@@ -1,0 +1,61 @@
+[
+  {
+    "id": "alliance-riviere",
+    "ordre": 1,
+    "nom": "Alliance Rivière",
+    "prix": 2400,
+    "image": {
+      "src": "../assets/sertelle/sertelle-alliance-riviere.jpg",
+      "position": "center 60%",
+      "alt": "Alliance Rivière en or jaune sertie de pierres taillées, posée sur des disques blancs"
+    }
+  },
+  {
+    "id": "bracelet-ligne",
+    "ordre": 2,
+    "nom": "Bracelet Ligne",
+    "prix": 3150,
+    "image": {
+      "src": "../assets/sertelle/sertelle-bracelet-ligne.jpg",
+      "position": "center 40%",
+      "alt": "Bracelet Ligne en or jaune, une rangée de pierres taillées en baguette, posé sur une rose rouge"
+    }
+  },
+  {
+    "id": "bague-lagon",
+    "ordre": 3,
+    "nom": "Bague Lagon",
+    "prix": 1950,
+    "image": {
+      "src": "../assets/sertelle/sertelle-bague-lagon.jpg",
+      "position": "center",
+      "alt": "Bague Lagon en or jaune : topaze bleue entourée d'un pavé de petites pierres, corbeille ajourée"
+    },
+    "pointsLoupe": [
+      {
+        "id": "pierre",
+        "numero": "I",
+        "x": 53.5,
+        "y": 28,
+        "titre": "La pierre",
+        "texte": "Une topaze bleue taillée en rond, quarante-sept facettes qui attrapent la lumière sous tous les angles."
+      },
+      {
+        "id": "corbeille",
+        "numero": "II",
+        "x": 56,
+        "y": 46,
+        "titre": "La corbeille ajourée",
+        "texte": "Sous la pierre, l'or est percé à la main. La lumière passe par-dessous et fait briller la topaze de l'intérieur."
+      },
+      {
+        "id": "anneau",
+        "numero": "III",
+        "x": 63,
+        "y": 72,
+        "titre": "L'anneau",
+        "texte": "Or jaune 18 carats, poli miroir à l'intérieur pour glisser sur le doigt sans accrocher."
+      }
+    ]
+  }
+]

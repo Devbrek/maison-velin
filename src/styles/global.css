@@ -1,1 +1,161 @@
 @import "tailwindcss";
+
+/*
+ * Tokens sémantiques : les utilitaires Tailwind (bg-bg, text-ink, text-accent, font-display…)
+ * pointent vers des variables qui changent selon l'identité active ([data-identity] sur un conteneur).
+ * `inline` : l'utilitaire lit la variable là où elle est utilisée, donc le scope par marque fonctionne.
+ */
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--id-bg);
+  --color-surface: var(--id-surface);
+  --color-ink: var(--id-ink);
+  --color-ink-2: var(--id-ink-2);
+  --color-line: var(--id-line);
+  --color-accent: var(--id-accent);
+  --color-on-accent: var(--id-on-accent);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-display: var(--id-font-display);
+  --font-body: var(--id-font-body);
+}
+
+@theme {
+  /* Courbe unique du site : lente, douce, jamais de rebond */
+  --ease-velin: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-velin-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-slow: 900ms;
+}
+
+/* ───────────── Identités ───────────── */
+
+/* Maison Vélin — jour (identité par défaut) */
+:root,
+[data-identity="velin"] {
+  --id-bg: #F3EEE4;
+  --id-surface: #E4DDD0;
+  --id-ink: #141311;
+  --id-ink-2: #5A554D;
+  --id-line: #D9D2C5;
+  --id-accent: #1C2A4A;
+  --id-on-accent: #F3EEE4;
+  --id-font-display: var(--font-bodoni), serif;
+  --id-font-body: var(--font-jost), sans-serif;
+}
+
+/* Maison Vélin — nuit (prête si on ajoute un sélecteur jour / nuit) */
+[data-identity="velin"][data-theme="nuit"] {
+  --id-bg: #0F0E0C;
+  --id-surface: #1A1916;
+  --id-ink: #EDE8DF;
+  --id-ink-2: #A8A296;
+  --id-line: #2C2A26;
+  --id-accent: #9DB2DE;
+  --id-on-accent: #0F0E0C;
+}
+
+/* Aubrek / Vecteur */
+[data-identity="aubrek"] {
+  --id-bg: #0A0A0B;
+  --id-surface: #050505;
+  --id-ink: #F2F2F0;
+  --id-ink-2: #9A9AA0;
+  --id-line: rgb(242 242 240 / 0.12);
+  --id-accent: #A8F0E0;
+  --id-on-accent: #0A0A0B;
+  --id-font-display: var(--font-saira), sans-serif;
+  --id-font-body: var(--font-saira), sans-serif;
+}
+
+/* Calade / Lavis — un jeu de couleurs par chapitre de la promenade */
+[data-identity="calade"],
+[data-identity="calade"] [data-chapitre="matin"] {
+  --id-bg: #F3EEE6;
+  --id-surface: #E6D8C2;
+  --id-ink: #1E140B;
+  --id-ink-2: #5E4836;
+  --id-line: #D9CBB6;
+  --id-accent: #8A5A0C;
+  --id-on-accent: #F3EEE6;
+}
+[data-identity="calade"] {
+  --id-font-display: var(--font-fraunces), serif;
+  --id-font-body: var(--font-manrope), sans-serif;
+}
+[data-identity="calade"] [data-chapitre="midi"] {
+  --id-bg: #1E140B;
+  --id-surface: #2A1A0E;
+  --id-ink: #F4ECE0;
+  --id-ink-2: #D9CBB6;
+  --id-line: rgb(244 236 224 / 0.16);
+  --id-accent: #F0C46A;
+  --id-on-accent: #1E140B;
+}
+[data-identity="calade"] [data-chapitre="soir"] {
+  --id-bg: #E9CFC6;
+  --id-surface: #E1C0B5;
+  --id-ink: #3A1410;
+  --id-ink-2: #6E3A30;
+  --id-line: rgb(58 20 16 / 0.18);
+  --id-accent: #8E2A1C;
+  --id-on-accent: #F4ECE0;
+}
+
+/* Sertelle / Filigrane */
+[data-identity="sertelle"] {
+  --id-bg: #F7F4EF;
+  --id-surface: #EFEBE4; /* section loupe */
+  --id-ink: #1A1714;
+  --id-ink-2: #5C554C;
+  --id-line: #D8D2C8;
+  --id-accent: #7F5E1C;
+  --id-on-accent: #F7F4EF;
+  --id-font-display: var(--font-cormorant), serif;
+  --id-font-body: var(--font-hanken), sans-serif;
+  /* Écrin et sections sombres */
+  --sertelle-ecrin: #16130F;
+  --sertelle-or-sombre: #D9B26A;
+}
+
+/* ───────────── Base ───────────── */
+
+@layer base {
+  html {
+    background-color: var(--id-bg);
+    color: var(--id-ink);
+    font-family: var(--id-font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Chaque conteneur d'identité repeint son fond et son texte */
+  [data-identity],
+  [data-chapitre] {
+    background-color: var(--id-bg);
+    color: var(--id-ink);
+    font-family: var(--id-font-body);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--id-accent);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--id-accent);
+    color: var(--id-on-accent);
+  }
+}
+
+/* Mouvement réduit : pas de déplacement ni de flou, animations quasi instantanées */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

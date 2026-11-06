@@ -1,0 +1,64 @@
+[
+  {
+    "id": "orage",
+    "ordre": 1,
+    "nom": "Orage",
+    "accroche": "Lisible sous toutes les lumières. Le cadran épouse le bord de l'écran, les chiffres l'encadrent.",
+    "image": {
+      "src": "../assets/aubrek/aubrek-orage-neon.jpg",
+      "position": "center 52%",
+      "alt": "Aubrek Orage, cadran noir aux chiffres blancs, posée sur un tube de lumière turquoise"
+    },
+    "caracteristiques": [
+      { "cle": "Boîtier", "valeur": "45 mm, aluminium noir" },
+      { "cle": "Écran", "valeur": "Toujours actif" },
+      { "cle": "Étanchéité", "valeur": "50 m" },
+      { "cle": "Bracelet", "valeur": "Élastomère noir" }
+    ],
+    "configuration": {
+      "boitiers": [
+        { "id": "41", "label": "41 mm", "poids": "32 g" },
+        { "id": "45", "label": "45 mm", "poids": "38 g" }
+      ],
+      "bracelets": [
+        { "id": "elastomere", "label": "Élastomère noir", "teinte": "#141416" },
+        { "id": "milanais", "label": "Milanais acier", "teinte": "#B8B8BE" },
+        { "id": "cuir", "label": "Cuir nuit", "teinte": "#2B2730" }
+      ]
+    }
+  },
+  {
+    "id": "aurore",
+    "ordre": 2,
+    "nom": "Aurore",
+    "accroche": "La douceur d'un aluminium clair, une lumière qui s'allume au premier regard.",
+    "image": {
+      "src": "../assets/aubrek/aubrek-aurore-ecran-vert.jpg",
+      "position": "55% center",
+      "alt": "Aubrek Aurore, aluminium clair et bracelet rose poudré, écran vert allumé"
+    },
+    "caracteristiques": [
+      { "cle": "Boîtier", "valeur": "41 mm, aluminium argent" },
+      { "cle": "Écran", "valeur": "Couleur, haute luminosité" },
+      { "cle": "Étanchéité", "valeur": "50 m" },
+      { "cle": "Bracelet", "valeur": "Rose poudré" }
+    ]
+  },
+  {
+    "id": "monolithe",
+    "ordre": 3,
+    "nom": "Monolithe",
+    "accroche": "Un bloc, une couronne, rien de plus. Les heures s'affichent en grand, sans fioriture.",
+    "image": {
+      "src": "../assets/aubrek/aubrek-monolithe.jpg",
+      "position": "center 40%",
+      "alt": "Aubrek Monolithe, boîtier argent et bracelet milanais, grands chiffres sur écran noir, fond blanc"
+    },
+    "caracteristiques": [
+      { "cle": "Boîtier", "valeur": "42 mm, acier poli" },
+      { "cle": "Écran", "valeur": "Monochrome" },
+      { "cle": "Étanchéité", "valeur": "50 m" },
+      { "cle": "Bracelet", "valeur": "Milanais acier" }
+    ]
+  }
+]

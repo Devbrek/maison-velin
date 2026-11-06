@@ -1,16 +1,43 @@
 ---
+// Page provisoire : vérifie les tokens et les polices de chaque identité (remplacée en phase 2)
+import { Font } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const identities = [
+  { id: 'velin', nom: 'Maison Vélin' },
+  { id: 'aubrek', nom: 'Aubrek' },
+  { id: 'calade', nom: 'Calade' },
+  { id: 'sertelle', nom: 'Sertelle' },
+] as const;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Maison Vélin — tokens" description="Page de vérification des tokens.">
+  <Fragment slot="fonts">
+    <Font cssVariable="--font-bodoni" preload />
+    <Font cssVariable="--font-jost" />
+    <Font cssVariable="--font-saira" />
+    <Font cssVariable="--font-fraunces" />
+    <Font cssVariable="--font-manrope" />
+    <Font cssVariable="--font-cormorant" />
+    <Font cssVariable="--font-hanken" />
+  </Fragment>
+
+  <main>
+    {identities.map(({ id, nom }) => (
+      <section data-identity={id} class="px-6 py-16">
+        <h2 class="font-display text-4xl">{nom}</h2>
+        <p class="mt-3 max-w-prose text-ink-2">
+          Texte secondaire dans la police de lecture de l'identité.
+        </p>
+        <a href="#" class="mt-6 inline-block bg-accent px-5 py-3 text-on-accent">Accent</a>
+      </section>
+    ))}
+    {(['matin', 'midi', 'soir'] as const).map((chapitre) => (
+      <section data-identity="calade" class="contents">
+        <div data-chapitre={chapitre} class="px-6 py-10">
+          <p class="font-display text-2xl">Calade — <em class="text-accent">{chapitre}</em></p>
+        </div>
+      </section>
+    ))}
+  </main>
+</BaseLayout>

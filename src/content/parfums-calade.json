@@ -1,0 +1,53 @@
+[
+  {
+    "id": "lumiere-blanche",
+    "ordre": 1,
+    "nom": "Lumière Blanche",
+    "chapitre": "matin",
+    "numero": "I",
+    "heure": "06:40",
+    "moment": "Le matin",
+    "texte": "Avant la chaleur. Un lys encore fermé, du linge propre, la pierre qui a gardé la nuit.",
+    "notes": ["Bergamote", "Lys", "Musc blanc"],
+    "prix": 140,
+    "image": {
+      "src": "../assets/calade/calade-lys.jpg",
+      "position": "center 55%",
+      "alt": "Fleur de lys orangée sur fond sombre"
+    }
+  },
+  {
+    "id": "pierre-d-ete",
+    "ordre": 2,
+    "nom": "Pierre d'Été",
+    "chapitre": "midi",
+    "numero": "II",
+    "heure": "13:00",
+    "moment": "Midi",
+    "texte": "La pierre brûle. L'air sent la résine et le fruit mûr, rien ne bouge sauf la lumière.",
+    "notes": ["Abricot", "Fleur d'oranger", "Ambre, cèdre"],
+    "prix": 145,
+    "image": {
+      "src": "../assets/calade/calade-pierre-d-ete-ambre.jpg",
+      "position": "center 42%",
+      "alt": "Flacon de Pierre d'Été au bord d'une tablette de verre, dans une lumière ambrée"
+    }
+  },
+  {
+    "id": "terre-rouge",
+    "ordre": 3,
+    "nom": "Terre Rouge",
+    "chapitre": "soir",
+    "numero": "III",
+    "heure": "21:10",
+    "moment": "Le soir",
+    "texte": "Les façades rougissent. Une épice douce sur la peau, puis un bois qui ne s'en va plus.",
+    "notes": ["Poivre rose", "Safran", "Bois d'olivier"],
+    "prix": 155,
+    "image": {
+      "src": "../assets/calade/calade-le-soir.jpg",
+      "position": "28% center",
+      "alt": "Une main approche un flacon du cou, dans une lumière orangée du soir"
+    }
+  }
+]

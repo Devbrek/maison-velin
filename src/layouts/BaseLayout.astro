@@ -1,0 +1,35 @@
+---
+/*
+ * Layout racine de toutes les pages.
+ * Les polices ne sont PAS chargées ici : chaque page (ou layout d'identité)
+ * passe ses <Font /> dans le slot « fonts », pour ne charger que ce dont elle a besoin.
+ */
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+export type Identity = 'velin' | 'aubrek' | 'calade' | 'sertelle';
+
+interface Props {
+  title: string;
+  description: string;
+  identity?: Identity;
+}
+
+const { title, description, identity = 'velin' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" data-identity={identity}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <slot name="fonts" />
+    <ClientRouter />
+  </head>
+  <body class="min-h-dvh">
+    <slot />
+  </body>
+</html>
