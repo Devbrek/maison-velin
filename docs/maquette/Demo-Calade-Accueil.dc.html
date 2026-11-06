@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Calade – Accueil (démo)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3EEE6}
+a{text-decoration:none;color:inherit}
+.u{position:relative;padding:12px 0;display:inline-block}
+.u::after{content:"";position:absolute;left:0;right:0;bottom:7px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 900ms cubic-bezier(0.22,1,0.36,1)}
+.u:hover::after{transform:scaleX(1)}
+/* Le fil : couleurs et position suivent le défilement, en douceur */
+.fil, .fil *{transition:color 900ms ease, background-color 900ms ease, border-color 900ms ease, opacity 700ms ease}
+.fil-soleil{transition:top 200ms linear, background-color 900ms ease}
+.fil-rempli{transition:height 200ms linear, background-color 900ms ease}
+@keyframes monte{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.monte{animation:monte 1400ms cubic-bezier(0.22,1,0.36,1) both}
+.d1{animation-delay:600ms}.d2{animation-delay:800ms}.d3{animation-delay:1000ms}.d4{animation-delay:1200ms}
+@keyframes encre{from{filter:blur(16px);opacity:.4}to{filter:blur(0);opacity:1}}
+.encre{animation:encre 2600ms cubic-bezier(0.22,1,0.36,1) both}
+.pill{transition:background 700ms ease, color 700ms ease}
+.pill:hover{background:#F4ECE0 !important;color:#1E140B !important}
+@media (max-width: 760px){.fil-texte{display:none}.chap{padding-left:72px !important}}
+@media (prefers-reduced-motion: reduce){.encre,.monte{animation:none}.fil,.fil *{transition:none}}
+</style>
+</helmet>
+<div style="font-family: 'Manrope', sans-serif; color: #2A1A0E; background: #F3EEE6;">
+
+  <!-- Bandeau démo -->
+  <div style="background: #1E140B; color: #D9CBB6; font-size: 11px; letter-spacing: 0.18em;">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 0 40px; min-height: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px;">
+      <span>DÉMO DE LA PIÈCE LAVIS · MAISON VÉLIN · MARQUE FICTIVE</span>
+      <a class="u" href="Main.dc.html" style="color: #D9CBB6;">RETOUR À MAISON VÉLIN</a>
+    </div>
+  </div>
+
+  <!-- ===== Ouverture : la calade ===== -->
+  <section aria-labelledby="hero" style="position: relative; min-height: 860px; display: flex; flex-direction: column; background: #3A2A1A; color: #F4ECE0; overflow: hidden;">
+    <img class="encre" src="../photos/calade-ruelle.jpg" alt="Une calade : ruelle pavée qui monte entre deux murs de pierre blonde, au soleil" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 70%;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top right, rgba(30,20,11,0.9) 0%, rgba(30,20,11,0.6) 40%, rgba(30,20,11,0.1) 70%), linear-gradient(to bottom, rgba(30,20,11,0.6) 0%, rgba(30,20,11,0) 24%);"></div>
+
+    <header style="position: relative;">
+      <div style="max-width: 1360px; margin: 0 auto; padding: 24px 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 16px;">
+        <nav aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 4px 32px; font-size: 12px; font-weight: 500; letter-spacing: 0.2em;">
+          <a class="u" href="#journee">LA PROMENADE</a>
+        </nav>
+        <a href="#" aria-label="Calade, accueil" style="justify-self: center; display: flex; flex-direction: column; align-items: center; gap: 4px; line-height: 1;">
+          <span style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 24px; letter-spacing: 0.42em; padding-left: 0.42em;">CALADE</span>
+          <span style="font-size: 10px; letter-spacing: 0.4em; color: #E6D8C2;">PARFUMS DU SUD</span>
+        </a>
+        <div style="justify-self: end; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 32px; font-size: 12px; font-weight: 500; letter-spacing: 0.2em;">
+          <a class="u" href="#echantillons">ÉCHANTILLONS</a>
+        </div>
+      </div>
+    </header>
+
+    <div style="position: relative; flex: 1; max-width: 1360px; width: 100%; margin: 0 auto; padding: 0 40px 80px; box-sizing: border-box; display: flex; align-items: flex-end;">
+      <div style="display: flex; flex-direction: column; gap: 24px; max-width: 540px;">
+        <p class="monte d1" style="margin: 0; font-family: 'Fraunces', serif; font-size: 20px;">calade <span style="font-family: 'Manrope', sans-serif; font-size: 13px; letter-spacing: 0.08em; color: #E6D8C2;">[ka.lad] · nom féminin</span></p>
+        <h1 id="hero" class="monte d2" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(40px, 4.6vw, 66px); line-height: 1.08;">Une ruelle pavée <em style="color: #F0C46A;">qui garde la chaleur du jour.</em></h1>
+        <p class="monte d3" style="margin: 0; max-width: 420px; font-size: 17px; font-weight: 300; line-height: 1.8; color: #EADFCC;">Trois parfums, trois heures d'une même journée. Suivez la promenade, du matin au soir.</p>
+        <a class="pill monte d4" href="#chap-matin" style="align-self: flex-start; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 28px; border: 1px solid #F4ECE0; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em;">COMMENCER LA PROMENADE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== La promenade : trois chapitres, un fil qui suit le défilement ===== -->
+  <div id="journee" style="position: relative;">
+
+    <!-- Repères invisibles (un tous les 1 %) : ils disent quelle partie de la promenade est à l'écran -->
+    <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+      <sc-for list="{{reperes}}" as="r" hint-placeholder-count="0">
+        <span data-repere="{{r.i}}" style="position: absolute; left: 0; width: 1px; height: 1px; top: {{r.top}};"></span>
+      </sc-for>
+    </div>
+
+    <!-- Le fil : posé par-dessus les chapitres, il se recentre dans la zone visible -->
+    <div style="position: absolute; inset: 0; z-index: 5; pointer-events: none;">
+      <nav class="fil" aria-label="Fil de la promenade" style="position: absolute; left: 0; top: {{fil.top}}; height: 600px; width: clamp(64px, 13vw, 190px); padding-left: clamp(20px, 3vw, 40px); box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 20px; pointer-events: auto; color: {{fil.ink}}; transition: top 200ms linear;">
+        <span class="fil-texte" style="font-size: 10px; font-weight: 600; letter-spacing: 0.3em; color: {{fil.muted}};">LA PROMENADE</span>
+        <div style="position: relative; height: 420px;">
+          <!-- la piste, la part déjà parcourue, le soleil -->
+          <span aria-hidden="true" style="position: absolute; left: 7px; top: 0; bottom: 0; width: 1px; background: {{fil.line}};"></span>
+          <span class="fil-rempli" aria-hidden="true" style="position: absolute; left: 7px; top: 0; width: 1px; height: {{fil.progress}}; background: {{fil.accent}};"></span>
+          <span class="fil-soleil" aria-hidden="true" style="position: absolute; left: 0; top: {{fil.progress}}; width: 15px; height: 15px; margin-top: -7px; border-radius: 50%; background: {{fil.accent}};"></span>
+          <sc-for list="{{stops}}" as="st" hint-placeholder-count="3">
+            <a href="{{st.href}}" aria-current="{{st.current}}" style="{{st.style}}">
+              <span aria-hidden="true" style="{{st.dot}}"></span>
+              <span class="fil-texte" style="display: flex; flex-direction: column; gap: 2px; line-height: 1.2;">
+                <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.2em;">{{st.time}}</span>
+                <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px;">{{st.label}}</span>
+              </span>
+            </a>
+          </sc-for>
+        </div>
+      </nav>
+    </div>
+
+    <!-- I. Matin : clair -->
+    <section id="chap-matin" class="chap" aria-labelledby="t-matin" style="min-height: 860px; display: flex; align-items: center; background: #F3EEE6; color: #2A1A0E; padding: 120px 40px 120px clamp(120px, 16vw, 240px); box-sizing: border-box;">
+      <div style="width: 100%; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 56px 96px; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 22px; max-width: 440px;">
+          <p style="{{a.matin.t1}} margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.3em; color: #8A5A0C;">I · 06:40 · LE MATIN</p>
+          <h2 id="t-matin" style="{{a.matin.t2}} margin: 0; font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 3.6vw, 54px); line-height: 1.1;">Lumière Blanche</h2>
+          <p style="{{a.matin.t3}} margin: 0; font-size: 18px; font-weight: 300; line-height: 1.8; color: #5E4836;">Avant la chaleur. Un lys encore fermé, du linge propre, la pierre qui a gardé la nuit.</p>
+          <p style="{{a.matin.t4}} margin: 0; font-size: 14px; letter-spacing: 0.08em; color: #5E4836;">Bergamote · Lys · Musc blanc</p>
+          <div style="{{a.matin.t5}} display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 8px;">
+            <a href="#" style="min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 26px; background: #2A1A0E; color: #F3EEE6; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em;">DÉCOUVRIR · 140 €</a>
+          </div>
+        </div>
+        <div class="arche" style="{{a.matin.frame}} justify-self: center; width: 100%; max-width: 440px; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px 0 0; background: #1A1A16;">
+          <img src="../photos/calade-lys.jpg" alt="Fleur de lys orangée sur fond sombre" style="width: 100%; height: 100%; object-fit: cover; object-position: center 55%; {{a.matin.img}}">
+        </div>
+      </div>
+    </section>
+
+    <!-- II. Midi : sombre, le flacon ambré s'allume -->
+    <section id="chap-midi" class="chap" aria-labelledby="t-midi" style="min-height: 860px; display: flex; align-items: center; background: #1E140B; color: #F4ECE0; padding: 120px 40px 120px clamp(120px, 16vw, 240px); box-sizing: border-box;">
+      <div style="width: 100%; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 56px 96px; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 22px; max-width: 440px;">
+          <p style="{{a.midi.t1}} margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.3em; color: #F0C46A;">II · 13:00 · MIDI</p>
+          <h2 id="t-midi" style="{{a.midi.t2}} margin: 0; font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 3.6vw, 54px); line-height: 1.1;">Pierre d'Été</h2>
+          <p style="{{a.midi.t3}} margin: 0; font-size: 18px; font-weight: 300; line-height: 1.8; color: #D9CBB6;">La pierre brûle. L'air sent la résine et le fruit mûr, rien ne bouge sauf la lumière.</p>
+          <p style="{{a.midi.t4}} margin: 0; font-size: 14px; letter-spacing: 0.08em; color: #D9CBB6;">Abricot · Fleur d'oranger · Ambre, cèdre</p>
+          <div style="{{a.midi.t5}} display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 8px;">
+            <a href="#" style="min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 26px; background: #F0C46A; color: #1E140B; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em;">DÉCOUVRIR · 145 €</a>
+          </div>
+        </div>
+        <div class="arche" style="{{a.midi.frame}} justify-self: center; width: 100%; max-width: 440px; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px 0 0; background: #3A2410;">
+          <img src="../photos/calade-pierre-d-ete-ambre.jpg" alt="Flacon de Pierre d'Été au bord d'une tablette de verre, dans une lumière ambrée" style="width: 100%; height: 100%; object-fit: cover; object-position: center 42%; {{a.midi.img}}">
+        </div>
+      </div>
+    </section>
+
+    <!-- III. Soir : rose du crépuscule -->
+    <section id="chap-soir" class="chap" aria-labelledby="t-soir" style="min-height: 860px; display: flex; align-items: center; background: #E9CFC6; color: #3A1410; padding: 120px 40px 120px clamp(120px, 16vw, 240px); box-sizing: border-box;">
+      <div style="width: 100%; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 56px 96px; align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 22px; max-width: 440px;">
+          <p style="{{a.soir.t1}} margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.3em; color: #8E2A1C;">III · 21:10 · LE SOIR</p>
+          <h2 id="t-soir" style="{{a.soir.t2}} margin: 0; font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 3.6vw, 54px); line-height: 1.1;">Terre Rouge</h2>
+          <p style="{{a.soir.t3}} margin: 0; font-size: 18px; font-weight: 300; line-height: 1.8; color: #6E3A30;">Les façades rougissent. Une épice douce sur la peau, puis un bois qui ne s'en va plus.</p>
+          <p style="{{a.soir.t4}} margin: 0; font-size: 14px; letter-spacing: 0.08em; color: #6E3A30;">Poivre rose · Safran · Bois d'olivier</p>
+          <div style="{{a.soir.t5}} display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 8px;">
+            <a href="#" style="min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 26px; background: #3A1410; color: #E9CFC6; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em;">DÉCOUVRIR · 155 €</a>
+          </div>
+        </div>
+        <div class="arche" style="{{a.soir.frame}} justify-self: center; width: 100%; max-width: 440px; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px 0 0; background: #3A1A0E;">
+          <img src="../photos/calade-le-soir.jpg" alt="Une main approche un flacon du cou, dans une lumière orangée du soir" style="width: 100%; height: 100%; object-fit: cover; object-position: 28% center; {{a.soir.img}}">
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== Échantillons : la nuit tombe ===== -->
+  <section id="echantillons" aria-labelledby="ech-title" style="background: #1E140B; color: #F4ECE0;">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 140px 40px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px;">
+      <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.3em; color: #F0C46A;">FIN DE LA PROMENADE</p>
+      <h2 id="ech-title" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(32px, 3.2vw, 48px); line-height: 1.15;">Toute la journée, <em style="color: #F0C46A;">dans une enveloppe.</em></h2>
+      <p style="margin: 0; max-width: 460px; font-size: 17px; font-weight: 300; line-height: 1.8; color: #D9CBB6;">Les trois parfums en échantillons de 2 ml. Leur prix est déduit de votre premier flacon.</p>
+      <a class="pill" href="#" style="min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 28px; border: 1px solid #F4ECE0; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em;">COMMANDER LE COFFRET · 15 €</a>
+    </div>
+  </section>
+
+  <!-- Pied de page -->
+  <footer style="background: #160E07; color: #D9CBB6;">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 64px 40px 40px; display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px 64px;">
+        <span style="font-family: 'Fraunces', serif; font-weight: 300; font-size: 28px; letter-spacing: 0.42em; color: #F4ECE0;">CALADE</span>
+        <nav aria-label="Liens du pied de page" style="display: flex; flex-wrap: wrap; gap: 4px 32px; font-size: 13px; letter-spacing: 0.12em;">
+          <a class="u" href="#">Livraison</a>
+          <a class="u" href="#">Contact</a>
+          <a class="u" href="#">Mentions légales</a>
+        </nav>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-top: 24px; border-top: 1px solid rgba(244,236,224,0.14); font-size: 12px; letter-spacing: 0.04em;">
+        <span>Calade est une marque fictive. Démo créée par Maison Vélin by Devbrek. Photos : Pexels [CRÉDITS À COMPLÉTER].</span>
+        <a class="u" href="#" style="padding: 0;">Réduire les animations</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { progress: 0, active: 0, filTop: 0, seen: [false, false, false], par: [0, 0, 0] };
+    this.visibles = new Set();
+  }
+  componentDidMount() {
+    this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.installer();
+  }
+  componentDidUpdate() {
+    // les repères sont créés par la boucle : on réessaie tant qu'ils ne sont pas tous là
+    if (!this.io) this.installer();
+  }
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+    if (this.ioChap) this.ioChap.disconnect();
+  }
+  installer() {
+    const reperes = document.querySelectorAll('[data-repere]');
+    const chapitres = ['chap-matin', 'chap-midi', 'chap-soir'].map((id) => document.getElementById(id));
+    if (reperes.length < 100 || chapitres.some((c) => !c)) return;
+    if (typeof IntersectionObserver === 'undefined' || this.reduce) {
+      this.setState({ seen: [true, true, true] });
+      return;
+    }
+    // IntersectionObserver regarde ce qui est réellement à l'écran,
+    // même quand c'est la fenêtre autour de la maquette qui défile
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        const k = Number(e.target.getAttribute('data-repere'));
+        if (e.isIntersecting) this.visibles.add(k); else this.visibles.delete(k);
+      });
+      this.mesurer();
+    }, { threshold: 0 });
+    reperes.forEach((r) => this.io.observe(r));
+
+    // Apparition : un chapitre se révèle quand 30 % de sa hauteur est à l'écran
+    this.ioChap = new IntersectionObserver((entries) => {
+      const seen = this.state.seen.slice();
+      let change = false;
+      entries.forEach((e) => {
+        const i = chapitres.indexOf(e.target);
+        if (i >= 0 && e.intersectionRatio >= 0.3 && !seen[i]) { seen[i] = true; change = true; }
+      });
+      if (change) this.setState({ seen });
+    }, { threshold: [0, 0.3, 0.6] });
+    chapitres.forEach((c) => this.ioChap.observe(c));
+  }
+  mesurer() {
+    const journee = document.getElementById('journee');
+    if (!journee || this.visibles.size === 0) return;
+    const H = journee.offsetHeight;
+    const ks = Array.from(this.visibles);
+    const haut = Math.min(...ks) / 99 * H;
+    const bas = Math.max(...ks) / 99 * H;
+    const centre = (haut + bas) / 2;
+    const FIL = 600;
+    const filTop = Math.max(0, Math.min(H - FIL, centre - FIL / 2));
+    const ch = ['chap-matin', 'chap-midi', 'chap-soir'].map((id) => document.getElementById(id));
+    const tops = ch.map((c) => c.offsetTop);
+    let active = 0;
+    tops.forEach((y, i) => { if (y <= centre) active = i; });
+    // le soleil touche une étape quand son chapitre passe au centre de la zone visible
+    let progress;
+    if (centre <= tops[0]) progress = 0;
+    else if (centre >= tops[2]) progress = 100;
+    else {
+      const i = centre < tops[1] ? 0 : 1;
+      progress = 50 * (i + (centre - tops[i]) / (tops[i + 1] - tops[i]));
+    }
+    const vue = Math.max(bas - haut, 500);
+    const par = ch.map((c) => Math.max(-1, Math.min(1, (c.offsetTop + c.offsetHeight / 2 - centre) / vue)));
+    this.setState({ progress, active, filTop, par });
+  }
+  renderVals() {
+    // Couleurs du fil selon le fond du chapitre qu'il survole
+    const FIL = [
+      { ink: '#2A1A0E', muted: '#5E4836', line: 'rgba(42,26,14,0.25)', accent: '#8A5A0C' },
+      { ink: '#F4ECE0', muted: '#D9CBB6', line: 'rgba(244,236,224,0.25)', accent: '#F0C46A' },
+      { ink: '#3A1410', muted: '#6E3A30', line: 'rgba(58,20,16,0.25)', accent: '#8E2A1C' }
+    ];
+    const STOPS = [
+      { href: '#chap-matin', time: '06:40', label: 'Matin', at: 0 },
+      { href: '#chap-midi', time: '13:00', label: 'Midi', at: 50 },
+      { href: '#chap-soir', time: '21:10', label: 'Soir', at: 100 }
+    ];
+    const s = this.state;
+    const fil = FIL[s.active];
+    const pct = Math.round(s.progress * 10) / 10;
+    return {
+      fil: { ...fil, progress: pct + '%', top: Math.round(s.filTop) + 'px' },
+      reperes: Array.from({ length: 100 }, (_, i) => ({ i, top: (i / 99 * 100) + '%' })),
+      stops: STOPS.map((st, i) => {
+        const done = i <= s.active;
+        const here = i === s.active;
+        return {
+          href: st.href,
+          time: st.time,
+          label: st.label,
+          current: here ? 'step' : 'false',
+          style: 'position: absolute; left: 0; top: ' + st.at + '%; transform: translateY(-50%); min-height: 44px; display: flex; align-items: center; gap: 14px; color: ' + fil.ink + '; opacity: ' + (here ? '1' : done ? '0.75' : '0.5') + ';',
+          dot: 'flex: none; width: 15px; height: 15px; box-sizing: border-box; border-radius: 50%; border: 1px solid ' + fil.ink + '; background: ' + (done ? fil.ink : 'transparent') + ';'
+        };
+      }),
+      // Animations des chapitres : apparition des textes en cascade, arche qui se dévoile, image en profondeur
+      a: ['matin', 'midi', 'soir'].reduce((acc, key, i) => {
+        const vu = s.seen[i];
+        const texte = (d) => vu
+          ? 'opacity: 1; transform: none; transition: opacity 1200ms ease ' + d + 'ms, transform 1400ms cubic-bezier(0.22,1,0.36,1) ' + d + 'ms;'
+          : 'opacity: 0; transform: translateY(28px);';
+        acc[key] = {
+          t1: texte(0), t2: texte(120), t3: texte(260), t4: texte(380), t5: texte(500),
+          frame: vu ? 'clip-path: inset(0 0 0 0); transition: clip-path 1800ms cubic-bezier(0.65,0,0.35,1) 150ms;' : 'clip-path: inset(100% 0 0 0);',
+          img: 'transform: translateY(' + Math.round(s.par[i] * 48) + 'px) scale(1.14); filter: ' + (vu ? 'blur(0)' : 'blur(14px)') + '; transition: filter 2200ms ease 400ms;'
+        };
+        return acc;
+      }, {})
+    };
+  }
+}
+</script>
+</body>
+</html>

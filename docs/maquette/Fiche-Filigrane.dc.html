@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Maison Vélin – Pièce Filigrane</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Jost:wght@300;400;500&amp;family=Saira:ital,wght@0,600;1,300&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3EEE4}
+a{color:#141311;text-decoration:none}
+a:hover{color:#1C2A4A}
+.nav-link{position:relative;padding:12px 0;display:inline-block}
+.nav-link::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 700ms cubic-bezier(0.22,1,0.36,1)}
+.nav-link:hover::after{transform:scaleX(1)}
+.on-image a{color:#F3EEE4}
+.on-image a:hover{color:#C9D2E6}
+.night a{color:#EDE8DF}
+.night a:hover{color:#9DB2DE}
+.ghost:hover{background:#F3EEE4 !important;color:#141311 !important}
+.opt{transition:border-color 500ms ease, background 500ms ease, color 500ms ease}
+.opt:hover{border-color:#EDE8DF !important}
+.preview, .preview *{transition:background-color 700ms cubic-bezier(0.22,1,0.36,1), color 700ms cubic-bezier(0.22,1,0.36,1), border-color 700ms ease}
+</style>
+</helmet>
+<div style="font-family: 'Jost', sans-serif; color: #141311; background: #F3EEE4;">
+
+  <!-- Ouverture plein écran -->
+  <section class="on-image" aria-labelledby="fiche-title" style="position: relative; min-height: 820px; display: flex; flex-direction: column; background: #3A3630; color: #F3EEE4; overflow: hidden;">
+    <img src="../photos/sertelle-alliance-riviere.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top right, rgba(15,14,12,0.92) 0%, rgba(15,14,12,0.74) 36%, rgba(15,14,12,0.1) 66%, rgba(15,14,12,0.45) 100%);"></div>
+
+    <header style="position: relative; border-bottom: 1px solid rgba(243,238,228,0.16);">
+      <div style="max-width: 1360px; margin: 0 auto; padding: 20px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px;">
+        <a href="Main.dc.html" style="display: flex; flex-direction: column; gap: 2px; line-height: 1;" aria-label="Maison Vélin, retour à l'accueil">
+          <span style="font-size: 15px; font-weight: 500; letter-spacing: 0.32em;">MAISON VÉLIN</span>
+          <span style="font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 13px; color: #D9D2C5;">by Devbrek</span>
+        </a>
+        <nav aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 40px; font-size: 13px; letter-spacing: 0.18em;">
+          <a class="nav-link" href="Main.dc.html#collection">LA COLLECTION</a>
+          <a class="nav-link" href="Main.dc.html#savoir-faire">LE SAVOIR-FAIRE</a>
+          <a class="nav-link" href="Main.dc.html#sur-mesure">SUR MESURE</a>
+        </nav>
+        <a class="ghost" href="Main.dc.html#sur-mesure" style="min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 24px; border: 1px solid rgba(243,238,228,0.7); font-size: 12px; letter-spacing: 0.22em; transition: background 600ms ease, color 600ms ease;">PRENDRE RENDEZ-VOUS</a>
+      </div>
+    </header>
+
+    <div style="position: relative; flex: 1; max-width: 1360px; width: 100%; margin: 0 auto; padding: 0 40px 72px; box-sizing: border-box; display: flex; align-items: flex-end;">
+      <div style="display: flex; flex-direction: column; gap: 28px; max-width: 720px;">
+        <nav aria-label="Fil d'Ariane" style="font-size: 12px; letter-spacing: 0.22em; color: #D9D2C5;">
+          <a class="nav-link" href="Main.dc.html#collection" style="color: #D9D2C5;">LA COLLECTION</a>
+          <span aria-hidden="true" style="padding: 0 12px;">/</span>
+          <span aria-current="page">FILIGRANE</span>
+        </nav>
+        <h1 id="fiche-title" style="margin: 0; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(72px, 11vw, 176px); line-height: 0.9; letter-spacing: -0.02em;">Filigrane</h1>
+        <p style="margin: 0; max-width: 480px; font-size: 18px; font-weight: 300; line-height: 1.7; color: #E4DDD0;">Une pièce pour l'horlogerie et la joaillerie. La délicatesse d'un motif vu en transparence : fond clair, macros sur la matière, beaucoup d'espace autour de l'objet.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center;">
+          <a class="ghost" href="Demo-Sertelle-Accueil.dc.html" style="min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 28px; border: 1px solid #F3EEE4; font-size: 12px; letter-spacing: 0.22em; transition: background 600ms ease, color 600ms ease;">VOIR LA DÉMO SERTELLE</a>
+          <a class="nav-link" href="#configurer" style="font-size: 12px; letter-spacing: 0.22em;">CONFIGURER LA PIÈCE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pour quelles maisons + contenu -->
+  <section aria-labelledby="pour-qui" style="max-width: 1360px; margin: 0 auto; padding: 140px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 64px 120px; align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <p style="margin: 0; font-size: 12px; letter-spacing: 0.32em; color: #5A554D;">POUR QUELLES MAISONS</p>
+      <h2 id="pour-qui" style="margin: 0; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(32px, 3.4vw, 52px); line-height: 1.2;">Pour les maisons dont l'objet est petit, précieux, et se regarde de très près.</h2>
+      <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.7; color: #5A554D;">Horlogers, joailliers, maroquiniers, orfèvres. La mise en page laisse toute la place à la matière, et le texte n'arrive qu'ensuite.</p>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <p style="margin: 0 0 16px; font-size: 12px; letter-spacing: 0.32em; color: #5A554D;">LA PIÈCE CONTIENT</p>
+      <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column;">
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); display: flex; justify-content: space-between; gap: 24px; font-size: 17px;"><span>Accueil</span><span style="color: #5A554D; font-weight: 300;">vidéo plein écran</span></li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); display: flex; justify-content: space-between; gap: 24px; font-size: 17px;"><span>Collection</span><span style="color: #5A554D; font-weight: 300;">modèles filtrables</span></li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); display: flex; justify-content: space-between; gap: 24px; font-size: 17px;"><span>Fiche d'un modèle</span><span style="color: #5A554D; font-weight: 300;">macros, caractéristiques</span></li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); display: flex; justify-content: space-between; gap: 24px; font-size: 17px;"><span>La Maison</span><span style="color: #5A554D; font-weight: 300;">histoire et savoir-faire</span></li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); display: flex; justify-content: space-between; gap: 24px; font-size: 17px;"><span>Rendez-vous en boutique</span><span style="color: #5A554D; font-weight: 300;">formulaire sobre</span></li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); border-bottom: 1px solid rgba(20,19,17,0.12); display: flex; justify-content: space-between; gap: 24px; font-size: 17px;"><span>Mentions légales</span><span style="color: #5A554D; font-weight: 300;">générées depuis le contenu</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Matières -->
+  <section aria-labelledby="matieres" style="max-width: 1360px; margin: 0 auto; padding: 0 40px 140px;">
+    <h2 id="matieres" style="margin: 0 0 48px; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(32px, 3.4vw, 52px);">Les matières</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;"><p style="margin: 0; font-size: 12px; letter-spacing: 0.32em;">ASTRO</p><p style="margin: 0; font-size: 16px; font-weight: 300; line-height: 1.7; color: #5A554D;">Un site statique : rapide, sans serveur à entretenir.</p></div>
+      <div style="display: flex; flex-direction: column; gap: 12px;"><p style="margin: 0; font-size: 12px; letter-spacing: 0.32em;">TAILWIND CSS</p><p style="margin: 0; font-size: 16px; font-weight: 300; line-height: 1.7; color: #5A554D;">Couleurs et polices réunies dans quelques variables.</p></div>
+      <div style="display: flex; flex-direction: column; gap: 12px;"><p style="margin: 0; font-size: 12px; letter-spacing: 0.32em;">ANIMATIONS CSS</p><p style="margin: 0; font-size: 16px; font-weight: 300; line-height: 1.7; color: #5A554D;">Liées au défilement, sans bibliothèque lourde.</p></div>
+      <div style="display: flex; flex-direction: column; gap: 12px;"><p style="margin: 0; font-size: 12px; letter-spacing: 0.32em;">UN FICHIER DE CONTENU</p><p style="margin: 0; font-size: 16px; font-weight: 300; line-height: 1.7; color: #5A554D;">Textes et modèles modifiables sans toucher au code.</p></div>
+    </div>
+  </section>
+
+  <!-- Configurateur (section nuit) -->
+  <section id="configurer" class="night" aria-labelledby="config-title" style="background: #0F0E0C; color: #EDE8DF;">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 140px 40px; display: flex; flex-wrap: wrap; gap: 64px 80px; align-items: flex-start;">
+
+      <!-- Réglages -->
+      <div style="flex: 1 1 320px; max-width: 400px; display: flex; flex-direction: column; gap: 48px;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <p style="margin: 0; font-size: 12px; letter-spacing: 0.32em; color: #B5AEA2;">L'ATELIER</p>
+          <h2 id="config-title" style="margin: 0; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(40px, 4.5vw, 68px); line-height: 1;">Configurer la pièce</h2>
+          <p style="margin: 0; font-size: 16px; font-weight: 300; line-height: 1.7; color: #B5AEA2;">Choisissez un accent, une police de titre et une ambiance. L'aperçu se règle sous vos yeux.</p>
+        </div>
+
+        <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 16px;">
+          <legend style="padding: 0 0 16px; font-size: 12px; letter-spacing: 0.32em;">ACCENT</legend>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <sc-for list="{{accents}}" as="a" hint-placeholder-count="3">
+              <button type="button" class="opt" onClick="{{a.pick}}" aria-pressed="{{a.pressed}}" style="{{a.style}}">
+                <span aria-hidden="true" style="width: 16px; height: 16px; border-radius: 50%; background: {{a.swatch}}; border: 1px solid rgba(237,232,223,0.4);"></span>
+                <span>{{a.label}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </fieldset>
+
+        <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 16px;">
+          <legend style="padding: 0 0 16px; font-size: 12px; letter-spacing: 0.32em;">POLICE DE TITRE</legend>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{fonts}}" as="f" hint-placeholder-count="3">
+              <button type="button" class="opt" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="{{f.style}}">
+                <span style="font-family: {{f.family}}; font-size: 24px; letter-spacing: 0;">{{f.label}}</span>
+                <span style="font-size: 12px; letter-spacing: 0.12em; color: #B5AEA2;">{{f.note}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </fieldset>
+
+        <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 16px;">
+          <legend style="padding: 0 0 16px; font-size: 12px; letter-spacing: 0.32em;">AMBIANCE</legend>
+          <div style="display: flex; gap: 8px;">
+            <sc-for list="{{modes}}" as="m" hint-placeholder-count="2">
+              <button type="button" class="opt" onClick="{{m.pick}}" aria-pressed="{{m.pressed}}" style="{{m.style}}">{{m.label}}</button>
+            </sc-for>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Aperçu en direct -->
+      <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <p aria-live="polite" style="margin: 0; font-size: 12px; letter-spacing: 0.22em; color: #B5AEA2;">APERÇU : {{summary}}</p>
+        <div class="preview" style="border: 1px solid rgba(237,232,223,0.16); background: {{p.bg}}; color: {{p.ink}};">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 32px; border-bottom: 1px solid {{p.line}};">
+            <span style="font-family: {{p.font}}; font-size: 20px; letter-spacing: 0.4em;">SERTELLE</span>
+            <span style="font-size: 11px; letter-spacing: 0.24em; color: {{p.muted}};">COLLECTION · À LA LOUPE · RENDEZ-VOUS</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 32px; padding: 56px 32px; align-items: center;">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <p style="margin: 0; font-size: 11px; letter-spacing: 0.3em; color: {{p.muted}};">COLLECTION RIVIÈRE</p>
+              <p style="margin: 0; font-family: {{p.font}}; font-size: clamp(40px, 4vw, 60px); line-height: 1;">L'éclat, <em style="color: {{p.accent}};">de près.</em></p>
+              <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.7; color: {{p.muted}};">Vingt-quatre pierres taillées à la main, serties une à une sur un anneau d'or.</p>
+              <span style="align-self: flex-start; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 24px; background: {{p.accent}}; color: {{p.onAccent}}; font-size: 11px; letter-spacing: 0.22em;">EXPLORER À LA LOUPE</span>
+            </div>
+            <div style="aspect-ratio: 4 / 5; overflow: hidden; background: {{p.surface}}; border: 1px solid {{p.line}};"><img src="../photos/sertelle-alliance-riviere.jpg" alt="" aria-hidden="true" style="width: 100%; height: 100%; object-fit: cover; object-position: center 62%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preuves -->
+  <section aria-labelledby="preuves" style="max-width: 1360px; margin: 0 auto; padding: 140px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 64px 120px;">
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <h2 id="preuves" style="margin: 0; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(32px, 3.4vw, 52px);">Les preuves</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: 'Bodoni Moda', serif; font-size: 48px;">[—]</span><span style="font-size: 12px; letter-spacing: 0.22em; color: #5A554D;">PERFORMANCE</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: 'Bodoni Moda', serif; font-size: 48px;">[—]</span><span style="font-size: 12px; letter-spacing: 0.22em; color: #5A554D;">ACCESSIBILITÉ</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: 'Bodoni Moda', serif; font-size: 48px;">[—]</span><span style="font-size: 12px; letter-spacing: 0.22em; color: #5A554D;">BONNES PRATIQUES</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: 'Bodoni Moda', serif; font-size: 48px;">[—]</span><span style="font-size: 12px; letter-spacing: 0.22em; color: #5A554D;">SEO</span></div>
+      </div>
+      <p style="margin: 0; font-size: 14px; color: #5A554D;">Scores Lighthouse sur mobile, mesurés sur la démo en ligne : [À MESURER].</p>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <p style="margin: 0 0 16px; font-size: 12px; letter-spacing: 0.32em; color: #5A554D;">ENGAGEMENTS</p>
+      <ul style="margin: 0; padding: 0; list-style: none;">
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); font-size: 17px; font-weight: 300; line-height: 1.6;">Texte lisible partout, contraste d'au moins 4,5 pour 1.</li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); font-size: 17px; font-weight: 300; line-height: 1.6;">Navigation complète au clavier, focus toujours visible.</li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); font-size: 17px; font-weight: 300; line-height: 1.6;">Animations coupées pour qui préfère les réduire.</li>
+        <li style="padding: 20px 0; border-top: 1px solid rgba(20,19,17,0.12); border-bottom: 1px solid rgba(20,19,17,0.12); font-size: 17px; font-weight: 300; line-height: 1.6;">Zoom autorisé sur téléphone, contrairement à beaucoup de sites de luxe.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Pièce suivante -->
+  <a class="on-image" href="Fiche-Vecteur.dc.html" aria-label="Pièce suivante : Vecteur" style="position: relative; display: flex; min-height: 520px; background: #161513; color: #F3EEE4; overflow: hidden; clip-path: polygon(0 0, 100% 0, 100% 88%, 95% 100%, 0 100%);">
+    <img src="../photos/aubrek-pluie.jpg" alt="" aria-hidden="true" style="position: absolute; top: 0; right: 0; width: 60%; height: 100%; object-fit: cover; object-position: center 45%;">
+    <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to right, #161513 0%, #161513 40%, rgba(22,21,19,0.2) 70%);"></span>
+    <span style="position: relative; width: 100%; max-width: 1360px; margin: 0 auto; padding: 72px 40px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px;">
+      <span style="font-size: 12px; letter-spacing: 0.32em; color: #D9D2C5;">PIÈCE SUIVANTE</span>
+      <span style="font-family: 'Saira', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(44px, 5vw, 76px); line-height: 1;">Vecteur</span>
+      <span style="font-size: 12px; letter-spacing: 0.22em; color: #9DB2DE;">HORLOGERIE CONNECTÉE · AUTOMOBILE · HAUTE TECHNOLOGIE</span>
+    </span>
+  </a>
+
+  <!-- Pied de page -->
+  <footer style="max-width: 1360px; margin: 0 auto; padding: 72px 40px 48px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 40px; font-size: 13px; color: #5A554D;">
+    <p style="margin: 0;">Maison Vélin est une création <a href="https://devbrek.fr/fr" style="color: #141311; text-decoration: underline; text-underline-offset: 3px;">Devbrek</a>.</p>
+    <nav aria-label="Liens légaux" style="display: flex; flex-wrap: wrap; gap: 8px 32px;">
+      <a class="nav-link" href="#" style="color: #5A554D;">Mentions légales</a>
+      <a class="nav-link" href="#" style="color: #5A554D;">Crédits photos</a>
+    </nav>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { accent: 'vert', font: 'bodoni', mode: 'clair' };
+  }
+  renderVals() {
+    const ACCENTS = [
+      { id: 'vert', label: 'Vert horloger', light: '#1F4A3A', dark: '#8FC2AA' },
+      { id: 'bleu', label: 'Bleu nuit', light: '#1C2A4A', dark: '#9DB2DE' },
+      { id: 'bordeaux', label: 'Bordeaux', light: '#6B1E2A', dark: '#E0909C' }
+    ];
+    const FONTS = [
+      { id: 'bodoni', label: 'Bodoni Moda', family: "'Bodoni Moda', serif", note: 'CONTRASTÉE, MODE' },
+      { id: 'cormorant', label: 'Cormorant Garamond', family: "'Cormorant Garamond', serif", note: 'FINE, LITTÉRAIRE' },
+      { id: 'garamond', label: 'EB Garamond', family: "'EB Garamond', serif", note: 'CLASSIQUE, SOBRE' }
+    ];
+    const MODES = [
+      { id: 'clair', label: 'Clair' },
+      { id: 'sombre', label: 'Sombre' }
+    ];
+    const s = this.state;
+    const dark = s.mode === 'sombre';
+    const acc = ACCENTS.find((a) => a.id === s.accent);
+    const font = FONTS.find((f) => f.id === s.font);
+
+    const base = 'min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 12px; padding: 0 18px; font-family: inherit; font-size: 13px; letter-spacing: 0.12em; cursor: pointer; ';
+    const on = 'background: #EDE8DF; color: #0F0E0C; border: 1px solid #EDE8DF;';
+    const off = 'background: transparent; color: #EDE8DF; border: 1px solid rgba(237,232,223,0.28);';
+
+    return {
+      accents: ACCENTS.map((a) => ({
+        label: a.label,
+        swatch: dark ? a.dark : a.light,
+        pressed: a.id === s.accent,
+        style: base + (a.id === s.accent ? on : off),
+        pick: () => this.setState({ accent: a.id })
+      })),
+      fonts: FONTS.map((f) => ({
+        label: f.label,
+        family: f.family,
+        note: f.note,
+        pressed: f.id === s.font,
+        style: base + 'justify-content: space-between; width: 100%; padding: 12px 18px; ' + (f.id === s.font ? 'background: rgba(237,232,223,0.08); color: #EDE8DF; border: 1px solid #EDE8DF;' : off),
+        pick: () => this.setState({ font: f.id })
+      })),
+      modes: MODES.map((m) => ({
+        label: m.label,
+        pressed: m.id === s.mode,
+        style: base + 'flex: 1; justify-content: center; ' + (m.id === s.mode ? on : off),
+        pick: () => this.setState({ mode: m.id })
+      })),
+      summary: (acc.label + ' · ' + font.label + ' · ' + (dark ? 'sombre' : 'clair')).toUpperCase(),
+      p: {
+        bg: dark ? '#12110F' : '#F7F5F0',
+        ink: dark ? '#EFEBE3' : '#161513',
+        muted: dark ? '#B3ACA0' : '#5C574F',
+        line: dark ? 'rgba(239,235,227,0.16)' : 'rgba(22,21,19,0.14)',
+        surface: dark ? '#1D1B18' : '#ECE8DF',
+        accent: dark ? acc.dark : acc.light,
+        onAccent: dark ? '#12110F' : '#F7F5F0',
+        font: font.family
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

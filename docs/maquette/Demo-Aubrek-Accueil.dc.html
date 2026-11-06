@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Aubrek – Accueil (démo)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A0A0B}
+a{color:#F2F2F0;text-decoration:none}
+a:hover{color:#FFFFFF}
+.cut{clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+.cut-lg{clip-path:polygon(0 0,calc(100% - 48px) 0,100% 48px,100% 100%,48px 100%,0 calc(100% - 48px))}
+.u{position:relative;padding:12px 0;display:inline-block}
+.u::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 500ms cubic-bezier(0.22,1,0.36,1)}
+.u:hover::after{transform:scaleX(1)}
+.btn{transition:transform 400ms cubic-bezier(0.22,1,0.36,1), background 400ms ease, color 400ms ease}
+.btn:hover{transform:translateY(-2px)}
+.ghost:hover{background:#F2F2F0 !important;color:#0A0A0B !important}
+.tab{transition:color 400ms ease, border-color 400ms ease}
+.tab:hover{color:#F2F2F0 !important}
+.light a{color:#0A0A0B}
+.light a:hover{color:#000}
+</style>
+</helmet>
+<div style="font-family: 'Saira', sans-serif; color: #F2F2F0; background: #0A0A0B;">
+
+  <!-- Bandeau démo -->
+  <div style="border-bottom: 1px solid rgba(242,242,240,0.12); font-size: 11px; letter-spacing: 0.18em; color: #9A9AA0;">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 0 40px; min-height: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px;">
+      <span>DÉMO DE LA PIÈCE VECTEUR · MAISON VÉLIN · MARQUE FICTIVE</span>
+      <a class="u" href="Main.dc.html" style="color: #9A9AA0;">RETOUR À MAISON VÉLIN</a>
+    </div>
+  </div>
+
+  <!-- Accueil -->
+  <section aria-labelledby="hero" style="position: relative; min-height: 920px; display: flex; flex-direction: column; background: #050505; overflow: hidden;">
+    <img src="../photos/aubrek-pluie.jpg" alt="Montre Aubrek au boîtier d'acier, couverte de gouttes d'eau, sur fond noir" style="position: absolute; top: 0; right: 0; width: 62%; height: 100%; object-fit: cover; object-position: center 45%;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to right, #050505 0%, #050505 36%, rgba(5,5,5,0.6) 52%, rgba(5,5,5,0) 72%);"></div>
+    <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0) 30%);"></div>
+
+    <header style="position: relative;">
+      <div style="max-width: 1360px; margin: 0 auto; padding: 24px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px;">
+        <a href="#" aria-label="Aubrek, accueil" style="font-size: 20px; font-weight: 600; letter-spacing: 0.5em;">AUBREK</a>
+        <nav aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 4px 36px; font-size: 13px; font-weight: 600; letter-spacing: 0.2em;">
+          <a class="u" href="#gamme">MODÈLES</a>
+          <a class="u" href="#ingenierie">INGÉNIERIE</a>
+          <a class="u" href="#coloris">COLORIS</a>
+          <a class="u" href="#points-de-vente">POINTS DE VENTE</a>
+        </nav>
+        <a class="btn ghost cut" href="#coloris" style="min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 24px; border: 1px solid rgba(242,242,240,0.6); font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">CONFIGURER</a>
+      </div>
+    </header>
+
+    <div style="position: relative; flex: 1; max-width: 1360px; width: 100%; margin: 0 auto; padding: 0 40px 56px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; gap: 64px;">
+      <div style="display: flex; flex-direction: column; gap: 28px; max-width: 640px;">
+        <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.32em; color: {{accent}};">HORLOGERIE CONNECTÉE</p>
+        <h1 id="hero" style="margin: 0; font-family: 'Saira', sans-serif; font-weight: 600; text-transform: uppercase; font-size: clamp(40px, 4.4vw, 68px); line-height: 1.05; letter-spacing: 0.01em;">Taillée pour <span style="color: {{accent}}; font-weight: 300; font-style: italic;">l'orage.</span></h1>
+        <p style="margin: 0; max-width: 440px; font-size: 17px; font-weight: 300; line-height: 1.7; color: #B8B8BE;">Un boîtier d'acier brossé, un verre saphir et une étanchéité à cinquante mètres. Aubrek ne craint ni la pluie ni la nuit.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+          <a class="btn cut" href="#coloris" style="min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 32px; background: {{accent}}; color: #0A0A0B; font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">CONFIGURER VOTRE AUBREK</a>
+          <a class="btn ghost cut" href="#gamme" style="min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 32px; border: 1px solid rgba(242,242,240,0.6); font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">DÉCOUVRIR LA GAMME</a>
+        </div>
+      </div>
+      <dl style="margin: 0; padding-top: 24px; border-top: 1px solid rgba(242,242,240,0.16); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 24px;">
+        <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #9A9AA0;">ÉTANCHÉITÉ</dt><dd style="margin: 8px 0 0; font-size: 22px; font-weight: 600;">50 m</dd></div>
+        <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #9A9AA0;">VERRE</dt><dd style="margin: 8px 0 0; font-size: 22px; font-weight: 600;">Saphir</dd></div>
+        <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #9A9AA0;">BOÎTIER</dt><dd style="margin: 8px 0 0; font-size: 22px; font-weight: 600;">Acier brossé</dd></div>
+        <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #9A9AA0;">AUTONOMIE</dt><dd style="margin: 8px 0 0; font-size: 22px; font-weight: 600;">36 h</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- La gamme : sélecteur de modèles -->
+  <section id="gamme" aria-labelledby="gamme-title" style="max-width: 1360px; margin: 0 auto; padding: 140px 40px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px 48px; margin-bottom: 56px;">
+      <h2 id="gamme-title" style="margin: 0; font-family: 'Saira', sans-serif; font-weight: 600; text-transform: uppercase; font-size: clamp(30px, 3vw, 44px); line-height: 1.1;">La <span style="font-weight: 300; font-style: italic;">gamme</span></h2>
+      <div role="group" aria-label="Choisir un modèle" style="display: flex; flex-wrap: wrap; gap: 8px 32px;">
+        <sc-for list="{{models}}" as="m" hint-placeholder-count="3">
+          <button type="button" class="tab" onClick="{{m.pick}}" aria-pressed="{{m.pressed}}" style="{{m.tabStyle}}">{{m.name}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 56px 96px; align-items: center;">
+      <div class="cut-lg" style="aspect-ratio: 4 / 5; background: #141416; overflow: hidden;">
+        <img src="{{cur.img}}" alt="{{cur.alt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{cur.pos}};">
+      </div>
+      <div aria-live="polite" style="display: flex; flex-direction: column; gap: 28px;">
+        <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.28em; color: #9A9AA0;">MODÈLE {{cur.index}} / 3</p>
+        <h3 style="margin: 0; font-family: 'Saira', sans-serif; font-weight: 600; text-transform: uppercase; font-size: clamp(40px, 4.2vw, 64px); line-height: 1;">{{cur.name}}</h3>
+        <p style="margin: 0; max-width: 420px; font-size: 18px; font-weight: 300; line-height: 1.7; color: #B8B8BE;">{{cur.tagline}}</p>
+        <dl style="margin: 0; display: flex; flex-direction: column;">
+          <sc-for list="{{cur.specs}}" as="s" hint-placeholder-count="4">
+            <div style="display: flex; justify-content: space-between; gap: 24px; padding: 16px 0; border-top: 1px solid rgba(242,242,240,0.12); font-size: 15px;">
+              <dt style="letter-spacing: 0.16em; color: #9A9AA0;">{{s.k}}</dt>
+              <dd style="margin: 0; font-weight: 600; text-align: right;">{{s.v}}</dd>
+            </div>
+          </sc-for>
+        </dl>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding-top: 8px;">
+          <a class="btn cut" href="#coloris" style="min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 28px; background: {{accent}}; color: #0A0A0B; font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">CONFIGURER</a>
+          <a class="u" href="Demo-Aubrek-Orage.dc.html" style="font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">FICHE TECHNIQUE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingénierie : texte sur image -->
+  <section id="ingenierie" aria-labelledby="ing-title" style="position: relative; min-height: 840px; display: flex; background: #1A1A1C; overflow: hidden;">
+    <img src="../photos/aubrek-capteurs.jpg" alt="Dos d'une montre Aubrek : quatre capteurs circulaires sous un verre, gravures techniques autour" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% center;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,11,0.92) 0%, rgba(10,10,11,0.7) 34%, rgba(10,10,11,0) 64%);"></div>
+    <div style="position: relative; width: 100%; max-width: 1360px; margin: 0 auto; padding: 96px 40px; box-sizing: border-box; display: flex; align-items: center;">
+      <div style="max-width: 480px; display: flex; flex-direction: column; gap: 28px;">
+        <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.32em; color: {{accent}};">INGÉNIERIE</p>
+        <h2 id="ing-title" style="margin: 0; font-family: 'Saira', sans-serif; font-weight: 600; text-transform: uppercase; font-size: clamp(30px, 3vw, 44px); line-height: 1.1;">Ce qui ne se voit pas, <span style="color: {{accent}}; font-weight: 300; font-style: italic;">se mesure.</span></h2>
+        <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.7; color: #C6C6CC;">Quatre capteurs optiques sous un verre saphir, un fond scellé et une couronne usinée dans la masse.</p>
+        <dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; padding-top: 24px; border-top: 1px solid rgba(242,242,240,0.18);">
+          <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #A8A8AE;">CAPTEURS</dt><dd style="margin: 8px 0 0; font-size: 20px; font-weight: 600;">4 optiques</dd></div>
+          <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #A8A8AE;">FOND</dt><dd style="margin: 8px 0 0; font-size: 20px; font-weight: 600;">Céramique</dd></div>
+          <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #A8A8AE;">COURONNE</dt><dd style="margin: 8px 0 0; font-size: 20px; font-weight: 600;">Usinée</dd></div>
+          <div><dt style="font-size: 11px; letter-spacing: 0.24em; color: #A8A8AE;">POSITION</dt><dd style="margin: 8px 0 0; font-size: 20px; font-weight: 600;">GPS</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coloris : section claire, contraste de rythme -->
+  <section id="coloris" aria-labelledby="col-title" style="background: {{c.bg}}; color: {{c.ink}}; transition: background-color 900ms cubic-bezier(0.22,1,0.36,1), color 900ms cubic-bezier(0.22,1,0.36,1);">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 140px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 56px 96px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 28px; max-width: 460px;">
+        <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.32em; color: {{c.muted}}; transition: color 900ms ease;">COLORIS · {{c.name}}</p>
+        <h2 id="col-title" style="margin: 0; font-family: 'Saira', sans-serif; font-weight: 600; text-transform: uppercase; font-size: clamp(30px, 3vw, 44px); line-height: 1.1;">Votre Aubrek, <span style="font-weight: 300; font-style: italic;">à votre lumière.</span></h2>
+        <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.7; color: {{c.muted}}; transition: color 900ms ease;">Aluminium clair et bracelet rose poudré. Choisissez l'écran au repos, puis composez le reste dans le configurateur.</p>
+        <fieldset style="margin: 0; padding: 0; border: 0;">
+          <legend style="padding: 0 0 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.28em;">ÉCRAN AU REPOS</legend>
+          <div style="display: flex; gap: 8px;">
+            <sc-for list="{{dials}}" as="d" hint-placeholder-count="2">
+              <button type="button" class="btn cut" onClick="{{d.pick}}" aria-pressed="{{d.pressed}}" style="{{d.style}}">
+                <span aria-hidden="true" style="width: 14px; height: 14px; background: {{d.swatch}}; border: 1px solid {{c.line}};"></span>
+                <span>{{d.label}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </fieldset>
+        <a class="btn cut" href="#" style="align-self: flex-start; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 32px; background: {{c.ink}}; color: {{c.bg}}; font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">OUVRIR LE CONFIGURATEUR</a>
+      </div>
+      <div class="cut-lg" style="aspect-ratio: 4 / 5; background: #E2DADD; overflow: hidden;">
+        <img src="{{dial.img}}" alt="{{dial.alt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{dial.pos}};">
+      </div>
+    </div>
+  </section>
+
+  <!-- Points de vente -->
+  <section id="points-de-vente" aria-labelledby="pdv" style="border-bottom: 1px solid rgba(242,242,240,0.12);">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 120px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 20px; max-width: 640px;">
+        <h2 id="pdv" style="margin: 0; font-family: 'Saira', sans-serif; font-weight: 600; text-transform: uppercase; font-size: clamp(28px, 2.6vw, 40px); line-height: 1.1;">L'essayer <span style="font-weight: 300; font-style: italic;">au poignet</span></h2>
+        <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.7; color: #B8B8BE;">Retrouvez la gamme complète chez nos partenaires agréés, ou prenez rendez-vous pour un essai privé.</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+        <a class="btn cut" href="#" style="min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 28px; background: {{accent}}; color: #0A0A0B; font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">TROUVER UN POINT DE VENTE</a>
+        <a class="btn ghost cut" href="#" style="min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 28px; border: 1px solid rgba(242,242,240,0.6); font-size: 12px; font-weight: 600; letter-spacing: 0.22em;">ESSAI PRIVÉ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pied de page -->
+  <footer style="max-width: 1360px; margin: 0 auto; padding: 72px 40px 40px; display: flex; flex-direction: column; gap: 56px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px 64px;">
+      <span style="font-size: 20px; font-weight: 600; letter-spacing: 0.5em;">AUBREK</span>
+      <nav aria-label="Liens du pied de page" style="display: flex; flex-wrap: wrap; gap: 4px 36px; font-size: 13px; letter-spacing: 0.14em; color: #9A9AA0;">
+        <a class="u" href="#" style="color: #9A9AA0;">ENTRETIEN</a>
+        <a class="u" href="#" style="color: #9A9AA0;">GARANTIE</a>
+        <a class="u" href="#" style="color: #9A9AA0;">CONTACT</a>
+        <a class="u" href="#" style="color: #9A9AA0;">MENTIONS LÉGALES</a>
+      </nav>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-top: 24px; border-top: 1px solid rgba(242,242,240,0.12); font-size: 12px; letter-spacing: 0.06em; color: #9A9AA0;">
+      <span>Aubrek est une marque fictive. Démo créée par Maison Vélin by Devbrek. Photos : Pexels [CRÉDITS À COMPLÉTER].</span>
+      <span style="display: flex; flex-wrap: wrap; gap: 8px 24px;">
+        <a class="u" href="#" style="color: #9A9AA0; padding: 0;">Taille du texte</a>
+        <a class="u" href="#" style="color: #9A9AA0; padding: 0;">Réduire les animations</a>
+      </span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#A8F0E0","options":["#A8F0E0","#E8D9A8","#F2F2F0"]},"$preview":{"width":1440,"height":5200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { model: 'orage', dial: 'nuit' };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#A8F0E0';
+    const MODELS = [
+      { id: 'orage', name: 'Orage', img: '../photos/aubrek-orage-neon.jpg', pos: 'center 52%',
+        alt: 'Aubrek Orage, cadran noir aux chiffres blancs, posée sur un tube de lumière turquoise',
+        tagline: 'Lisible sous toutes les lumières. Le cadran épouse le bord de l’écran, les chiffres l’encadrent.',
+        specs: [{ k: 'BOÎTIER', v: '45 mm, aluminium noir' }, { k: 'ÉCRAN', v: 'Toujours actif' }, { k: 'ÉTANCHÉITÉ', v: '50 m' }, { k: 'BRACELET', v: 'Élastomère noir' }] },
+      { id: 'aurore', name: 'Aurore', img: '../photos/aubrek-aurore-ecran-vert.jpg', pos: '55% center',
+        alt: 'Aubrek Aurore, aluminium clair et bracelet rose poudré, écran vert allumé',
+        tagline: 'La douceur d’un aluminium clair, une lumière qui s’allume au premier regard.',
+        specs: [{ k: 'BOÎTIER', v: '41 mm, aluminium argent' }, { k: 'ÉCRAN', v: 'Couleur, haute luminosité' }, { k: 'ÉTANCHÉITÉ', v: '50 m' }, { k: 'BRACELET', v: 'Rose poudré' }] },
+      { id: 'monolithe', name: 'Monolithe', img: '../photos/aubrek-monolithe.jpg', pos: 'center 40%',
+        alt: 'Aubrek Monolithe, boîtier argent et bracelet milanais, grands chiffres sur écran noir, fond blanc',
+        tagline: 'Un bloc, une couronne, rien de plus. Les heures s’affichent en grand, sans fioriture.',
+        specs: [{ k: 'BOÎTIER', v: '42 mm, acier poli' }, { k: 'ÉCRAN', v: 'Monochrome' }, { k: 'ÉTANCHÉITÉ', v: '50 m' }, { k: 'BRACELET', v: 'Milanais acier' }] }
+    ];
+    const DIALS = [
+      { id: 'nuit', label: 'Nuit', swatch: '#0A0A0B', img: '../photos/aubrek-aurore-ecran-noir.jpg', pos: 'center 45%',
+        alt: 'Aubrek coloris Aurore, écran noir au repos, bracelet rose poudré' },
+      { id: 'aurore', label: 'Aurore', swatch: '#1FC98E', img: '../photos/aubrek-aurore-ecran-vert.jpg', pos: '55% center',
+        alt: 'Aubrek coloris Aurore, écran vert allumé, bracelet rose poudré' }
+    ];
+    const s = this.state;
+    // Ambiance de la section Coloris, liée à l'écran choisi
+    const SCENES = {
+      aurore: { name: 'AURORE', bg: '#1FC98E', ink: '#0A0A0B', muted: '#14382A', line: 'rgba(10,10,11,0.4)' },
+      nuit: { name: 'NUIT', bg: '#1C1719', ink: '#F2EEF0', muted: '#B9AFB4', line: 'rgba(242,238,240,0.35)' }
+    };
+    const c = SCENES[s.dial];
+    const idx = MODELS.findIndex((m) => m.id === s.model);
+    const cur = MODELS[idx];
+    const tabBase = 'min-height: 44px; padding: 0; background: transparent; border: 0; border-bottom: 1px solid; font-family: inherit; font-size: 14px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; ';
+    const dialBase = 'min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px; padding: 0 20px; font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; ';
+    return {
+      accent,
+      models: MODELS.map((m) => ({
+        name: m.name,
+        pressed: m.id === s.model,
+        tabStyle: tabBase + (m.id === s.model ? 'color: #F2F2F0; border-color: ' + accent + ';' : 'color: #9A9AA0; border-color: transparent;'),
+        pick: () => this.setState({ model: m.id })
+      })),
+      cur: { ...cur, index: String(idx + 1).padStart(2, '0') },
+      dials: DIALS.map((d) => ({
+        label: d.label,
+        swatch: d.swatch,
+        pressed: d.id === s.dial,
+        style: dialBase + (d.id === s.dial
+          ? 'background: ' + c.ink + '; color: ' + c.bg + '; border: 1px solid ' + c.ink + ';'
+          : 'background: transparent; color: ' + c.ink + '; border: 1px solid ' + c.line + ';'),
+        pick: () => this.setState({ dial: d.id })
+      })),
+      dial: DIALS.find((d) => d.id === s.dial),
+      c
+    };
+  }
+}
+</script>
+</body>
+</html>
