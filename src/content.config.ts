@@ -22,6 +22,13 @@ const pieces = defineCollection({
       intro: z.string(),
       marqueDemo: z.object({ nom: z.string(), href: z.string() }),
       couverture: z.object({ src: image(), position: z.string() }),
+      // Bloc de la pièce sur l'accueil Maison Vélin
+      accueil: z.object({
+        accroche: z.string(),
+        image: image(),
+        position: z.string(),
+        mise: z.enum(['bas-gauche', 'droite', 'haut-gauche']),
+      }),
       pourQui: z.object({ surtitre: z.string(), titre: z.string(), texte: z.string() }),
       contenu: z.array(z.object({ nom: z.string(), detail: z.string() })).min(1),
       matieres: z.array(z.object({ titre: z.string(), texte: z.string() })).length(4),

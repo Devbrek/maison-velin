@@ -1,0 +1,42 @@
+---
+/*
+ * Layout des pages Maison Vélin : polices Bodoni + Jost, en-tête et pied de page.
+ * `enTeteSurImage` : l'en-tête se superpose à la photo d'ouverture de la page (texte clair),
+ * sinon il s'affiche en haut, sur fond vélin.
+ */
+import { Font } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/velin/SiteHeader.astro';
+import SiteFooter from '../components/velin/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  enTeteSurImage?: boolean;
+}
+
+const { title, description, enTeteSurImage = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} identity="velin">
+  <Fragment slot="fonts">
+    <Font cssVariable="--font-bodoni" preload />
+    <Font cssVariable="--font-jost" />
+    <slot name="fonts" />
+  </Fragment>
+
+  <a
+    href="#contenu"
+    class="sr-only z-50 bg-accent px-5 py-3 text-on-accent focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+  >
+    Aller au contenu
+  </a>
+
+  <SiteHeader surImage={enTeteSurImage} />
+
+  <main id="contenu">
+    <slot />
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

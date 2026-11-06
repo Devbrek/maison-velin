@@ -1,0 +1,84 @@
+---
+/*
+ * Bloc d'une pièce sur l'accueil : photo plein cadre, voile en dégradé, texte posé dessus.
+ * Le nom de la pièce est écrit dans la police de sa propre identité.
+ * Sur téléphone, le texte est toujours en bas ; sur grand écran, il suit la « mise » de la maquette.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+
+interface Props {
+  piece: CollectionEntry<'pieces'>;
+}
+
+const { piece } = Astro.props;
+const { id, data } = piece;
+
+// Style du nom : chaque pièce garde la typographie de son univers
+const stylesNom: Record<string, string> = {
+  filigrane: 'font-normal',
+  vecteur: 'font-semibold uppercase tracking-[0.04em]',
+  lavis: 'font-light italic',
+};
+
+const alignement = {
+  'bas-gauche': 'md:items-end md:justify-start',
+  droite: 'md:items-center md:justify-end',
+  'haut-gauche': 'md:items-start md:justify-start',
+}[data.accueil.mise];
+---
+
+<article
+  aria-labelledby={`piece-${id}`}
+  class:list={['bloc relative flex min-h-[640px] overflow-hidden bg-[#2B2723] text-sur-image md:min-h-[820px]', `bloc--${data.accueil.mise}`]}
+>
+  <Picture
+    src={data.accueil.image}
+    alt=""
+    formats={['avif', 'webp']}
+    layout="full-width"
+    widths={[640, 960, data.accueil.image.width]}
+    class="absolute inset-0 h-full w-full object-cover"
+    style={`object-position: ${data.accueil.position}`}
+  />
+  <div aria-hidden="true" class="voile absolute inset-0"></div>
+
+  <div class:list={['conteneur relative flex items-end py-18', alignement]}>
+    <div class="flex max-w-[460px] flex-col gap-5">
+      <p class="surtitre text-sur-image-3">{data.univers.join(' · ')}</p>
+      <h3
+        id={`piece-${id}`}
+        class:list={['text-[clamp(44px,5vw,76px)] leading-none', stylesNom[id]]}
+        style={`font-family: var(${data.policeNom})`}
+      >
+        {data.nom}
+      </h3>
+      <p class="text-[17px] leading-[1.7] font-light text-sur-image-2">{data.accueil.accroche}</p>
+      <a href={`/collection/${id}`} class="lien-trace self-start text-[12px] tracking-[0.22em] uppercase">
+        Découvrir la pièce<span class="sr-only"> {data.nom}</span>
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  /* Téléphone : voile du bas vers le haut, sous le texte */
+  .voile {
+    background: linear-gradient(to top, rgb(15 14 12 / 0.92) 0%, rgb(15 14 12 / 0.78) 45%, rgb(15 14 12 / 0) 80%);
+  }
+
+  @media (width >= 48rem) {
+    .bloc--bas-gauche .voile {
+      background: linear-gradient(to top right, rgb(15 14 12 / 0.9) 0%, rgb(15 14 12 / 0.72) 34%, rgb(15 14 12 / 0) 66%);
+    }
+    .bloc--droite {
+      clip-path: polygon(0 0, 100% 0, 100% 92%, 94% 100%, 0 100%);
+    }
+    .bloc--droite .voile {
+      background: linear-gradient(to left, rgb(15 14 12 / 0.92) 0%, rgb(15 14 12 / 0.8) 36%, rgb(15 14 12 / 0.15) 72%);
+    }
+    .bloc--haut-gauche .voile {
+      background: linear-gradient(to bottom right, rgb(30 20 11 / 0.92) 0%, rgb(30 20 11 / 0.7) 32%, rgb(30 20 11 / 0) 62%);
+    }
+  }
+</style>

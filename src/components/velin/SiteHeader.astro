@@ -1,0 +1,119 @@
+---
+/*
+ * En-tête Maison Vélin.
+ * Grand écran : logo, navigation, bouton rendez-vous.
+ * Téléphone : bouton « Menu » qui ouvre un panneau plein écran (<dialog> natif :
+ * focus piégé, touche Échap et fond inerte sont gérés par le navigateur).
+ */
+interface Props {
+  surImage?: boolean;
+}
+
+const { surImage = false } = Astro.props;
+
+const liens = [
+  { href: '/#collection', label: 'La Collection' },
+  { href: '/savoir-faire', label: 'Le Savoir-faire' },
+  { href: '/sur-mesure', label: 'Sur mesure' },
+];
+
+const chemin = Astro.url.pathname.replace(/\/$/, '') || '/';
+const estCourant = (href: string) => href === chemin;
+---
+
+<header
+  class:list={[
+    'z-20 border-b',
+    surImage ? 'absolute inset-x-0 top-0 border-sur-image/15 text-sur-image' : 'relative border-line',
+  ]}
+>
+  <div class="conteneur flex items-center justify-between gap-x-10 gap-y-4 py-5">
+    <a href="/" class="flex flex-col gap-0.5 leading-none" aria-label="Maison Vélin, retour à l'accueil">
+      <span class="text-[15px] font-medium tracking-[0.32em]">MAISON VÉLIN</span>
+      <span class:list={['font-display text-[13px] italic', surImage ? 'text-sur-image-3' : 'text-ink-2']}>
+        by Devbrek
+      </span>
+    </a>
+
+    <nav aria-label="Navigation principale" class="hidden lg:block">
+      <ul class="flex items-center gap-10 text-[13px] tracking-[0.18em] uppercase">
+        {liens.map(({ href, label }) => (
+          <li>
+            <a class="lien-trace" href={href} aria-current={estCourant(href) ? 'page' : undefined}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/sur-mesure" class:list={['bouton-contour hidden px-6 lg:inline-flex', !surImage && 'bouton-contour--encre']}>
+      Prendre rendez-vous
+    </a>
+
+    <button
+      type="button"
+      class="min-h-11 min-w-11 text-[12px] tracking-[0.22em] uppercase lg:hidden"
+      aria-haspopup="dialog"
+      aria-controls="menu-mobile"
+      data-menu-ouvrir
+    >
+      Menu
+    </button>
+  </div>
+</header>
+
+<dialog
+  id="menu-mobile"
+  aria-label="Menu"
+  class="menu-mobile m-0 h-dvh max-h-none w-full max-w-none bg-bg p-0 text-ink"
+>
+  <div class="conteneur flex h-full flex-col py-5">
+    <div class="flex items-center justify-between">
+      <span class="text-[15px] font-medium tracking-[0.32em]">MAISON VÉLIN</span>
+      <button type="button" class="min-h-11 min-w-11 text-[12px] tracking-[0.22em] uppercase" data-menu-fermer>
+        Fermer
+      </button>
+    </div>
+    <nav aria-label="Navigation principale" class="flex flex-1 flex-col justify-center">
+      <ul class="flex flex-col gap-6">
+        {liens.map(({ href, label }) => (
+          <li>
+            <a class="lien-trace font-display text-[32px]" href={href} aria-current={estCourant(href) ? 'page' : undefined}>
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a href="/sur-mesure" class="bouton-contour bouton-contour--encre self-start">Prendre rendez-vous</a>
+  </div>
+</dialog>
+
+<style>
+  /* Sur fond vélin, le bouton se remplit d'encre au survol */
+  .bouton-contour--encre:hover {
+    background-color: var(--id-ink);
+    color: var(--id-bg);
+  }
+
+  .menu-mobile[open] {
+    animation: menu-fondu 600ms var(--ease-velin);
+  }
+  @keyframes menu-fondu {
+    from {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  // Relancé à chaque navigation (View Transitions remplacent la page sans recharger les scripts)
+  document.addEventListener('astro:page-load', () => {
+    const menu = document.querySelector<HTMLDialogElement>('#menu-mobile');
+    if (!menu) return;
+
+    document.querySelector('[data-menu-ouvrir]')?.addEventListener('click', () => menu.showModal());
+    menu.querySelector('[data-menu-fermer]')?.addEventListener('click', () => menu.close());
+    // Un lien choisi ferme le menu avant la navigation
+    menu.querySelectorAll('a').forEach((lien) => lien.addEventListener('click', () => menu.close()));
+  });
+</script>

@@ -8,6 +8,12 @@
     "intro": "Une pièce pour l'horlogerie et la joaillerie. La délicatesse d'un motif vu en transparence : fond clair, macros sur la matière, beaucoup d'espace autour de l'objet.",
     "marqueDemo": { "nom": "Sertelle", "href": "/demos/sertelle" },
     "couverture": { "src": "../assets/sertelle/sertelle-alliance-riviere.jpg", "position": "center 62%" },
+    "accueil": {
+      "accroche": "La délicatesse d'un motif vu en transparence. Fond clair, macros sur la matière, détails fins.",
+      "image": "../assets/sertelle/sertelle-alliance-riviere.jpg",
+      "position": "center 62%",
+      "mise": "bas-gauche"
+    },
     "pourQui": {
       "surtitre": "Pour quelles maisons",
       "titre": "Pour les maisons dont l'objet est petit, précieux, et se regarde de très près.",
@@ -63,6 +69,12 @@
     "intro": "Une pièce pour l'horlogerie connectée, l'automobile et la haute technologie. La précision d'une machine, l'allure d'une sculpture.",
     "marqueDemo": { "nom": "Aubrek", "href": "/demos/aubrek" },
     "couverture": { "src": "../assets/aubrek/aubrek-pluie.jpg", "position": "center 45%" },
+    "accueil": {
+      "accroche": "La précision d'une machine, l'allure d'une sculpture. Fond noir, angles coupés, chiffres techniques et un configurateur au centre.",
+      "image": "../assets/aubrek/aubrek-orage-neon.jpg",
+      "position": "center 50%",
+      "mise": "droite"
+    },
     "pourQui": {
       "surtitre": "Pour quelles marques",
       "titre": "Pour les marques qui vendent autant la performance que le style.",
@@ -118,6 +130,12 @@
     "intro": "Une pièce pour le parfum, l'hôtellerie et le spa. L'atmosphère d'une encre diluée : un récit qui se lit en défilant, des images qui passent du flou au net.",
     "marqueDemo": { "nom": "Calade", "href": "/demos/calade" },
     "couverture": { "src": "../assets/calade/calade-ruelle.jpg", "position": "center 70%" },
+    "accueil": {
+      "accroche": "L'atmosphère d'une encre diluée. Un récit qui se lit en défilant, des images qui passent du flou au net.",
+      "image": "../assets/calade/calade-pierre-d-ete-ambre.jpg",
+      "position": "center 40%",
+      "mise": "haut-gauche"
+    },
     "pourQui": {
       "surtitre": "Pour quelles marques",
       "titre": "Pour les marques qui vendent une sensation plutôt qu'un objet.",
