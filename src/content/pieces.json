@@ -4,7 +4,10 @@
     "ordre": 1,
     "nom": "Filigrane",
     "policeNom": "--font-bodoni",
-    "univers": ["Joaillerie", "Horlogerie"],
+    "univers": [
+      "Joaillerie",
+      "Horlogerie"
+    ],
     "intro": "Une pièce pour l'horlogerie et la joaillerie. La délicatesse d'un motif vu en transparence : fond clair, macros sur la matière, beaucoup d'espace autour de l'objet.",
     "marqueDemo": { "nom": "Sertelle", "href": "/demos/sertelle" },
     "couverture": { "src": "../assets/sertelle/sertelle-alliance-riviere.jpg", "position": "center 62%" },
@@ -45,8 +48,30 @@
         { "id": "garamond", "label": "EB Garamond", "police": "--font-eb-garamond", "note": "Classique, sobre" }
       ],
       "ambiances": [
-        { "id": "clair", "label": "Clair", "sombre": false, "couleurs": { "fond": "#F7F5F0", "encre": "#161513", "secondaire": "#5C574F", "surface": "#ECE8DF" } },
-        { "id": "sombre", "label": "Sombre", "sombre": true, "couleurs": { "fond": "#12110F", "encre": "#EFEBE3", "secondaire": "#B3ACA0", "surface": "#1D1B18" } }
+        {
+          "id": "clair",
+          "label": "Clair",
+          "sombre": false,
+          "couleurs": {
+            "fond": "#F7F5F0",
+            "encre": "#161513",
+            "secondaire": "#5C574F",
+            "surface": "#ECE8DF"
+          },
+          "apercu": { "src": "../assets/sertelle/sertelle-alliance-riviere.jpg", "position": "center 62%" }
+        },
+        {
+          "id": "sombre",
+          "label": "Sombre",
+          "sombre": true,
+          "couleurs": {
+            "fond": "#12110F",
+            "encre": "#EFEBE3",
+            "secondaire": "#B3ACA0",
+            "surface": "#1D1B18"
+          },
+          "apercu": { "src": "../assets/sertelle/sertelle-alliance-riviere.jpg", "position": "center 62%" }
+        }
       ]
     },
     "preuves": {
@@ -65,7 +90,11 @@
     "ordre": 2,
     "nom": "Vecteur",
     "policeNom": "--font-saira",
-    "univers": ["Horlogerie connectée", "Automobile", "Haute technologie"],
+    "univers": [
+      "Horlogerie connectée",
+      "Automobile",
+      "Haute technologie"
+    ],
     "intro": "Une pièce pour l'horlogerie connectée, l'automobile et la haute technologie. La précision d'une machine, l'allure d'une sculpture.",
     "marqueDemo": { "nom": "Aubrek", "href": "/demos/aubrek" },
     "couverture": { "src": "../assets/aubrek/aubrek-pluie.jpg", "position": "center 45%" },
@@ -106,8 +135,30 @@
         { "id": "titillium", "label": "Titillium Web", "police": "--font-titillium", "note": "Technique, discrète" }
       ],
       "ambiances": [
-        { "id": "noir", "label": "Noir", "sombre": true, "couleurs": { "fond": "#0A0A0B", "encre": "#F2F2F0", "secondaire": "#A8A8AE", "surface": "#141416" } },
-        { "id": "blanc", "label": "Blanc", "sombre": false, "couleurs": { "fond": "#F2F2F0", "encre": "#0A0A0B", "secondaire": "#55555B", "surface": "#E4E4E1" } }
+        {
+          "id": "noir",
+          "label": "Noir",
+          "sombre": true,
+          "couleurs": {
+            "fond": "#0A0A0B",
+            "encre": "#F2F2F0",
+            "secondaire": "#A8A8AE",
+            "surface": "#141416"
+          },
+          "apercu": { "src": "../assets/aubrek/aubrek-pluie.jpg", "position": "center 45%" }
+        },
+        {
+          "id": "blanc",
+          "label": "Blanc",
+          "sombre": false,
+          "couleurs": {
+            "fond": "#F2F2F0",
+            "encre": "#0A0A0B",
+            "secondaire": "#55555B",
+            "surface": "#E4E4E1"
+          },
+          "apercu": { "src": "../assets/aubrek/aubrek-monolithe.jpg", "position": "center 40%" }
+        }
       ]
     },
     "preuves": {
@@ -126,7 +177,11 @@
     "ordre": 3,
     "nom": "Lavis",
     "policeNom": "--font-fraunces",
-    "univers": ["Parfum", "Hôtellerie", "Spa"],
+    "univers": [
+      "Parfum",
+      "Hôtellerie",
+      "Spa"
+    ],
     "intro": "Une pièce pour le parfum, l'hôtellerie et le spa. L'atmosphère d'une encre diluée : un récit qui se lit en défilant, des images qui passent du flou au net.",
     "marqueDemo": { "nom": "Calade", "href": "/demos/calade" },
     "couverture": { "src": "../assets/calade/calade-ruelle.jpg", "position": "center 70%" },
@@ -167,8 +222,28 @@
         { "id": "playfair", "label": "Playfair Display", "police": "--font-playfair", "note": "Contrastée, éditoriale" }
       ],
       "ambiances": [
-        { "id": "jour", "label": "Jour", "sombre": false, "couleurs": { "fond": "#F3EEE6", "encre": "#2A1A0E", "secondaire": "#5E4836" } },
-        { "id": "nuit", "label": "Nuit", "sombre": true, "couleurs": { "fond": "#1E140B", "encre": "#F4ECE0", "secondaire": "#D9CBB6" } }
+        {
+          "id": "jour",
+          "label": "Jour",
+          "sombre": false,
+          "couleurs": {
+            "fond": "#F3EEE6",
+            "encre": "#2A1A0E",
+            "secondaire": "#5E4836"
+          },
+          "apercu": { "src": "../assets/calade/calade-lys.jpg", "position": "center 55%" }
+        },
+        {
+          "id": "nuit",
+          "label": "Nuit",
+          "sombre": true,
+          "couleurs": {
+            "fond": "#1E140B",
+            "encre": "#F4ECE0",
+            "secondaire": "#D9CBB6"
+          },
+          "apercu": { "src": "../assets/calade/calade-pierre-d-ete-ambre.jpg", "position": "center 42%" }
+        }
       ]
     },
     "preuves": {

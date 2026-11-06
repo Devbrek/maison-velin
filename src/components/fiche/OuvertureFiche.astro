@@ -1,0 +1,64 @@
+---
+// Ouverture plein écran d'une fiche pièce : photo, voile, fil d'Ariane, nom de la pièce
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import NomPiece from './NomPiece.astro';
+
+interface Props {
+  piece: CollectionEntry<'pieces'>;
+}
+
+const { id, data } = Astro.props.piece;
+---
+
+<section
+  aria-labelledby="fiche-titre"
+  class="relative flex min-h-[max(560px,100svh)] flex-col bg-[#2B2723] text-sur-image"
+>
+  <Picture
+    src={data.couverture.src}
+    alt=""
+    formats={['avif', 'webp']}
+    layout="full-width"
+    widths={[640, 960, data.couverture.src.width]}
+    priority
+    class="absolute inset-0 h-full w-full object-cover"
+    style={`object-position: ${data.couverture.position}`}
+  />
+  <div aria-hidden="true" class="voile absolute inset-0"></div>
+
+  <div class="conteneur relative mt-auto pt-32 pb-12 md:pb-18">
+    <div class="flex max-w-[720px] flex-col gap-7">
+      <nav aria-label="Fil d'Ariane" class="text-[12px] tracking-[0.22em] text-sur-image-3 uppercase">
+        <ol class="flex flex-wrap items-center">
+          <li><a class="lien-trace" href="/#collection">La Collection</a></li>
+          <li aria-hidden="true" class="px-3">/</li>
+          <li aria-current="page">{data.nom}</li>
+        </ol>
+      </nav>
+      <NomPiece id={id} nom={data.nom} police={data.policeNom} niveau="h1" htmlId="fiche-titre" />
+      <p class="max-w-[480px] text-lg leading-[1.7] font-light text-sur-image-2">{data.intro}</p>
+      <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
+        <a href={data.marqueDemo.href} class="bouton-contour">Voir la démo {data.marqueDemo.nom}</a>
+        <a href="#configurer" class="lien-trace text-[12px] tracking-[0.22em] uppercase">Configurer la pièce</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .voile {
+    background: linear-gradient(to top, rgb(15 14 12 / 0.92) 0%, rgb(15 14 12 / 0.6) 50%, rgb(15 14 12 / 0.35) 100%);
+  }
+  @media (width >= 48rem) {
+    .voile {
+      background: linear-gradient(
+        to top right,
+        rgb(15 14 12 / 0.92) 0%,
+        rgb(15 14 12 / 0.74) 36%,
+        rgb(15 14 12 / 0.1) 66%,
+        rgb(15 14 12 / 0.45) 100%
+      );
+    }
+  }
+</style>

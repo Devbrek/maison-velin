@@ -6,6 +6,7 @@
  */
 import type { CollectionEntry } from 'astro:content';
 import { Picture } from 'astro:assets';
+import NomPiece from '../fiche/NomPiece.astro';
 
 interface Props {
   piece: CollectionEntry<'pieces'>;
@@ -13,13 +14,6 @@ interface Props {
 
 const { piece } = Astro.props;
 const { id, data } = piece;
-
-// Style du nom : chaque pièce garde la typographie de son univers
-const stylesNom: Record<string, string> = {
-  filigrane: 'font-normal',
-  vecteur: 'font-semibold uppercase tracking-[0.04em]',
-  lavis: 'font-light italic',
-};
 
 const alignement = {
   'bas-gauche': 'md:items-end md:justify-start',
@@ -46,13 +40,7 @@ const alignement = {
   <div class:list={['conteneur relative flex items-end py-18', alignement]}>
     <div class="flex max-w-[460px] flex-col gap-5">
       <p class="surtitre text-sur-image-3">{data.univers.join(' · ')}</p>
-      <h3
-        id={`piece-${id}`}
-        class:list={['text-[clamp(44px,5vw,76px)] leading-none', stylesNom[id]]}
-        style={`font-family: var(${data.policeNom})`}
-      >
-        {data.nom}
-      </h3>
+      <NomPiece id={id} nom={data.nom} police={data.policeNom} niveau="h3" htmlId={`piece-${id}`} />
       <p class="text-[17px] leading-[1.7] font-light text-sur-image-2">{data.accueil.accroche}</p>
       <a href={`/collection/${id}`} class="lien-trace self-start text-[12px] tracking-[0.22em] uppercase">
         Découvrir la pièce<span class="sr-only"> {data.nom}</span>

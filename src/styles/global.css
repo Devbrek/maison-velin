@@ -55,8 +55,8 @@
   --id-bg: #0F0E0C;
   --id-surface: #1A1916;
   --id-ink: #EDE8DF;
-  --id-ink-2: #A8A296;
-  --id-line: #2C2A26;
+  --id-ink-2: #B5AEA2;
+  --id-line: rgb(237 232 223 / 0.16);
   --id-accent: #9DB2DE;
   --id-on-accent: #0F0E0C;
 }
@@ -174,6 +174,19 @@
   text-transform: uppercase;
 }
 
+/* Formes Aubrek : coins coupés */
+@utility cut {
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+@utility cut-lg {
+  clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+}
+
+/* Forme Calade : image en arche */
+@utility arche {
+  border-radius: 999px 999px 0 0;
+}
+
 @layer components {
   /* Lien souligné qui se trace de gauche à droite au survol */
   .lien-trace {
@@ -197,6 +210,15 @@
   .lien-trace:focus-visible::after,
   .lien-trace[aria-current="page"]::after {
     transform: scaleX(1);
+  }
+
+  /* Aperçu du configurateur : les couleurs glissent d'un réglage à l'autre */
+  .apercu,
+  .apercu * {
+    transition:
+      background-color 900ms var(--ease-velin),
+      color 900ms var(--ease-velin),
+      border-color 900ms var(--ease-velin);
   }
 
   /* Bouton contour : se remplit au survol */

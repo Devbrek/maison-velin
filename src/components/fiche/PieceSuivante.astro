@@ -1,0 +1,47 @@
+---
+// Carte « pièce suivante » : la collection tourne en boucle (Filigrane → Vecteur → Lavis → Filigrane)
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import NomPiece from './NomPiece.astro';
+
+interface Props {
+  piece: CollectionEntry<'pieces'>;
+}
+
+const { id, data } = Astro.props.piece;
+---
+
+<a
+  href={`/collection/${id}`}
+  class="suivante group relative flex min-h-[420px] overflow-hidden bg-[#161513] text-sur-image md:min-h-[520px]"
+>
+  <Picture
+    src={data.accueil.image}
+    alt=""
+    formats={['avif', 'webp']}
+    widths={[640, 960]}
+    sizes="(min-width: 48rem) 60vw, 100vw"
+    class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-velin motion-safe:group-hover:scale-[1.03] md:left-auto md:w-3/5"
+    style={`object-position: ${data.accueil.position}`}
+  />
+  <span aria-hidden="true" class="voile absolute inset-0"></span>
+  <span class="conteneur relative flex flex-col justify-end gap-4 py-18">
+    <span class="surtitre text-sur-image-3">Pièce suivante</span>
+    <NomPiece id={id} nom={data.nom} police={data.policeNom} />
+    <span class="text-[12px] tracking-[0.22em] text-brume uppercase">{data.univers.join(' · ')}</span>
+  </span>
+</a>
+
+<style>
+  .voile {
+    background: linear-gradient(to top, #161513 0%, rgb(22 21 19 / 0.75) 45%, rgb(22 21 19 / 0.2) 100%);
+  }
+  @media (width >= 48rem) {
+    .suivante {
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 95% 100%, 0 100%);
+    }
+    .voile {
+      background: linear-gradient(to right, #161513 0%, #161513 40%, rgb(22 21 19 / 0.2) 70%);
+    }
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+// Les quatre « matières » techniques de la pièce
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  matieres: CollectionEntry<'pieces'>['data']['matieres'];
+}
+
+const { matieres } = Astro.props;
+---
+
+<section aria-labelledby="matieres" class="conteneur pb-24 md:pb-[140px]">
+  <h2 id="matieres" class="mb-12 font-display text-[clamp(30px,3.2vw,48px)]">Les matières</h2>
+  <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    {matieres.map(({ titre, texte }) => (
+      <div class="flex flex-col gap-3">
+        <h3 class="surtitre">{titre}</h3>
+        <p class="leading-[1.7] font-light text-ink-2">{texte}</p>
+      </div>
+    ))}
+  </div>
+</section>

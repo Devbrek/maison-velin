@@ -1,0 +1,31 @@
+---
+/*
+ * Nom d'une pièce, écrit dans la typographie de son univers.
+ * Utilisé sur l'accueil, l'ouverture de fiche et la carte « pièce suivante ».
+ */
+interface Props {
+  id: string;
+  nom: string;
+  police: string; // variable CSS de la police
+  niveau?: 'h1' | 'h3' | 'span';
+  htmlId?: string;
+  class?: string;
+}
+
+const { id, nom, police, niveau = 'span', htmlId, class: classe } = Astro.props;
+const Balise = niveau;
+
+const styles: Record<string, string> = {
+  filigrane: 'font-normal',
+  vecteur: 'font-semibold uppercase tracking-[0.04em]',
+  lavis: 'font-light italic',
+};
+---
+
+<Balise
+  id={htmlId}
+  class:list={['text-[clamp(44px,5vw,76px)] leading-none', styles[id], classe]}
+  style={`font-family: var(${police})`}
+>
+  {nom}
+</Balise>

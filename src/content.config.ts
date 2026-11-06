@@ -45,6 +45,8 @@ const pieces = defineCollection({
               label: z.string(),
               sombre: z.boolean(),
               couleurs: z.object({ fond: hex, encre: hex, secondaire: hex, surface: hex.optional() }),
+              // Photo de l'aperçu dans cette ambiance
+              apercu: z.object({ src: image(), position: z.string() }),
             }),
           )
           .length(2),

@@ -1,0 +1,82 @@
+---
+/*
+ * Fiche d'une pièce : une page générée par pièce de la collection.
+ * Le configurateur est le seul îlot React de la page (hydraté quand il arrive à l'écran).
+ */
+import type { GetStaticPaths } from 'astro';
+import { Font, getImage } from 'astro:assets';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import VelinLayout from '../../layouts/VelinLayout.astro';
+import OuvertureFiche from '../../components/fiche/OuvertureFiche.astro';
+import PourQui from '../../components/fiche/PourQui.astro';
+import Matieres from '../../components/fiche/Matieres.astro';
+import Preuves from '../../components/fiche/Preuves.astro';
+import PieceSuivante from '../../components/fiche/PieceSuivante.astro';
+import Configurateur from '../../islands/configurateur/Configurateur';
+import type { Ambiance, PieceId } from '../../islands/configurateur/types';
+
+export const getStaticPaths = (async () => {
+  const pieces = await getCollection('pieces');
+  return pieces.map((piece) => ({ params: { piece: piece.id }, props: { piece } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  piece: CollectionEntry<'pieces'>;
+}
+
+const { piece } = Astro.props;
+const { data } = piece;
+const suivante = await getEntry(data.suivante);
+if (!suivante) throw new Error(`Pièce suivante introuvable pour « ${piece.id} »`);
+
+// Photos de l'aperçu : optimisées ici, l'îlot ne reçoit que leur URL
+const ambiances: Ambiance[] = await Promise.all(
+  data.configurateur.ambiances.map(async ({ apercu, ...ambiance }) => {
+    const image = await getImage({ src: apercu.src, width: 800, format: 'webp' });
+    return { ...ambiance, image: { src: image.src, position: apercu.position } };
+  }),
+);
+
+// Polices propres à cette fiche : nom de la pièce, pièce suivante, choix du configurateur
+type VariablePolice = Parameters<typeof Font>[0]['cssVariable'];
+const polices = new Set<string>([
+  data.policeNom,
+  suivante.data.policeNom,
+  ...data.configurateur.polices.map((p) => p.police),
+  ...(piece.id === 'lavis' ? ['--font-manrope'] : []),
+]);
+polices.delete('--font-bodoni'); // déjà chargée par le layout
+---
+
+<VelinLayout title={`${data.nom} — Maison Vélin`} description={data.intro} enTeteSurImage>
+  <Fragment slot="fonts">
+    {[...polices].map((variable) => <Font cssVariable={variable as VariablePolice} />)}
+  </Fragment>
+
+  <OuvertureFiche piece={piece} />
+  <PourQui data={data} />
+  <Matieres matieres={data.matieres} />
+
+  <section id="configurer" aria-labelledby="config-titre" data-identity="velin" data-theme="nuit" class="scroll-mt-4">
+    <div class="conteneur py-24 md:py-[140px]">
+      <Configurateur
+        client:visible
+        pieceId={piece.id as PieceId}
+        accents={data.configurateur.accents}
+        polices={data.configurateur.polices}
+        ambiances={ambiances}
+      >
+        <div class="flex flex-col gap-5">
+          <p class="surtitre text-ink-2">L'atelier</p>
+          <h2 id="config-titre" class="font-display text-[clamp(32px,3.6vw,52px)] leading-none">Configurer la pièce</h2>
+          <p class="leading-[1.7] font-light text-ink-2">
+            Choisissez un accent, une police de titre et une ambiance. L'aperçu se règle sous vos yeux.
+          </p>
+        </div>
+      </Configurateur>
+    </div>
+  </section>
+
+  <Preuves preuves={data.preuves} />
+  <PieceSuivante piece={suivante} />
+</VelinLayout>
