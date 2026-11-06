@@ -1,0 +1,215 @@
+---
+/*
+ * Démo Vecteur → Aubrek : fiche du modèle Orage.
+ * Trois îlots partagent la même configuration (boîtier + bracelet) : le configurateur,
+ * la bande de caractéristiques et la fiche technique.
+ */
+import { Picture } from 'astro:assets';
+import { getCollection, getEntry } from 'astro:content';
+import AubrekLayout from '../../../layouts/AubrekLayout.astro';
+import ConfigurateurOrage from '../../../islands/aubrek/ConfigurateurOrage';
+import BandeSpecs from '../../../islands/aubrek/BandeSpecs';
+import FicheTechnique from '../../../islands/aubrek/FicheTechnique';
+import photoCapteurs from '../../../assets/aubrek/aubrek-capteurs.jpg';
+
+const orage = await getEntry('modelesAubrek', 'orage');
+if (!orage?.data.configuration) throw new Error('Configuration de l’Orage manquante');
+const options = orage.data.configuration;
+
+// « Dans la gamme » : les autres modèles
+const autres = (await getCollection('modelesAubrek'))
+  .filter(({ id }) => id !== 'orage')
+  .sort((a, b) => a.data.ordre - b.data.ordre);
+const resumeBoitier = (data: (typeof autres)[number]['data']) =>
+  data.caracteristiques.find((c) => c.cle === 'Boîtier')?.valeur.replace(', ', ' · ') ?? '';
+---
+
+<AubrekLayout
+  title="Orage — Aubrek (démo Maison Vélin)"
+  description="Fiche du modèle Orage, montre connectée de la marque fictive Aubrek : configurateur boîtier et bracelet, cadran, capteurs et fiche technique."
+>
+  <header class="border-b border-line">
+    <div class="conteneur flex flex-wrap items-center justify-between gap-x-10 gap-y-3 py-6">
+      <a href="/demos/aubrek" aria-label="Aubrek, accueil" class="text-xl font-semibold tracking-[0.5em]">AUBREK</a>
+      <nav aria-label="Navigation principale" class="order-last w-full md:order-none md:w-auto">
+        <ul class="flex flex-wrap gap-x-9 gap-y-1 text-[13px] font-semibold tracking-[0.2em] uppercase">
+          <li><a class="lien-trace" href="/demos/aubrek#gamme">Modèles</a></li>
+          <li><a class="lien-trace" href="/demos/aubrek#ingenierie">Ingénierie</a></li>
+          <li><a class="lien-trace" href="/demos/aubrek#coloris">Coloris</a></li>
+          <li><a class="lien-trace" href="#essai">Points de vente</a></li>
+        </ul>
+      </nav>
+      <a href="#essai" class="bouton-aubrek bouton-aubrek--contour cut min-h-11 px-6">Essai privé</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Produit : photo + configuration -->
+    <section id="configurer" aria-labelledby="modele" class="conteneur scroll-mt-4 pt-12 pb-24 md:pb-30">
+      <nav aria-label="Fil d'Ariane" class="mb-10 text-xs font-semibold tracking-[0.22em] text-ink-2 uppercase">
+        <ol class="flex items-center">
+          <li><a class="lien-trace" href="/demos/aubrek#gamme">Modèles</a></li>
+          <li aria-hidden="true" class="px-3">/</li>
+          <li aria-current="page" class="text-ink">Orage</li>
+        </ol>
+      </nav>
+
+      <div class="grid items-start gap-x-24 gap-y-14 md:grid-cols-2">
+        <div class="cut-lg aspect-4/5 overflow-hidden bg-[#141416]">
+          <Picture
+            src={orage.data.image.src}
+            alt={orage.data.image.alt}
+            formats={['avif', 'webp']}
+            widths={[480, 720, orage.data.image.src.width]}
+            sizes="(min-width: 48rem) 50vw, 100vw"
+            priority
+            class="h-full w-full object-cover"
+            style={`object-position: ${orage.data.image.position}`}
+          />
+        </div>
+
+        <ConfigurateurOrage client:visible {...options}>
+          <div class="flex flex-col gap-4">
+            <p class="text-xs font-semibold tracking-[0.32em] text-accent">HORLOGERIE CONNECTÉE</p>
+            <h1 id="modele" class="text-[clamp(40px,4.4vw,64px)] leading-none font-semibold tracking-[0.02em] uppercase">
+              {orage.data.nom}
+            </h1>
+            <p class="max-w-[440px] text-[17px] leading-[1.7] font-light text-aubrek-doux">{orage.data.accroche}</p>
+            <p class="text-[15px] tracking-[0.08em]">Prix sur demande</p>
+          </div>
+        </ConfigurateurOrage>
+      </div>
+    </section>
+
+    <!-- Bande de caractéristiques -->
+    <section aria-label="Caractéristiques principales" class="border-y border-line">
+      <BandeSpecs client:visible {...options} />
+    </section>
+
+    <!-- Le cadran : macro (la même photo, recadrée et agrandie 1,6 fois) -->
+    <section data-apparition aria-labelledby="cadran" class="conteneur grid items-center gap-x-24 gap-y-14 py-24 md:grid-cols-2 md:py-[140px]">
+      <div class="apparait depuis-gauche cut aspect-16/10 overflow-hidden bg-[#141416]">
+        <Picture
+          src={orage.data.image.src}
+          alt="Gros plan sur le cadran de l'Orage : chiffres blancs qui suivent le bord de l'écran"
+          formats={['avif', 'webp']}
+          widths={[720, orage.data.image.src.width]}
+          sizes="(min-width: 48rem) 80vw, 160vw"
+          class="macro h-full w-full object-cover"
+        />
+      </div>
+      <div class="apparait depuis-droite delai-1 flex max-w-[460px] flex-col gap-6">
+        <p class="text-xs font-semibold tracking-[0.32em] text-accent">LE CADRAN</p>
+        <h2 id="cadran" class="text-[clamp(30px,3vw,44px)] leading-[1.1] font-semibold uppercase">
+          Des chiffres <span class="font-light text-accent italic">en bordure</span>
+        </h2>
+        <p class="text-[17px] leading-[1.7] font-light text-aubrek-doux">
+          Les heures suivent le contour de l'écran et laissent le centre libre. L'affichage reste actif, atténué au repos,
+          plein dès que le poignet se lève.
+        </p>
+      </div>
+    </section>
+
+    <!-- Au dos : texte posé sur la photo, avec un voile -->
+    <section data-apparition aria-labelledby="dos" class="relative flex min-h-[640px] overflow-hidden bg-[#1A1A1C] md:min-h-[720px]">
+      <Picture
+        src={photoCapteurs}
+        alt="Dos de l'Orage : quatre capteurs optiques sous un verre, gravures techniques autour"
+        formats={['avif', 'webp']}
+        widths={[640, 960, photoCapteurs.width]}
+        sizes="100vw"
+        class="net absolute inset-0 h-full w-full object-cover"
+        style="object-position: 60% center"
+      />
+      <div aria-hidden="true" class="voile-dos absolute inset-0"></div>
+      <div class="conteneur relative flex items-end py-24 md:items-center">
+        <div class="apparait depuis-gauche flex max-w-[440px] flex-col gap-6">
+          <p class="text-xs font-semibold tracking-[0.32em] text-accent">AU DOS</p>
+          <h2 id="dos" class="text-[clamp(30px,3vw,44px)] leading-[1.1] font-semibold uppercase">
+            Quatre capteurs, <span class="font-light text-accent italic">un fond scellé</span>
+          </h2>
+          <p class="text-[17px] leading-[1.7] font-light text-[#C6C6CC]">
+            Fréquence cardiaque, oxygène, température et position, mesurés à travers un verre saphir. Le fond est scellé pour
+            tenir à cinquante mètres.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fiche technique -->
+    <section aria-labelledby="fiche" class="conteneur grid items-start gap-x-24 gap-y-12 py-24 md:py-[140px] lg:grid-cols-[1fr_2fr]">
+      <h2 id="fiche" class="text-[clamp(30px,3vw,44px)] leading-[1.1] font-semibold uppercase">
+        Fiche <span class="font-light italic">technique</span>
+      </h2>
+      <FicheTechnique client:visible {...options} />
+    </section>
+
+    <!-- Dans la gamme -->
+    <section data-apparition aria-labelledby="gamme" class="border-t border-line">
+      <div class="conteneur py-24 md:py-30">
+        <h2 id="gamme" class="mb-12 text-[clamp(30px,3vw,44px)] leading-[1.1] font-semibold uppercase">
+          Dans <span class="font-light italic">la gamme</span>
+        </h2>
+        <ul class="grid gap-6 md:grid-cols-2">
+          {autres.map(({ data }, i) => (
+            <li class:list={['apparait depuis-bas', i === 1 && 'delai-1']}>
+              <a href="/demos/aubrek#gamme" class="group relative flex min-h-[420px] items-end overflow-hidden bg-[#E2DADD] md:min-h-[520px]">
+                <Picture
+                  src={data.image.src}
+                  alt=""
+                  formats={['avif', 'webp']}
+                  widths={[480, 720, 960]}
+                  sizes="(min-width: 48rem) 50vw, 100vw"
+                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-velin motion-safe:group-hover:scale-[1.03]"
+                  style={`object-position: ${data.image.position}`}
+                />
+                <span aria-hidden="true" class="absolute inset-0 bg-linear-to-t from-[rgb(10_10_11/0.8)] to-transparent to-50%"></span>
+                <span class="relative flex flex-col gap-1.5 p-8">
+                  <span class="text-[11px] font-semibold tracking-[0.28em] text-[#D8D8DC] uppercase">{resumeBoitier(data)}</span>
+                  <span class="text-[32px] font-semibold uppercase">{data.nom}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Essai -->
+    <section id="essai" aria-labelledby="essai-titre" class="border-y border-line">
+      <div class="conteneur flex flex-wrap items-end justify-between gap-10 py-24 md:py-30">
+        <div class="flex max-w-[640px] flex-col gap-5">
+          <h2 id="essai-titre" class="text-[clamp(28px,2.6vw,40px)] leading-[1.1] font-semibold uppercase">
+            Essayer l'Orage <span class="font-light italic">au poignet</span>
+          </h2>
+          <p class="text-[17px] leading-[1.7] font-light text-aubrek-doux">
+            Votre configuration est transmise au point de vente. Un conseiller la prépare pour votre rendez-vous.
+          </p>
+        </div>
+        <a href="/sur-mesure" class="bouton-aubrek cut bg-accent text-on-accent">
+          Prendre rendez-vous<span class="sr-only"> (formulaire Maison Vélin)</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</AubrekLayout>
+
+<style>
+  /* Macro du cadran : la photo agrandie 1,6 fois, centrée sur le cadran */
+  .macro {
+    object-position: 45% 47%;
+    transform: scale(1.6);
+    transform-origin: 45% 47%;
+  }
+  .voile-dos {
+    background: linear-gradient(to top, rgb(10 10 11 / 0.95) 0%, rgb(10 10 11 / 0.75) 50%, rgb(10 10 11 / 0.2) 100%);
+  }
+  @media (width >= 48rem) {
+    .voile-dos {
+      background: linear-gradient(to right, rgb(10 10 11 / 0.92) 0%, rgb(10 10 11 / 0.7) 34%, rgb(10 10 11 / 0) 64%);
+    }
+  }
+  :global(html[data-identity='aubrek']) {
+    scroll-behavior: smooth;
+  }
+</style>

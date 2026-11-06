@@ -5,7 +5,6 @@ import { getViteConfig } from 'astro/config';
 export default getViteConfig({
   test: {
     include: ['src/**/*.test.ts'],
-    // Pas d'échec tant qu'aucun test n'existe (les premiers arrivent en phase 4)
     passWithNoTests: true,
   },
 });
