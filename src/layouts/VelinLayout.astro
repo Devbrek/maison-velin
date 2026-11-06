@@ -20,7 +20,7 @@ const { title, description, enTeteSurImage = false } = Astro.props;
 
 <BaseLayout title={title} description={description} identity="velin">
   <Fragment slot="fonts">
-    <Font cssVariable="--font-bodoni" preload />
+    <Font cssVariable="--font-bodoni" preload={[{ style: 'normal' }]} />
     <Font cssVariable="--font-jost" />
     <slot name="fonts" />
   </Fragment>

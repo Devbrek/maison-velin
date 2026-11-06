@@ -1,0 +1,17 @@
+---
+// Bandeau en haut de chaque démo : rappelle que la marque est fictive, et ramène à Maison Vélin
+interface Props {
+  piece: string; // nom de la pièce démontrée
+  retour: string; // lien vers la fiche de la pièce
+  class?: string;
+}
+
+const { piece, retour, class: classe } = Astro.props;
+---
+
+<div class:list={['text-[11px] tracking-[0.18em] uppercase', classe]}>
+  <div class="flex min-h-10 flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 md:px-10">
+    <p>Marque fictive — démonstration Maison Vélin · pièce {piece}</p>
+    <a class="lien-trace" href={retour}>Retour à Maison Vélin</a>
+  </div>
+</div>

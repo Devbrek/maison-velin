@@ -28,6 +28,13 @@
   --color-sur-image-3: #D9D2C5;
   --color-brume: #C9D2E6; /* texte secondaire sur l'accent bleu encre */
 
+  /* Sertelle : l'écrin (velours sombre) et l'or lisible sur fond sombre */
+  --color-ecrin: #16130F;
+  --color-or-sombre: #D9B26A;
+  --color-ecrin-texte: #F7F4EF;
+  --color-ecrin-discret: #9C9186;
+  --color-sertelle-pale: #D8D2C8;
+
   /* Courbe unique du site : lente, douce, jamais de rebond */
   --ease-velin: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-velin-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -241,7 +248,67 @@
   }
 }
 
-/* Mouvement réduit : pas de déplacement ni de flou, animations quasi instantanées */
+/* ───────────── Apparitions au défilement ─────────────
+ * Une section [data-apparition] reçoit data-vu="oui" quand 15 % d'elle est à l'écran
+ * (src/scripts/apparitions.ts). Sans JavaScript (pas de classe .js), tout reste visible.
+ */
+@layer components {
+  .js [data-apparition] .apparait {
+    opacity: 0;
+    transition:
+      opacity 1200ms ease,
+      transform 1400ms var(--ease-velin);
+  }
+  .js [data-apparition] .depuis-gauche {
+    transform: translateX(-32px);
+  }
+  .js [data-apparition] .depuis-droite {
+    transform: translateX(32px);
+  }
+  .js [data-apparition] .depuis-bas {
+    transform: translateY(36px);
+  }
+  @media (width >= 64rem) {
+    .js [data-apparition] .depuis-gauche {
+      transform: translateX(-72px);
+    }
+    .js [data-apparition] .depuis-droite {
+      transform: translateX(72px);
+    }
+  }
+  .js [data-apparition][data-vu="oui"] .apparait {
+    opacity: 1;
+    transform: none;
+  }
+  .delai-1 {
+    transition-delay: 150ms !important;
+  }
+  .delai-2 {
+    transition-delay: 300ms !important;
+  }
+  .delai-3 {
+    transition-delay: 450ms !important;
+  }
+  .delai-4 {
+    transition-delay: 600ms !important;
+  }
+
+  /* Image qui passe du flou au net en arrivant */
+  .js [data-apparition] .net {
+    transform: scale(1.1);
+    filter: blur(10px);
+    transition:
+      transform 2200ms var(--ease-velin),
+      filter 1800ms ease;
+  }
+  .js [data-apparition][data-vu="oui"] .net {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Mouvement réduit (préférence système, ou bouton « Réduire les animations ») :
+   pas de déplacement ni de flou, animations quasi instantanées */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -249,6 +316,28 @@
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
+  .js [data-apparition] .apparait,
+  .js [data-apparition] .net {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+html[data-mouvement="reduit"] *,
+html[data-mouvement="reduit"] *::before,
+html[data-mouvement="reduit"] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-mouvement="reduit"] [data-apparition] .apparait,
+html[data-mouvement="reduit"] [data-apparition] .net {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
 }

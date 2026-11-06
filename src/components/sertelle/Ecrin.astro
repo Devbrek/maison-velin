@@ -1,0 +1,97 @@
+---
+/*
+ * L'écrin : panneau sombre fixé à droite (grand écran), avec l'anneau « fil d'Ariane ».
+ * Les positions sont calculées ici, une fois, avec les maths testées (src/lib/sertelle.ts).
+ * Au défilement, seule la variable CSS --p change : tout l'anneau tourne de p × PAS_ETAPE degrés,
+ * les libellés tournent en sens inverse pour rester droits. Griffes et étapes tournent ensemble :
+ * chaque étape reste posée sur sa griffe.
+ */
+import { NB_GRIFFES, PAS_ETAPE, RAYON, ANGLE_PIERRE, angleGriffe, pointSurAnneau } from '../../lib/sertelle';
+import { ETAPES } from './etapes';
+
+const rayonPiste = RAYON - 11; // les griffes et les étapes courent entre les deux bords
+const griffes = Array.from({ length: NB_GRIFFES }, (_, k) => pointSurAnneau(angleGriffe(k, 0), rayonPiste));
+const etapes = ETAPES.map((etape, i) => ({
+  ...etape,
+  i,
+  ...pointSurAnneau(ANGLE_PIERRE - i * PAS_ETAPE, rayonPiste),
+}));
+const px = (n: number) => `${n.toFixed(1)}px`;
+---
+
+<aside
+  class="ecrin fixed inset-y-0 right-0 z-20 hidden w-[340px] border-l border-or-sombre/55 bg-ecrin text-ecrin-texte lg:block"
+  aria-label="Votre visite"
+>
+  <p aria-hidden="true" class="absolute top-8 left-8 text-[10px] font-semibold tracking-[0.34em] text-ecrin-discret">
+    VOTRE VISITE
+  </p>
+
+  <nav
+    aria-label="Sections de la page"
+    class="absolute top-1/2 right-0 h-[600px] w-[300px] -translate-y-1/2 overflow-hidden"
+    style={`--pas:${PAS_ETAPE}`}
+  >
+    <div class="relative size-[600px]">
+      <!-- Les deux bords de l'anneau -->
+      <span aria-hidden="true" class="absolute inset-0 rounded-full border border-or-sombre/40"></span>
+      <span aria-hidden="true" class="absolute inset-[22px] rounded-full border border-or-sombre/40"></span>
+
+      <!-- Tout ce qui tourne avec la page -->
+      <div class="anneau-tournant absolute inset-0">
+        {griffes.map(({ left, top }) => (
+          <span
+            aria-hidden="true"
+            class="absolute -mt-[2.5px] -ml-[2.5px] size-[5px] rotate-45 bg-or-sombre"
+            style={`left:${px(left)};top:${px(top)}`}
+          />
+        ))}
+        {etapes.map(({ id, numero, label, i, left, top }) => (
+          <span class="etape absolute size-0" style={`left:${px(left)};top:${px(top)};--i:${i}`}>
+            <a
+              href={`#${id}`}
+              data-etape={i}
+              class="absolute top-0 left-0 flex min-h-11 translate-x-[26px] -translate-y-1/2 items-center gap-2.5 whitespace-nowrap"
+            >
+              <span class="font-(family-name:--font-cormorant) text-[15px] text-or-sombre italic">{numero}</span>
+              <span class="etape-texte text-[11px] tracking-[0.22em] uppercase">{label}</span>
+            </a>
+          </span>
+        ))}
+      </div>
+
+      <!-- La pierre : fixe, elle marque la section en cours. Tournée de 45°, sa largeur
+           (filet compris) égale l'épaisseur de l'anneau : 22 px, sans déborder à gauche. -->
+      <span aria-hidden="true" class="pierre absolute top-[300px] left-[11px] border-2 border-ecrin bg-or-sombre"></span>
+    </div>
+  </nav>
+</aside>
+
+<style>
+  /* Côté du carré = (22 px / √2) − 2 px de filet extérieur : la diagonale fait 22 px */
+  .pierre {
+    --cote: calc(22px / 1.41421 - 2px);
+    width: var(--cote);
+    height: var(--cote);
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: 0 0 0 1px var(--color-or-sombre);
+  }
+
+  .anneau-tournant {
+    transform: rotate(calc(var(--p, 0) * var(--pas) * 1deg));
+  }
+  /* Le libellé tourne en sens inverse : il reste horizontal */
+  .etape {
+    transform: rotate(calc(var(--p, 0) * var(--pas) * -1deg));
+    /* Opacité = 1 − |angle − 180°| / 95, bornée à 0 (même formule que opaciteEtape) */
+    --ecart: calc((var(--i) - var(--p, 0)) * var(--pas));
+    opacity: max(0, 1 - max(var(--ecart), -1 * var(--ecart)) / 95);
+  }
+  .etape:focus-within {
+    opacity: 1;
+  }
+  a[aria-current='location'] .etape-texte {
+    font-size: 12px;
+    font-weight: 600;
+  }
+</style>

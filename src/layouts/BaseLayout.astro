@@ -27,9 +27,19 @@ const { title, description, identity = 'velin' } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <slot name="fonts" />
+    <!-- Avant l'affichage : signale que JS est actif (apparitions) et applique le choix « Réduire les animations » -->
+    <script is:inline data-astro-rerun>
+      document.documentElement.classList.add('js');
+      try {
+        if (localStorage.getItem('mouvement') === 'reduit') document.documentElement.dataset.mouvement = 'reduit';
+      } catch {}
+    </script>
     <ClientRouter />
   </head>
   <body class="min-h-dvh">
     <slot />
+    <script>
+      import '../scripts/apparitions';
+    </script>
   </body>
 </html>

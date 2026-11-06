@@ -1,0 +1,83 @@
+---
+/*
+ * Version téléphone de l'écrin : une barre compacte en bas de l'écran.
+ * La pierre + la section en cours, un trait doré qui se remplit, et un bouton « Plan ».
+ */
+import { ETAPES } from './etapes';
+---
+
+<div class="fixed inset-x-0 bottom-0 z-20 border-t border-or-sombre/55 bg-ecrin text-ecrin-texte lg:hidden">
+  <!-- Progression : de 0 (ouverture) à 1 (rendez-vous) -->
+  <span aria-hidden="true" class="barre-progression absolute inset-x-0 -top-px h-px origin-left bg-or-sombre"></span>
+  <div class="flex h-14 items-center justify-between gap-4 px-4">
+    <p class="flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase">
+      <span aria-hidden="true" class="size-3 rotate-45 bg-or-sombre"></span>
+      <span class="font-(family-name:--font-cormorant) text-[15px] tracking-normal text-or-sombre normal-case italic" data-etape-numero>I</span>
+      <span data-etape-label>Ouverture</span>
+    </p>
+    <button
+      type="button"
+      class="min-h-11 px-2 text-[11px] font-semibold tracking-[0.22em] uppercase"
+      aria-haspopup="dialog"
+      aria-controls="plan-visite"
+      data-plan-ouvrir
+    >
+      Plan
+    </button>
+  </div>
+</div>
+
+<dialog
+  id="plan-visite"
+  aria-label="Plan de la visite"
+  class="plan m-0 mt-auto max-h-none w-full max-w-none border-t border-or-sombre/55 bg-ecrin p-0 text-ecrin-texte backdrop:bg-ecrin/60"
+>
+  <div class="flex items-center justify-between px-4 pt-4">
+    <p class="text-[10px] font-semibold tracking-[0.34em] text-ecrin-discret">VOTRE VISITE</p>
+    <button type="button" class="min-h-11 px-2 text-[11px] tracking-[0.22em] uppercase" data-plan-fermer>Fermer</button>
+  </div>
+  <nav aria-label="Sections de la page">
+    <ol class="px-4 pb-6">
+      {ETAPES.map(({ id, numero, label }, i) => (
+        <li class="border-b border-ecrin-texte/10">
+          <a href={`#${id}`} data-etape={i} class="flex min-h-12 items-center gap-4 text-[13px] tracking-[0.18em] uppercase">
+            <span class="w-6 font-(family-name:--font-cormorant) text-base tracking-normal text-or-sombre normal-case italic">{numero}</span>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</dialog>
+
+<style>
+  .barre-progression {
+    transform: scaleX(calc(var(--p, 0) / 5));
+  }
+  .plan[open] {
+    animation: plan-monte 700ms var(--ease-velin);
+  }
+  @keyframes plan-monte {
+    from {
+      transform: translateY(24px);
+      opacity: 0;
+    }
+  }
+  a[aria-current='location'] {
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const plan = document.querySelector<HTMLDialogElement>('#plan-visite');
+    if (!plan) return;
+    document.querySelector('[data-plan-ouvrir]')?.addEventListener('click', () => plan.showModal());
+    plan.querySelector('[data-plan-fermer]')?.addEventListener('click', () => plan.close());
+    plan.querySelectorAll('a').forEach((lien) => lien.addEventListener('click', () => plan.close()));
+    // Un clic sur le fond ferme le plan
+    plan.addEventListener('click', (e) => {
+      if (e.target === plan) plan.close();
+    });
+  });
+</script>

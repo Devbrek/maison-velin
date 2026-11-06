@@ -1,0 +1,283 @@
+---
+/*
+ * Démo de la pièce Filigrane : Sertelle, joaillerie (marque fictive).
+ * Contenu aligné à gauche (1120 px), le bord droit est réservé à l'écrin (340 px).
+ */
+import { Font, Picture, getImage } from 'astro:assets';
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BandeauDemo from '../../components/demo/BandeauDemo.astro';
+import Ecrin from '../../components/sertelle/Ecrin.astro';
+import BarreVisite from '../../components/sertelle/BarreVisite.astro';
+import Loupe from '../../islands/sertelle/Loupe';
+import photoPorte from '../../assets/sertelle/sertelle-porte-colliers.jpg';
+
+const bijoux = (await getCollection('bijouxSertelle')).sort((a, b) => a.data.ordre - b.data.ordre);
+const alliance = await getEntry('bijouxSertelle', 'alliance-riviere');
+const lagon = await getEntry('bijouxSertelle', 'bague-lagon');
+if (!alliance || !lagon?.data.pointsLoupe) throw new Error('Données Sertelle incomplètes');
+
+// La lentille agrandit la photo 2,6 fois : on lui donne la version haute définition
+const grande = await getImage({ src: lagon.data.image.src, width: 2576, format: 'webp' });
+
+// Décalages de la collection : chaque pièce arrive d'un côté différent
+const miseCollection = [
+  { entree: 'depuis-gauche delai-1', decalage: '' },
+  { entree: 'depuis-bas delai-2', decalage: 'md:mt-30' },
+  { entree: 'depuis-droite delai-3', decalage: 'md:mt-10' },
+];
+const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
+---
+
+<BaseLayout
+  title="Sertelle — Joaillerie (démo Maison Vélin)"
+  description="Sertelle, maison de joaillerie fictive : démonstration de la pièce Filigrane de Maison Vélin. Loupe sur la Bague Lagon et anneau de navigation."
+  identity="sertelle"
+>
+  <Fragment slot="fonts">
+    <Font cssVariable="--font-cormorant" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--font-hanken" />
+  </Fragment>
+
+  <div class="overflow-x-clip pb-14 lg:pr-[340px] lg:pb-0">
+    <BandeauDemo piece="Filigrane" retour="/collection/filigrane" class="bg-ink text-sertelle-pale" />
+
+    <header class="border-b border-ink/10">
+      <div class="aligne flex flex-wrap items-center gap-x-16 gap-y-4 py-6">
+        <a href="#ouverture" aria-label="Sertelle, haut de page" class="flex flex-col gap-1.5 leading-none">
+          <span class="font-display text-[28px] tracking-[0.46em]">SERTELLE</span>
+          <span class="text-[10px] tracking-[0.42em] text-ink-2">JOAILLERIE</span>
+        </a>
+        <nav aria-label="Navigation principale">
+          <ul class="flex flex-wrap gap-x-8 gap-y-1 text-[12px] font-medium tracking-[0.2em] uppercase">
+            <li><a class="lien-trace" href="#loupe">À la loupe</a></li>
+            <li><a class="lien-trace" href="#collection">Collection</a></li>
+            <li><a class="lien-trace" href="#atelier">L'atelier</a></li>
+            <li><a class="lien-trace" href="#rendez-vous">Rendez-vous</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- I. Ouverture -->
+      <section id="ouverture" data-apparition aria-labelledby="hero">
+        <div class="aligne grid items-center gap-x-24 gap-y-16 pt-16 pb-24 md:grid-cols-2 md:pt-24 md:pb-[140px]">
+          <div class="apparait depuis-gauche flex max-w-[460px] flex-col gap-7">
+            <p class="surtitre font-medium text-accent">Collection Rivière</p>
+            <h1 id="hero" class="font-display text-[clamp(40px,4.6vw,68px)] leading-[1.04] font-light">
+              L'éclat <em>se regarde de près.</em>
+            </h1>
+            <p class="max-w-[400px] text-[17px] leading-[1.8] font-light text-ink-2">
+              Vingt-quatre pierres taillées à la main, serties une à une sur un anneau d'or jaune.
+            </p>
+            <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <a href="#loupe" class="bouton-plein">Explorer à la loupe</a>
+              <a href="#collection" class="lien-trace text-[12px] font-medium tracking-[0.22em] uppercase">La collection</a>
+            </div>
+          </div>
+          <div class="apparait depuis-droite delai-1 w-full max-w-[480px] border border-accent/45 p-[18px]">
+            <div class="aspect-2/3 overflow-hidden bg-[#E8E6E2]">
+              <Picture
+                src={alliance.data.image.src}
+                alt={alliance.data.image.alt}
+                formats={['avif', 'webp']}
+                widths={[480, 720, 960]}
+                sizes="(min-width: 48rem) 444px, calc(100vw - 68px)"
+                loading="eager"
+                class="net h-full w-full object-cover"
+                style={`object-position: ${alliance.data.image.position}`}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- II. À la loupe -->
+      <section id="loupe" data-apparition aria-labelledby="loupe-titre" class="border-y border-ink/8 bg-surface">
+        <div class="aligne py-24 md:py-30">
+          <div class="apparait depuis-gauche mb-12 flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
+            <div class="flex flex-col gap-3.5">
+              <p class="surtitre font-medium text-accent">À la loupe · Bague Lagon</p>
+              <h2 id="loupe-titre" class="font-display text-[clamp(32px,3.4vw,50px)] leading-[1.1] font-light">
+                Approchez-vous, <em>comme au comptoir.</em>
+              </h2>
+            </div>
+            <p class="max-w-[340px] text-[15px] leading-[1.7] font-light text-ink-2">
+              Survolez la bague, ou choisissez un détail : la loupe du joaillier vous montre ce que l'œil ne voit pas.
+            </p>
+          </div>
+          <div class="apparait depuis-bas delai-1">
+            <Loupe client:visible grande={grande.src} points={lagon.data.pointsLoupe}>
+              <Picture
+                src={lagon.data.image.src}
+                alt={lagon.data.image.alt}
+                formats={['avif', 'webp']}
+                widths={[640, 960, 1280]}
+                sizes="(min-width: 64rem) 640px, calc(100vw - 32px)"
+                class="block h-full w-full object-cover"
+              />
+            </Loupe>
+          </div>
+        </div>
+      </section>
+
+      <!-- III. La collection : chaque pièce arrive d'un côté différent -->
+      <section id="collection" data-apparition aria-labelledby="collection-titre">
+        <div class="aligne py-24 md:py-[140px]">
+          <h2 id="collection-titre" class="apparait depuis-gauche mb-14 font-display text-[clamp(32px,3.4vw,50px)] font-light">
+            La collection
+          </h2>
+          <ul class="grid items-start gap-10 md:grid-cols-3">
+            {bijoux.map(({ id, data }, i) => {
+              const Balise = id === 'bague-lagon' ? 'a' : 'div';
+              return (
+                <li class:list={['apparait', miseCollection[i].entree, miseCollection[i].decalage]}>
+                  <Balise href={id === 'bague-lagon' ? '#loupe' : undefined} class="piece group flex flex-col gap-5">
+                    <span class="block aspect-4/5 overflow-hidden bg-[#E8E6E2]">
+                      <Picture
+                        src={data.image.src}
+                        alt={data.image.alt}
+                        formats={['avif', 'webp']}
+                        widths={[360, 540, 720]}
+                        sizes="(min-width: 48rem) 30vw, calc(100vw - 32px)"
+                        class="h-full w-full object-cover transition-transform duration-[1800ms] ease-velin motion-safe:group-hover:scale-[1.04]"
+                        style={`object-position: ${data.image.position}`}
+                      />
+                    </span>
+                    <span class="flex items-baseline justify-between gap-4">
+                      <span class="font-display text-2xl">{data.nom}</span>
+                      <span class="text-sm text-ink-2">{prix(data.prix)}</span>
+                    </span>
+                  </Balise>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      <!-- IV. Porté -->
+      <section id="porte" data-apparition aria-labelledby="porte-titre" class="bg-ink text-bg">
+        <div class="aligne grid items-center gap-x-24 gap-y-14 md:grid-cols-2">
+          <div class="apparait depuis-gauche -mx-4 aspect-4/5 max-h-[820px] overflow-hidden bg-[#3A1A10] md:mx-0">
+            <Picture
+              src={photoPorte}
+              alt="Colliers en or superposés et puce d'oreille, portés sur une robe rouge"
+              formats={['avif', 'webp']}
+              widths={[480, 720, 960]}
+              sizes="(min-width: 48rem) 50vw, 100vw"
+              class="net h-full w-full object-cover"
+              style="object-position: center 55%"
+            />
+          </div>
+          <div class="apparait depuis-droite delai-2 flex max-w-[420px] flex-col gap-6 pb-20 md:py-20">
+            <p class="surtitre font-medium text-or-sombre">Porté</p>
+            <h2 id="porte-titre" class="font-display text-[clamp(32px,3.4vw,50px)] leading-[1.1] font-light">
+              Des pièces qui se superposent, <em>jamais ne s'imposent.</em>
+            </h2>
+            <p class="leading-[1.8] font-light text-sertelle-pale">
+              Chaînes fines, médailles, puces d'oreille : chaque création Sertelle est pensée pour se porter seule ou à
+              plusieurs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- V. L'atelier (texte seul pour l'instant) -->
+      <section id="atelier" data-apparition aria-labelledby="atelier-titre">
+        <div class="aligne flex flex-col gap-7 py-28 md:py-40">
+          <span aria-hidden="true" class="apparait depuis-bas h-px w-18 bg-accent"></span>
+          <p class="apparait depuis-gauche delai-1 surtitre font-medium text-accent">L'atelier</p>
+          <h2
+            id="atelier-titre"
+            class="apparait depuis-gauche delai-2 max-w-[720px] font-display text-[clamp(30px,3.2vw,46px)] leading-[1.2] font-light"
+          >
+            Chaque pierre est sertie à la main, <em>griffe après griffe.</em> Il faut une journée pour une alliance.
+          </h2>
+        </div>
+      </section>
+
+      <!-- VI. Rendez-vous -->
+      <section id="rendez-vous" data-apparition aria-labelledby="rdv-titre" class="border-t border-ink/10">
+        <div class="aligne flex flex-wrap items-end justify-between gap-10 py-24 md:py-30">
+          <div class="apparait depuis-gauche flex max-w-[520px] flex-col gap-4">
+            <h2 id="rdv-titre" class="font-display text-[clamp(30px,3.2vw,46px)] leading-[1.1] font-light">
+              Essayer en salon privé
+            </h2>
+            <p class="leading-[1.8] font-light text-ink-2">
+              Une heure avec une joaillière, les pièces de votre choix, et la loupe à portée de main.
+            </p>
+          </div>
+          <a href="/sur-mesure" class="apparait depuis-droite delai-1 bouton-plein">
+            Prendre rendez-vous<span class="sr-only"> (formulaire Maison Vélin)</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-ink text-sertelle-pale">
+      <div class="aligne flex flex-col gap-10 pt-16 pb-10">
+        <div class="flex flex-wrap items-center justify-between gap-x-16 gap-y-6">
+          <span class="font-display text-[26px] tracking-[0.46em] text-bg">SERTELLE</span>
+          <nav aria-label="Liens du pied de page">
+            <ul class="flex flex-wrap gap-x-8 gap-y-1 text-[13px] tracking-[0.12em]">
+              <li><a class="lien-trace" href="/mentions-legales">Mentions légales</a></li>
+              <li><a class="lien-trace" href="/collection/filigrane">La pièce Filigrane</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-bg/14 pt-6 text-[12px] tracking-[0.04em]">
+          <p>
+            Sertelle est une marque fictive. Démo créée par Maison Vélin by Devbrek. Photos : Pexels,
+            <a class="underline underline-offset-3" href="/mentions-legales#credits">voir les crédits</a>.
+          </p>
+          <button type="button" class="lien-trace" data-reduire-animations aria-pressed="false">
+            Réduire les animations
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <Ecrin />
+  <BarreVisite />
+</BaseLayout>
+
+<style>
+  /* Contenu aligné à gauche : l'écrin garde le bord droit */
+  .aligne {
+    max-width: 1120px;
+    padding-inline: 16px;
+    @media (width >= 48rem) {
+      padding-inline: 40px;
+    }
+  }
+
+  :global(html[data-identity='sertelle']) {
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px;
+  }
+
+  .bouton-plein {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 28px;
+    background: var(--id-ink);
+    color: var(--id-bg);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: background-color 700ms ease;
+  }
+  .bouton-plein:hover {
+    background: var(--id-accent);
+  }
+</style>
+
+<script>
+  import '../../scripts/sertelle-visite';
+  import '../../scripts/reduire-animations';
+</script>
