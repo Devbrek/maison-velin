@@ -1,0 +1,217 @@
+---
+/*
+ * Démo de la pièce Vecteur : Aubrek, horlogerie connectée (marque fictive) — accueil.
+ * Deux îlots React : les onglets de la gamme et la scène Coloris.
+ */
+import { Picture, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import AubrekLayout from '../../../layouts/AubrekLayout.astro';
+import Gamme from '../../../islands/aubrek/Gamme';
+import Coloris from '../../../islands/aubrek/Coloris';
+import photoPluie from '../../../assets/aubrek/aubrek-pluie.jpg';
+import photoCapteurs from '../../../assets/aubrek/aubrek-capteurs.jpg';
+import ecranNoir from '../../../assets/aubrek/aubrek-aurore-ecran-noir.jpg';
+import ecranVert from '../../../assets/aubrek/aubrek-aurore-ecran-vert.jpg';
+
+// Photos des îlots : optimisées ici, les îlots ne reçoivent que leur URL
+const versIlot = async (src: ImageMetadata) => (await getImage({ src, width: 900, format: 'webp' })).src;
+
+const modeles = await Promise.all(
+  (await getCollection('modelesAubrek'))
+    .sort((a, b) => a.data.ordre - b.data.ordre)
+    .map(async ({ id, data }) => ({
+      id,
+      nom: data.nom,
+      accroche: data.accroche,
+      caracteristiques: data.caracteristiques,
+      image: { ...data.image, src: await versIlot(data.image.src) },
+      ficheTechnique: data.configuration ? `/demos/aubrek/${id}` : undefined,
+    })),
+);
+
+const ecrans = [
+  {
+    id: 'nuit',
+    label: 'Nuit',
+    teinte: '#0A0A0B',
+    image: {
+      src: await versIlot(ecranNoir),
+      position: 'center 45%',
+      alt: 'Aubrek coloris Aurore, écran noir au repos, bracelet rose poudré',
+    },
+    scene: { nom: 'NUIT', fond: '#1C1719', encre: '#F2EEF0', secondaire: '#B9AFB4', ligne: 'rgb(242 238 240 / 0.35)' },
+  },
+  {
+    id: 'aurore',
+    label: 'Aurore',
+    teinte: '#1FC98E',
+    image: {
+      src: await versIlot(ecranVert),
+      position: '55% center',
+      alt: 'Aubrek coloris Aurore, écran vert allumé, bracelet rose poudré',
+    },
+    scene: { nom: 'AURORE', fond: '#1FC98E', encre: '#0A0A0B', secondaire: '#14382A', ligne: 'rgb(10 10 11 / 0.4)' },
+  },
+];
+
+const specsHero = [
+  ['Étanchéité', '50 m'],
+  ['Verre', 'Saphir'],
+  ['Boîtier', 'Acier brossé'],
+  ['Autonomie', '36 h'],
+];
+const specsIngenierie = [
+  ['Capteurs', '4 optiques'],
+  ['Fond', 'Céramique'],
+  ['Couronne', 'Usinée'],
+  ['Position', 'GPS'],
+];
+---
+
+<AubrekLayout
+  title="Aubrek — Horlogerie connectée (démo Maison Vélin)"
+  description="Aubrek, marque fictive de montres connectées : démonstration de la pièce Vecteur de Maison Vélin. Sélecteur de gamme et scène Coloris."
+>
+  <main>
+    <!-- Accueil : photo à droite, texte à gauche sur un voile -->
+    <section aria-labelledby="hero" class="relative flex min-h-[max(640px,calc(100svh-40px))] flex-col overflow-hidden bg-aubrek-nuit">
+      <Picture
+        src={photoPluie}
+        alt="Montre Aubrek au boîtier d'acier, couverte de gouttes d'eau, sur fond noir"
+        formats={['avif', 'webp']}
+        widths={[640, 960, photoPluie.width]}
+        sizes="(min-width: 48rem) 62vw, 100vw"
+        priority
+        class="absolute inset-0 h-full w-full object-cover md:left-auto md:w-[62%]"
+        style="object-position: center 45%"
+      />
+      <div aria-hidden="true" class="voile-hero absolute inset-0"></div>
+
+      <header class="relative">
+        <div class="conteneur flex flex-wrap items-center justify-between gap-x-10 gap-y-3 py-6">
+          <a href="#" aria-label="Aubrek, haut de page" class="text-xl font-semibold tracking-[0.5em]">AUBREK</a>
+          <nav aria-label="Navigation principale" class="order-last w-full md:order-none md:w-auto">
+            <ul class="flex flex-wrap gap-x-9 gap-y-1 text-[13px] font-semibold tracking-[0.2em] uppercase">
+              <li><a class="lien-trace" href="#gamme">Modèles</a></li>
+              <li><a class="lien-trace" href="#ingenierie">Ingénierie</a></li>
+              <li><a class="lien-trace" href="#coloris">Coloris</a></li>
+              <li><a class="lien-trace" href="#points-de-vente">Points de vente</a></li>
+            </ul>
+          </nav>
+          <a href="/demos/aubrek/orage#configurer" class="bouton-aubrek bouton-aubrek--contour cut min-h-11 px-6">
+            Configurer
+          </a>
+        </div>
+      </header>
+
+      <div class="conteneur relative mt-auto flex flex-col gap-16 pt-24 pb-14">
+        <div class="flex max-w-[640px] flex-col gap-7">
+          <p class="text-xs font-semibold tracking-[0.32em] text-accent">HORLOGERIE CONNECTÉE</p>
+          <h1 id="hero" class="text-[clamp(40px,4.4vw,68px)] leading-[1.05] font-semibold tracking-[0.01em] uppercase">
+            Taillée pour <span class="font-light text-accent italic">l'orage.</span>
+          </h1>
+          <p class="max-w-[440px] text-[17px] leading-[1.7] font-light text-aubrek-doux">
+            Un boîtier d'acier brossé, un verre saphir et une étanchéité à cinquante mètres. Aubrek ne craint ni la pluie
+            ni la nuit.
+          </p>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="/demos/aubrek/orage#configurer" class="bouton-aubrek cut bg-accent px-8 text-on-accent">
+              Configurer votre Aubrek
+            </a>
+            <a href="#gamme" class="bouton-aubrek bouton-aubrek--contour cut px-8">Découvrir la gamme</a>
+          </div>
+        </div>
+        <dl class="grid grid-cols-2 gap-6 border-t border-ink/16 pt-6 md:grid-cols-4">
+          {specsHero.map(([cle, valeur]) => (
+            <div>
+              <dt class="text-[11px] tracking-[0.24em] text-ink-2 uppercase">{cle}</dt>
+              <dd class="mt-2 text-[22px] font-semibold">{valeur}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- La gamme : onglets Orage / Aurore / Monolithe -->
+    <section id="gamme" data-apparition aria-labelledby="gamme-titre">
+      <div class="conteneur apparait depuis-bas py-24 md:py-[140px]">
+        <Gamme client:visible modeles={modeles} />
+      </div>
+    </section>
+
+    <!-- Ingénierie : texte posé sur la photo, avec un voile -->
+    <section id="ingenierie" data-apparition aria-labelledby="ing-titre" class="relative flex min-h-[720px] overflow-hidden bg-[#1A1A1C] md:min-h-[840px]">
+      <Picture
+        src={photoCapteurs}
+        alt="Dos d'une montre Aubrek : quatre capteurs circulaires sous un verre, gravures techniques autour"
+        formats={['avif', 'webp']}
+        widths={[640, 960, photoCapteurs.width]}
+        sizes="100vw"
+        class="net absolute inset-0 h-full w-full object-cover"
+        style="object-position: 60% center"
+      />
+      <div aria-hidden="true" class="voile-ingenierie absolute inset-0"></div>
+      <div class="conteneur relative flex items-end py-24 md:items-center">
+        <div class="apparait depuis-gauche flex max-w-[480px] flex-col gap-7">
+          <p class="text-xs font-semibold tracking-[0.32em] text-accent">INGÉNIERIE</p>
+          <h2 id="ing-titre" class="text-[clamp(30px,3vw,44px)] leading-[1.1] font-semibold uppercase">
+            Ce qui ne se voit pas, <span class="font-light text-accent italic">se mesure.</span>
+          </h2>
+          <p class="text-[17px] leading-[1.7] font-light text-[#C6C6CC]">
+            Quatre capteurs optiques sous un verre saphir, un fond scellé et une couronne usinée dans la masse.
+          </p>
+          <dl class="grid grid-cols-2 gap-x-8 gap-y-6 border-t border-ink/18 pt-6">
+            {specsIngenierie.map(([cle, valeur]) => (
+              <div>
+                <dt class="text-[11px] tracking-[0.24em] text-[#A8A8AE] uppercase">{cle}</dt>
+                <dd class="mt-2 text-xl font-semibold">{valeur}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coloris : le fond de la section suit l'écran choisi -->
+    <Coloris client:visible ecrans={ecrans} />
+
+    <!-- Points de vente -->
+    <section id="points-de-vente" data-apparition aria-labelledby="pdv" class="border-b border-line">
+      <div class="conteneur apparait depuis-bas flex flex-wrap items-end justify-between gap-10 py-24 md:py-30">
+        <div class="flex max-w-[640px] flex-col gap-5">
+          <h2 id="pdv" class="text-[clamp(28px,2.6vw,40px)] leading-[1.1] font-semibold uppercase">
+            L'essayer <span class="font-light italic">au poignet</span>
+          </h2>
+          <p class="text-[17px] leading-[1.7] font-light text-aubrek-doux">
+            Retrouvez la gamme complète chez nos partenaires agréés, ou prenez rendez-vous pour un essai privé.
+          </p>
+        </div>
+        <a href="/demos/aubrek/orage#essai" class="bouton-aubrek cut bg-accent text-on-accent">Réserver un essai privé</a>
+      </div>
+    </section>
+  </main>
+</AubrekLayout>
+
+<style>
+  /* Téléphone : photo en plein cadre, voile du bas vers le haut */
+  .voile-hero {
+    background: linear-gradient(to top, #050505 0%, rgb(5 5 5 / 0.85) 45%, rgb(5 5 5 / 0.3) 100%);
+  }
+  .voile-ingenierie {
+    background: linear-gradient(to top, rgb(10 10 11 / 0.95) 0%, rgb(10 10 11 / 0.75) 50%, rgb(10 10 11 / 0.2) 100%);
+  }
+  @media (width >= 48rem) {
+    .voile-hero {
+      background:
+        linear-gradient(to top, rgb(5 5 5 / 0.85) 0%, rgb(5 5 5 / 0) 30%),
+        linear-gradient(to right, #050505 0%, #050505 36%, rgb(5 5 5 / 0.6) 52%, rgb(5 5 5 / 0) 72%);
+    }
+    .voile-ingenierie {
+      background: linear-gradient(to right, rgb(10 10 11 / 0.92) 0%, rgb(10 10 11 / 0.7) 34%, rgb(10 10 11 / 0) 64%);
+    }
+  }
+
+  :global(html[data-identity='aubrek']) {
+    scroll-behavior: smooth;
+  }
+</style>

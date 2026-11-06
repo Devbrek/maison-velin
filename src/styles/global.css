@@ -35,6 +35,10 @@
   --color-ecrin-discret: #9C9186;
   --color-sertelle-pale: #D8D2C8;
 
+  /* Aubrek : texte courant, un cran plus clair que le secondaire */
+  --color-aubrek-doux: #B8B8BE;
+  --color-aubrek-nuit: #050505;
+
   /* Courbe unique du site : lente, douce, jamais de rebond */
   --ease-velin: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-velin-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -79,6 +83,8 @@
   --id-on-accent: #0A0A0B;
   --id-font-display: var(--font-saira), sans-serif;
   --id-font-body: var(--font-saira), sans-serif;
+  --coupe: 12px;
+  --coupe-lg: 48px;
 }
 
 /* Calade / Lavis — un jeu de couleurs par chapitre de la promenade */
@@ -181,12 +187,14 @@
   text-transform: uppercase;
 }
 
-/* Formes Aubrek : coins coupés */
+/* Formes Aubrek : coins coupés (taille de la coupe réglable avec --coupe / --coupe-lg) */
 @utility cut {
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  --c: var(--coupe, 10px);
+  clip-path: polygon(var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0 100%, 0 var(--c));
 }
 @utility cut-lg {
-  clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+  --c: var(--coupe-lg, 32px);
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
 }
 
 /* Forme Calade : image en arche */
@@ -226,6 +234,44 @@
       background-color 900ms var(--ease-velin),
       color 900ms var(--ease-velin),
       border-color 900ms var(--ease-velin);
+  }
+
+  /* Aubrek : bouton à coins coupés (forme donnée par .cut) */
+  .bouton-aubrek {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding-inline: 28px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition:
+      transform 400ms var(--ease-velin),
+      background-color 400ms ease,
+      color 400ms ease;
+  }
+  .bouton-aubrek:hover {
+    transform: translateY(-2px);
+  }
+  /* Variante contour : le filet est dessiné par une ombre intérieure (une bordure serait rognée aux coins) */
+  .bouton-aubrek--contour {
+    box-shadow: inset 0 0 0 1px rgb(242 242 240 / 0.6);
+  }
+  .bouton-aubrek--contour:hover {
+    background-color: var(--id-ink);
+    color: var(--id-bg);
+  }
+
+  /* Aubrek : le texte d'un modèle arrive en fondu */
+  .gamme-fondu {
+    animation: gamme-fondu 700ms var(--ease-velin);
+  }
+  @keyframes gamme-fondu {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
   }
 
   /* Bouton contour : se remplit au survol */

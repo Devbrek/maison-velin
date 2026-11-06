@@ -1,0 +1,52 @@
+---
+/*
+ * Layout des pages Aubrek (démo de la pièce Vecteur) : Saira seule, bandeau démo, pied de page.
+ * Partagé par l'accueil et la fiche Orage.
+ */
+import { Font } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import BandeauDemo from '../components/demo/BandeauDemo.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} identity="aubrek">
+  <Fragment slot="fonts">
+    <Font cssVariable="--font-saira" preload={[{ style: 'normal' }]} />
+  </Fragment>
+
+  <BandeauDemo piece="Vecteur" retour="/collection/vecteur" class="border-b border-line text-ink-2" />
+
+  <slot />
+
+  <footer class="conteneur flex flex-col gap-14 pt-18 pb-10">
+    <div class="flex flex-wrap items-center justify-between gap-x-16 gap-y-8">
+      <span class="text-xl font-semibold tracking-[0.5em]">AUBREK</span>
+      <nav aria-label="Liens du pied de page">
+        <ul class="flex flex-wrap gap-x-9 gap-y-1 text-[13px] tracking-[0.14em] text-ink-2 uppercase">
+          <li><a class="lien-trace" href="/demos/aubrek#gamme">Modèles</a></li>
+          <li><a class="lien-trace" href="/demos/aubrek/orage">Orage</a></li>
+          <li><a class="lien-trace" href="/mentions-legales">Mentions légales</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-line pt-6 text-xs tracking-[0.06em] text-ink-2">
+      <p>
+        Aubrek est une marque fictive. Démo créée par Maison Vélin by Devbrek. Photos : Pexels,
+        <a class="underline underline-offset-3" href="/mentions-legales#credits">voir les crédits</a>.
+      </p>
+      <button type="button" class="lien-trace" data-reduire-animations aria-pressed="false">
+        Réduire les animations
+      </button>
+    </div>
+  </footer>
+</BaseLayout>
+
+<script>
+  import '../scripts/reduire-animations';
+</script>
