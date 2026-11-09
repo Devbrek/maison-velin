@@ -25,8 +25,8 @@ export default defineConfig({
 
   // Polices auto-hébergées : déclarées ici, chargées page par page avec <Font cssVariable="…" />
   fonts: [
-    // Maison Vélin
-    { provider: fontsource, name: 'Bodoni Moda', cssVariable: '--font-bodoni', weights: ['400 700'], fallbacks: ['serif'] },
+    // Maison Vélin : Newsreader pour les titres, Jost pour le texte
+    { provider: fontsource, name: 'Newsreader', cssVariable: '--font-newsreader', weights: [400], styles: ['normal', 'italic'], fallbacks: ['serif'] },
     { provider: fontsource, name: 'Jost', cssVariable: '--font-jost', weights: ['300 500'], styles: ['normal'] },
 
     // Aubrek / Vecteur
@@ -36,7 +36,8 @@ export default defineConfig({
     { provider: fontsource, name: 'Fraunces', cssVariable: '--font-fraunces', weights: ['300 600'], fallbacks: ['serif'] },
     { provider: fontsource, name: 'Manrope', cssVariable: '--font-manrope', weights: ['300 600'], styles: ['normal'] },
 
-    // Sertelle / Filigrane
+    // Sertelle / Filigrane (Bodoni : nom de la pièce Filigrane et choix du configurateur)
+    { provider: fontsource, name: 'Bodoni Moda', cssVariable: '--font-bodoni', weights: ['400 700'], fallbacks: ['serif'] },
     { provider: fontsource, name: 'Cormorant Garamond', cssVariable: '--font-cormorant', weights: ['300 500'], fallbacks: ['serif'] },
     { provider: fontsource, name: 'Hanken Grotesk', cssVariable: '--font-hanken', weights: ['300 600'], styles: ['normal'] },
 

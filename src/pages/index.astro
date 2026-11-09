@@ -15,8 +15,9 @@ const pieces = (await getCollection('pieces')).sort((a, b) => a.data.ordre - b.d
   description="Maison Vélin dessine des templates de sites web haut de gamme pour la joaillerie, l'horlogerie connectée et le parfum. Une création Devbrek."
   enTeteSurImage
 >
-  <!-- Polices des noms de pièces : Vecteur en Saira, Lavis en Fraunces -->
+  <!-- Polices des noms de pièces : Filigrane en Bodoni, Vecteur en Saira, Lavis en Fraunces -->
   <Fragment slot="fonts">
+    <Font cssVariable="--font-bodoni" />
     <Font cssVariable="--font-saira" />
     <Font cssVariable="--font-fraunces" />
   </Fragment>

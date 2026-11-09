@@ -1,6 +1,6 @@
 ---
 /*
- * Layout des pages Maison Vélin : polices Bodoni + Jost, en-tête et pied de page.
+ * Layout des pages Maison Vélin : polices Newsreader (titres) + Jost (texte), en-tête et pied de page.
  * `enTeteSurImage` : l'en-tête se superpose à la photo d'ouverture de la page (texte clair),
  * sinon il s'affiche en haut, sur fond vélin.
  */
@@ -23,7 +23,8 @@ const { title, description, enTeteSurImage = false, noindex = false, og, ogAlt }
 
 <BaseLayout title={title} description={description} identity="velin" noindex={noindex} og={og} ogAlt={ogAlt}>
   <Fragment slot="fonts">
-    <Font cssVariable="--font-bodoni" preload={[{ style: 'normal' }]} />
+    <!-- Préchargées : le titre du hero (droit + italique) s'affiche dès l'arrivée -->
+    <Font cssVariable="--font-newsreader" preload={[{ style: 'normal' }, { style: 'italic' }]} />
     <Font cssVariable="--font-jost" />
     <slot name="fonts" />
   </Fragment>

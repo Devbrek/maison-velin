@@ -22,7 +22,9 @@ const police = (name: string, fichier: string, weight: 300 | 400 | 500 | 600, st
 });
 
 const POLICES = [
-  police('Bodoni Moda', 'bodoni-moda-400-normal', 400),
+  police('Newsreader', 'newsreader-400-normal', 400),
+  police('Newsreader', 'newsreader-400-italic', 400, 'italic'),
+  police('Bodoni Moda', 'bodoni-moda-400-normal', 400), // nom de la pièce Filigrane
   police('Jost', 'jost-400-normal', 400),
   police('Jost', 'jost-500-normal', 500),
   police('Saira', 'saira-600-normal', 600),
@@ -76,7 +78,7 @@ export async function carteVelin(titre?: string): Promise<Buffer> {
       img(logo('horizontal'), { height: titre ? 150 : 230 }),
       h(
         'div',
-        { fontFamily: titre ? 'Bodoni Moda' : 'Jost', fontSize: titre ? 64 : 24, letterSpacing: titre ? 0 : 7, color: titre ? ENCRE : SECONDAIRE },
+        { fontFamily: titre ? 'Newsreader' : 'Jost', fontSize: titre ? 64 : 24, letterSpacing: titre ? 0 : 7, color: titre ? ENCRE : SECONDAIRE },
         titre ?? 'TEMPLATES DE SITES POUR MAISONS DE LUXE',
       ),
     ),

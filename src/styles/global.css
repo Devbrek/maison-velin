@@ -57,7 +57,7 @@
   --id-line: #D9D2C5;
   --id-accent: #1C2A4A;
   --id-on-accent: #F3EEE4;
-  --id-font-display: var(--font-bodoni), serif;
+  --id-font-display: var(--font-newsreader), serif;
   --id-font-body: var(--font-jost), sans-serif;
 }
 
@@ -190,7 +190,7 @@
 /* Paragraphe Maison Vélin : Jost léger, 17 px sur téléphone → 21 px en grand écran,
    interligne 1,6 et ~60 caractères par ligne au plus. Mesuré : une lettre de Jost fait ~0,43 em en moyenne,
    donc 26 em ≈ 60 caractères (60ch en laisserait passer ~80, « ch » étant la largeur du chiffre 0).
-   Bodoni reste réservé aux titres courts. */
+   Newsreader est réservé aux titres. */
 @utility paragraphe {
   font-family: var(--font-jost), sans-serif;
   font-size: clamp(17px, 0.9rem + 0.45vw, 21px);

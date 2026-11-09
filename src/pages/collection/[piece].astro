@@ -45,7 +45,6 @@ const polices = new Set<string>([
   ...data.configurateur.polices.map((p) => p.police),
   ...(piece.id === 'lavis' ? ['--font-manrope'] : []),
 ]);
-polices.delete('--font-bodoni'); // déjà chargée par le layout
 ---
 
 <VelinLayout
