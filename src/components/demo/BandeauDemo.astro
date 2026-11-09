@@ -9,9 +9,9 @@ interface Props {
 const { piece, retour, class: classe } = Astro.props;
 ---
 
-<div class:list={['text-[11px] tracking-[0.18em] uppercase', classe]}>
+<aside aria-label="À propos de cette démo" class:list={['text-[11px] tracking-[0.18em] uppercase', classe]}>
   <div class="flex min-h-10 flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 md:px-10">
     <p>Marque fictive — démonstration Maison Vélin · pièce {piece}</p>
     <a class="lien-trace" href={retour}>Retour à Maison Vélin</a>
   </div>
-</div>
+</aside>

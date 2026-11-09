@@ -6,7 +6,7 @@
 import { ETAPES } from './etapes';
 ---
 
-<div class="fixed inset-x-0 bottom-0 z-20 border-t border-or-sombre/55 bg-ecrin text-ecrin-texte lg:hidden">
+<aside aria-label="Votre visite" class="fixed inset-x-0 bottom-0 z-20 border-t border-or-sombre/55 bg-ecrin text-ecrin-texte lg:hidden">
   <!-- Progression : de 0 (ouverture) à 1 (rendez-vous) -->
   <span aria-hidden="true" class="barre-progression absolute inset-x-0 -top-px h-px origin-left bg-or-sombre"></span>
   <div class="flex h-14 items-center justify-between gap-4 px-4">
@@ -25,7 +25,7 @@ import { ETAPES } from './etapes';
       Plan
     </button>
   </div>
-</div>
+</aside>
 
 <dialog
   id="plan-visite"

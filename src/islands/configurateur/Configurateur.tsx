@@ -30,7 +30,7 @@ export default function Configurateur({ pieceId, accents, polices, ambiances, ch
 
   return (
     <div className="flex flex-wrap items-start gap-x-20 gap-y-16">
-      <div className="flex max-w-[400px] flex-[1_1_320px] flex-col gap-12">
+      <div className="flex max-w-[400px] min-w-0 flex-[1_1_280px] flex-col gap-12">
         {children}
 
         <GroupeOptions
@@ -60,7 +60,7 @@ export default function Configurateur({ pieceId, accents, polices, ambiances, ch
           disposition="colonne"
           variante="cadre"
           rendu={(p) => (
-            <span className="flex w-full items-center justify-between gap-4 py-3">
+            <span className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1 py-3">
               <span className="text-2xl tracking-normal whitespace-nowrap" style={{ fontFamily: `var(${p.police})` }}>
                 {p.label}
               </span>

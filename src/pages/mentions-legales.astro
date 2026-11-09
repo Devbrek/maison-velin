@@ -112,8 +112,8 @@ const texte = 'flex max-w-[680px] flex-col gap-4 leading-[1.8] font-light text-i
     <h2 id="credits-titre" class={titre}>Crédits photos</h2>
     <ul class="max-w-[680px] border-b border-ink/12">
       {credits.map(({ data }) => (
-        <li class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-ink/12 py-4">
-          <a class="font-light text-ink underline underline-offset-3 hover:text-accent" href={data.url}>
+        <li class="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-ink/12 py-1.5">
+          <a class="inline-flex min-h-11 items-center font-light text-ink underline underline-offset-3 hover:text-accent" href={data.url}>
             {data.nomAuteur}<span class="sr-only"> (photo sur Pexels)</span>
           </a>
           <span class="text-sm text-ink-2">{data.utilisation}</span>

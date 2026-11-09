@@ -35,7 +35,7 @@ const position = (i: number) => `${(i / (arrets.length - 1)) * 100}%`;
       <ol>
         {arrets.map(({ id, heure, label }, i) => (
           <li class="arret absolute left-0 -translate-y-1/2" style={`top:${position(i)}`} data-arret={i}>
-            <a href={`#${id}`} class="flex min-h-11 items-center gap-3.5">
+            <a href={`#${id}`} class="flex min-h-11 min-w-11 items-center gap-3.5">
               <span aria-hidden="true" class="arret-point size-[15px] flex-none rounded-full border border-ink"></span>
               <span class="fil-texte flex flex-col gap-0.5 leading-tight">
                 <span class="text-[11px] font-semibold tracking-[0.2em]">{heure}</span>
@@ -65,12 +65,13 @@ const position = (i: number) => `${(i / (arrets.length - 1)) * 100}%`;
   .fil-soleil {
     top: calc(var(--remplissage, 0) * 100%);
   }
-  /* Arrêts : à venir (pâle), passés (plein), en cours (net) */
+  /* Arrêts : à venir (pâle), passés (plein), en cours (net).
+     Opacités choisies pour garder un contraste ≥ 4,5:1 sur les trois fonds. */
   .arret {
-    opacity: 0.5;
+    opacity: 0.72;
   }
   .arret[data-etat='passe'] {
-    opacity: 0.75;
+    opacity: 0.86;
   }
   .arret[data-etat='passe'] .arret-point,
   .arret[data-etat='courant'] .arret-point {
@@ -79,10 +80,15 @@ const position = (i: number) => `${(i / (arrets.length - 1)) * 100}%`;
   .arret[data-etat='courant'] {
     opacity: 1;
   }
-  /* Téléphone : le fil seul, sans textes */
+  /* Téléphone : le fil seul ; les textes restent lus par les lecteurs d'écran (masquage visuel seulement) */
   @media (width < 48rem) {
     .fil-texte {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
   }
 </style>
