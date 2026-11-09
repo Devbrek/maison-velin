@@ -134,8 +134,9 @@ const creditsPhotos = defineCollection({
   schema: z.object({
     // id = nom de la photo dans src/assets, sans extension (ex. aubrek-pluie)
     fichierPexels: z.string().regex(/^pexels-.+-\d+\.jpg$/),
-    auteur: z.string().min(1), // identifiant Pexels ; nom complet à compléter en phase 8
-    nomAuteur: z.string().optional(),
+    auteur: z.string().min(1), // identifiant Pexels du photographe
+    nomAuteur: z.string().min(1), // nom affiché sur Pexels
+    utilisation: z.string().optional(), // où la photo apparaît ; absente = photo de réserve, non créditée
     pexelsId: z.string().regex(/^\d+$/),
     url: z.url(),
   }),
