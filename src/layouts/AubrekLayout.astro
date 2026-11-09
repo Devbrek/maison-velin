@@ -10,12 +10,14 @@ import BandeauDemo from '../components/demo/BandeauDemo.astro';
 interface Props {
   title: string;
   description: string;
+  og?: string;
+  ogAlt?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, og, ogAlt } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} identity="aubrek">
+<BaseLayout title={title} description={description} identity="aubrek" og={og} ogAlt={ogAlt}>
   <Fragment slot="fonts">
     <Font cssVariable="--font-saira" preload={[{ style: 'normal' }]} />
   </Fragment>

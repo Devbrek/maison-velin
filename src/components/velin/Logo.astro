@@ -1,0 +1,39 @@
+---
+/*
+ * Logo horizontal Maison Vélin (arche + « MAISON Vélin BY DEVBREK », texte vectorisé : aucune police requise).
+ * `clair` : version pour fond sombre (photo, mode nuit). Sinon, la version suit le thème :
+ * encre sur vélin, et version claire sous [data-theme="nuit"].
+ * Décoratif ici (alt vide) : le lien qui l'entoure porte le nom accessible.
+ */
+import logoEncre from '../../assets/logo/horizontal.svg';
+import logoClair from '../../assets/logo/horizontal-clair.svg';
+
+interface Props {
+  clair?: boolean;
+  class?: string;
+}
+
+const { clair = false, class: classe } = Astro.props;
+// Hauteur affichée : 44 px sur téléphone, 52 px en grand écran (le texte « BY DEVBREK » reste lisible)
+const taille = 'h-11 w-auto md:h-[52px]';
+---
+
+{
+  clair ? (
+    <img src={logoClair.src} width={logoClair.width} height={logoClair.height} alt="" class:list={[taille, classe]} />
+  ) : (
+    <>
+      <img src={logoEncre.src} width={logoEncre.width} height={logoEncre.height} alt="" class:list={['logo-jour', taille, classe]} />
+      <img src={logoClair.src} width={logoClair.width} height={logoClair.height} alt="" class:list={['logo-nuit hidden', taille, classe]} />
+    </>
+  )
+}
+
+<style>
+  :global([data-theme='nuit']) .logo-jour {
+    display: none;
+  }
+  :global([data-theme='nuit']) .logo-nuit {
+    display: block;
+  }
+</style>

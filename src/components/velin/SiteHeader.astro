@@ -5,6 +5,8 @@
  * Téléphone : bouton « Menu » qui ouvre un panneau plein écran (<dialog> natif :
  * focus piégé, touche Échap et fond inerte sont gérés par le navigateur).
  */
+import Logo from './Logo.astro';
+
 interface Props {
   surImage?: boolean;
 }
@@ -28,11 +30,8 @@ const estCourant = (href: string) => href === chemin;
   ]}
 >
   <div class="conteneur flex items-center justify-between gap-x-10 gap-y-4 py-5">
-    <a href="/" class="flex min-h-11 flex-col justify-center gap-0.5 leading-none" aria-label="Maison Vélin, retour à l'accueil">
-      <span class="text-[15px] font-medium tracking-[0.32em]">MAISON VÉLIN</span>
-      <span class:list={['font-display text-[13px] italic', surImage ? 'text-sur-image-3' : 'text-ink-2']}>
-        by Devbrek
-      </span>
+    <a href="/" class="flex min-h-11 items-center" aria-label="Maison Vélin by Devbrek, retour à l'accueil">
+      <Logo clair={surImage} />
     </a>
 
     <nav aria-label="Navigation principale" class="hidden lg:block">
@@ -68,7 +67,7 @@ const estCourant = (href: string) => href === chemin;
 >
   <div class="conteneur flex h-full flex-col py-5">
     <div class="flex items-center justify-between">
-      <span class="text-[15px] font-medium tracking-[0.32em]">MAISON VÉLIN</span>
+      <Logo />
       <button type="button" class="min-h-11 min-w-11 text-[12px] tracking-[0.22em] uppercase" data-menu-fermer>
         Fermer
       </button>

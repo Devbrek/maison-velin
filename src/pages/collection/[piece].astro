@@ -48,7 +48,13 @@ const polices = new Set<string>([
 polices.delete('--font-bodoni'); // déjà chargée par le layout
 ---
 
-<VelinLayout title={`${data.nom} — Maison Vélin`} description={data.intro} enTeteSurImage>
+<VelinLayout
+  title={`${data.nom} — pièce ${data.univers[0].toLowerCase()} · Maison Vélin`}
+  description={data.intro}
+  og={piece.id}
+  ogAlt={`Pièce ${data.nom} : photo d'ouverture et nom de la pièce`}
+  enTeteSurImage
+>
   <Fragment slot="fonts">
     {[...polices].map((variable) => <Font cssVariable={variable as VariablePolice} />)}
   </Fragment>

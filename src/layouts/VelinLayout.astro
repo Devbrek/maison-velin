@@ -12,14 +12,16 @@ import SiteFooter from '../components/velin/SiteFooter.astro';
 interface Props {
   title: string;
   description: string;
+  og?: string;
+  ogAlt?: string;
   enTeteSurImage?: boolean;
   noindex?: boolean;
 }
 
-const { title, description, enTeteSurImage = false, noindex = false } = Astro.props;
+const { title, description, enTeteSurImage = false, noindex = false, og, ogAlt } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} identity="velin" noindex={noindex}>
+<BaseLayout title={title} description={description} identity="velin" noindex={noindex} og={og} ogAlt={ogAlt}>
   <Fragment slot="fonts">
     <Font cssVariable="--font-bodoni" preload={[{ style: 'normal' }]} />
     <Font cssVariable="--font-jost" />

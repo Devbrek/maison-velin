@@ -4,11 +4,20 @@ import { defineConfig, fontProviders } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
+import sitemap from '@astrojs/sitemap';
+
 const fontsource = fontProviders.fontsource();
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  // Domaine provisoire, à confirmer en phase 9 (sert au sitemap, aux URL canoniques et aux images Open Graph)
+  site: 'https://velin.devbrek.fr',
+
+  integrations: [
+    react(),
+    // La page 404 et les images Open Graph ne vont pas dans le sitemap
+    sitemap({ filter: (page) => !page.includes('/404') && !page.includes('/og/') }),
+  ],
 
   vite: {
     plugins: [tailwindcss()]

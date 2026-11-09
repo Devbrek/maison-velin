@@ -5,6 +5,7 @@
  * passe ses <Font /> dans le slot « fonts », pour ne charger que ce dont elle a besoin.
  */
 import { ClientRouter } from 'astro:transitions';
+import { NOM_SITE, jsonLd } from '../lib/seo';
 import '../styles/global.css';
 
 export type Identity = 'velin' | 'aubrek' | 'calade' | 'sertelle';
@@ -14,9 +15,23 @@ interface Props {
   description: string;
   identity?: Identity;
   noindex?: boolean; // page à exclure des moteurs de recherche (ex. 404)
+  og?: string; // nom de l'image Open Graph : /og/<og>.jpg (1200 × 630)
+  ogAlt?: string; // description de cette image
 }
 
-const { title, description, identity = 'velin', noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  identity = 'velin',
+  noindex = false,
+  og = 'accueil',
+  ogAlt = 'Logo Maison Vélin by Devbrek sur fond vélin',
+} = Astro.props;
+
+// URL absolues (le domaine vient de `site` dans astro.config)
+const site = Astro.site ?? new URL('https://velin.devbrek.fr');
+const canonique = new URL(Astro.url.pathname, site).href;
+const image = new URL(`/og/${og}.jpg`, site).href;
 ---
 
 <!doctype html>
@@ -24,10 +39,39 @@ const { title, description, identity = 'velin', noindex = false } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonique} />}
+
+    <!-- Icônes -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Partage (Open Graph, X/Twitter) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={NOM_SITE} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonique} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Données structurées : Devbrek édite le site « Maison Vélin » -->
+    {
+      !noindex && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(jsonLd({ url: canonique, titre: title, description, site: site.href }))}
+        />
+      )
+    }
     <slot name="fonts" />
     <!-- Avant l'affichage : signale que JS est actif (apparitions) et applique le choix « Réduire les animations » -->
     <script is:inline data-astro-rerun>
