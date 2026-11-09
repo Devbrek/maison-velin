@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://velin.devbrek.fr/sitemap-index.xml
+Sitemap: https://maison-velin.vercel.app/sitemap-index.xml

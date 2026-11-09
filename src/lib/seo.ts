@@ -11,7 +11,7 @@ interface Page {
   url: string; // URL canonique absolue
   titre: string;
   description: string;
-  site: string; // racine du site, ex. https://velin.devbrek.fr/
+  site: string; // racine du site, ex. https://maison-velin.vercel.app/
 }
 
 export function jsonLd({ url, titre, description, site }: Page) {

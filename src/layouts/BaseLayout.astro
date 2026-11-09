@@ -29,7 +29,7 @@ const {
 } = Astro.props;
 
 // URL absolues (le domaine vient de `site` dans astro.config)
-const site = Astro.site ?? new URL('https://velin.devbrek.fr');
+const site = Astro.site ?? new URL('https://maison-velin.vercel.app');
 const canonique = new URL(Astro.url.pathname, site).href;
 const image = new URL(`/og/${og}.jpg`, site).href;
 ---

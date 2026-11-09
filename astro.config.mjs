@@ -10,8 +10,8 @@ const fontsource = fontProviders.fontsource();
 
 // https://astro.build/config
 export default defineConfig({
-  // Domaine provisoire, à confirmer en phase 9 (sert au sitemap, aux URL canoniques et aux images Open Graph)
-  site: 'https://velin.devbrek.fr',
+  // Adresse publique (sert au sitemap, aux URL canoniques et aux images Open Graph)
+  site: 'https://maison-velin.vercel.app',
 
   integrations: [
     react(),
