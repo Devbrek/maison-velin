@@ -5,7 +5,7 @@
  * Sur téléphone, le texte est toujours en bas ; sur grand écran, il suit la « mise » de la maquette.
  */
 import type { CollectionEntry } from 'astro:content';
-import { Picture } from 'astro:assets';
+import Photo from '../Photo.astro';
 import NomPiece from '../fiche/NomPiece.astro';
 
 interface Props {
@@ -26,12 +26,10 @@ const alignement = {
   aria-labelledby={`piece-${id}`}
   class:list={['bloc relative flex min-h-[640px] overflow-hidden bg-[#2B2723] text-sur-image md:min-h-[820px]', `bloc--${data.accueil.mise}`]}
 >
-  <Picture
+  <Photo
     src={data.accueil.image}
     alt=""
-    formats={['avif', 'webp']}
-    layout="full-width"
-    widths={[640, 960, data.accueil.image.width]}
+    sizes="100vw"
     class="absolute inset-0 h-full w-full object-cover"
     style={`object-position: ${data.accueil.position}`}
   />

@@ -1,0 +1,35 @@
+---
+/*
+ * Toutes les photos du site passent par ce composant : mêmes formats, même qualité,
+ * mêmes largeurs, et des `sizes` qui tiennent compte du recadrage.
+ *
+ * Piège corrigé : avec object-fit: cover, une photo plus large que sa boîte est agrandie
+ * pour la couvrir. Elle est donc peinte plus large que la boîte. `cadre` (largeur / hauteur
+ * de la boîte) permet de calculer cet agrandissement et de demander assez de pixels.
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { Picture } from 'astro:assets';
+import { facteurCouverture, largeursPhoto, sizesAgrandis } from '../lib/photo';
+
+interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'alt' | 'width' | 'height' | 'sizes'> {
+  src: ImageMetadata;
+  alt: string;
+  sizes: string; // largeur de la boîte à l'écran
+  cadre?: number; // rapport largeur / hauteur de la boîte, si la photo est recadrée (object-fit: cover)
+  priority?: boolean;
+}
+
+const { src, alt, sizes, cadre, priority = false, ...attributs } = Astro.props;
+const facteur = cadre ? facteurCouverture(src.width / src.height, cadre) : 1;
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  formats={['avif', 'webp']}
+  quality={80}
+  widths={largeursPhoto(src.width)}
+  sizes={sizesAgrandis(sizes, facteur)}
+  priority={priority}
+  {...attributs}
+/>

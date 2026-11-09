@@ -32,7 +32,7 @@ if (!suivante) throw new Error(`Pièce suivante introuvable pour « ${piece.id} 
 // Photos de l'aperçu : optimisées ici, l'îlot ne reçoit que leur URL
 const ambiances: Ambiance[] = await Promise.all(
   data.configurateur.ambiances.map(async ({ apercu, ...ambiance }) => {
-    const image = await getImage({ src: apercu.src, width: 800, format: 'webp' });
+    const image = await getImage({ src: apercu.src, width: Math.min(1200, apercu.src.width), format: 'webp', quality: 80 });
     return { ...ambiance, image: { src: image.src, position: apercu.position } };
   }),
 );

@@ -3,7 +3,7 @@
  * Ouverture plein écran de l'accueil.
  * En attendant la vidéo (macro lente sur un cadran, une carrosserie, un drapé), une photo.
  */
-import { Picture } from 'astro:assets';
+import Photo from '../Photo.astro';
 import photo from '../../assets/aubrek/aubrek-pluie.jpg';
 ---
 
@@ -11,12 +11,10 @@ import photo from '../../assets/aubrek/aubrek-pluie.jpg';
   aria-labelledby="hero-titre"
   class="relative flex min-h-[max(560px,100svh)] flex-col bg-[#2B2723] text-sur-image"
 >
-  <Picture
+  <Photo
     src={photo}
     alt=""
-    formats={['avif', 'webp']}
-    layout="full-width"
-    widths={[640, 960, photo.width]}
+    sizes="100vw"
     priority
     class="absolute inset-0 h-full w-full object-cover"
     style="object-position: center 45%"

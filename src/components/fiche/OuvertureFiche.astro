@@ -1,7 +1,7 @@
 ---
 // Ouverture plein écran d'une fiche pièce : photo, voile, fil d'Ariane, nom de la pièce
 import type { CollectionEntry } from 'astro:content';
-import { Picture } from 'astro:assets';
+import Photo from '../Photo.astro';
 import NomPiece from './NomPiece.astro';
 
 interface Props {
@@ -15,12 +15,10 @@ const { id, data } = Astro.props.piece;
   aria-labelledby="fiche-titre"
   class="relative flex min-h-[max(560px,100svh)] flex-col bg-[#2B2723] text-sur-image"
 >
-  <Picture
+  <Photo
     src={data.couverture.src}
     alt=""
-    formats={['avif', 'webp']}
-    layout="full-width"
-    widths={[640, 960, data.couverture.src.width]}
+    sizes="100vw"
     priority
     class="absolute inset-0 h-full w-full object-cover"
     style={`object-position: ${data.couverture.position}`}

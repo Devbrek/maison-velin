@@ -3,7 +3,8 @@
  * Démo de la pièce Vecteur : Aubrek, horlogerie connectée (marque fictive) — accueil.
  * Deux îlots React : les onglets de la gamme et la scène Coloris.
  */
-import { Picture, getImage } from 'astro:assets';
+import { getImage } from 'astro:assets';
+import Photo from '../../../components/Photo.astro';
 import { getCollection } from 'astro:content';
 import AubrekLayout from '../../../layouts/AubrekLayout.astro';
 import Gamme from '../../../islands/aubrek/Gamme';
@@ -14,7 +15,9 @@ import ecranNoir from '../../../assets/aubrek/aubrek-aurore-ecran-noir.jpg';
 import ecranVert from '../../../assets/aubrek/aubrek-aurore-ecran-vert.jpg';
 
 // Photos des îlots : optimisées ici, les îlots ne reçoivent que leur URL
-const versIlot = async (src: ImageMetadata) => (await getImage({ src, width: 900, format: 'webp' })).src;
+// 1600 px : une photo paysage recadrée en 4:5 est peinte bien plus large que sa boîte
+const versIlot = async (src: ImageMetadata) =>
+  (await getImage({ src, width: Math.min(1600, src.width), format: 'webp', quality: 80 })).src;
 
 const modeles = await Promise.all(
   (await getCollection('modelesAubrek'))
@@ -75,11 +78,9 @@ const specsIngenierie = [
   <main>
     <!-- Accueil : photo à droite, texte à gauche sur un voile -->
     <section aria-labelledby="hero" class="relative flex min-h-[max(640px,calc(100svh-40px))] flex-col overflow-hidden bg-aubrek-nuit">
-      <Picture
+      <Photo
         src={photoPluie}
         alt="Montre Aubrek au boîtier d'acier, couverte de gouttes d'eau, sur fond noir"
-        formats={['avif', 'webp']}
-        widths={[640, 960, photoPluie.width]}
         sizes="(min-width: 48rem) 62vw, 100vw"
         priority
         class="absolute inset-0 h-full w-full object-cover md:left-auto md:w-[62%]"
@@ -141,11 +142,9 @@ const specsIngenierie = [
 
     <!-- Ingénierie : texte posé sur la photo, avec un voile -->
     <section id="ingenierie" data-apparition aria-labelledby="ing-titre" class="relative flex min-h-[720px] overflow-hidden bg-[#1A1A1C] md:min-h-[840px]">
-      <Picture
+      <Photo
         src={photoCapteurs}
         alt="Dos d'une montre Aubrek : quatre capteurs circulaires sous un verre, gravures techniques autour"
-        formats={['avif', 'webp']}
-        widths={[640, 960, photoCapteurs.width]}
         sizes="100vw"
         class="net absolute inset-0 h-full w-full object-cover"
         style="object-position: 60% center"

@@ -4,7 +4,7 @@
  * Trois îlots partagent la même configuration (boîtier + bracelet) : le configurateur,
  * la bande de caractéristiques et la fiche technique.
  */
-import { Picture } from 'astro:assets';
+import Photo from '../../../components/Photo.astro';
 import { getCollection, getEntry } from 'astro:content';
 import AubrekLayout from '../../../layouts/AubrekLayout.astro';
 import ConfigurateurOrage from '../../../islands/aubrek/ConfigurateurOrage';
@@ -56,12 +56,11 @@ const resumeBoitier = (data: (typeof autres)[number]['data']) =>
 
       <div class="grid items-start gap-x-24 gap-y-14 md:grid-cols-2">
         <div class="cut-lg aspect-4/5 overflow-hidden bg-[#141416]">
-          <Picture
+          <Photo
             src={orage.data.image.src}
             alt={orage.data.image.alt}
-            formats={['avif', 'webp']}
-            widths={[480, 720, orage.data.image.src.width]}
             sizes="(min-width: 48rem) 50vw, 100vw"
+            cadre={4 / 5}
             priority
             class="h-full w-full object-cover"
             style={`object-position: ${orage.data.image.position}`}
@@ -89,11 +88,9 @@ const resumeBoitier = (data: (typeof autres)[number]['data']) =>
     <!-- Le cadran : macro (la même photo, recadrée et agrandie 1,6 fois) -->
     <section data-apparition aria-labelledby="cadran" class="conteneur grid items-center gap-x-24 gap-y-14 py-24 md:grid-cols-2 md:py-[140px]">
       <div class="apparait depuis-gauche cut aspect-16/10 overflow-hidden bg-[#141416]">
-        <Picture
+        <Photo
           src={orage.data.image.src}
           alt="Gros plan sur le cadran de l'Orage : chiffres blancs qui suivent le bord de l'écran"
-          formats={['avif', 'webp']}
-          widths={[720, orage.data.image.src.width]}
           sizes="(min-width: 48rem) 80vw, 160vw"
           class="macro h-full w-full object-cover"
         />
@@ -112,11 +109,9 @@ const resumeBoitier = (data: (typeof autres)[number]['data']) =>
 
     <!-- Au dos : texte posé sur la photo, avec un voile -->
     <section data-apparition aria-labelledby="dos" class="relative flex min-h-[640px] overflow-hidden bg-[#1A1A1C] md:min-h-[720px]">
-      <Picture
+      <Photo
         src={photoCapteurs}
         alt="Dos de l'Orage : quatre capteurs optiques sous un verre, gravures techniques autour"
-        formats={['avif', 'webp']}
-        widths={[640, 960, photoCapteurs.width]}
         sizes="100vw"
         class="net absolute inset-0 h-full w-full object-cover"
         style="object-position: 60% center"
@@ -154,12 +149,11 @@ const resumeBoitier = (data: (typeof autres)[number]['data']) =>
           {autres.map(({ data }, i) => (
             <li class:list={['apparait depuis-bas', i === 1 && 'delai-1']}>
               <a href="/demos/aubrek#gamme" class="group relative flex min-h-[420px] items-end overflow-hidden bg-[#E2DADD] md:min-h-[520px]">
-                <Picture
+                <Photo
                   src={data.image.src}
                   alt=""
-                  formats={['avif', 'webp']}
-                  widths={[480, 720, 960]}
                   sizes="(min-width: 48rem) 50vw, 100vw"
+                  cadre={1.2 /* carte : ~50vw × 520 px */}
                   class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-velin motion-safe:group-hover:scale-[1.03]"
                   style={`object-position: ${data.image.position}`}
                 />

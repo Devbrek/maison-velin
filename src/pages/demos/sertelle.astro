@@ -3,7 +3,8 @@
  * Démo de la pièce Filigrane : Sertelle, joaillerie (marque fictive).
  * Contenu aligné à gauche (1120 px), le bord droit est réservé à l'écrin (340 px).
  */
-import { Font, Picture, getImage } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
+import Photo from '../../components/Photo.astro';
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BandeauDemo from '../../components/demo/BandeauDemo.astro';
@@ -18,7 +19,7 @@ const lagon = await getEntry('bijouxSertelle', 'bague-lagon');
 if (!alliance || !lagon?.data.pointsLoupe) throw new Error('Données Sertelle incomplètes');
 
 // La lentille agrandit la photo 2,6 fois : on lui donne la version haute définition
-const grande = await getImage({ src: lagon.data.image.src, width: 2576, format: 'webp' });
+const grande = await getImage({ src: lagon.data.image.src, width: 2576, format: 'webp', quality: 85 });
 
 // Décalages de la collection : chaque pièce arrive d'un côté différent
 const miseCollection = [
@@ -78,12 +79,11 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
           </div>
           <div class="apparait depuis-droite delai-1 w-full max-w-[480px] border border-accent/45 p-[18px]">
             <div class="aspect-2/3 overflow-hidden bg-[#E8E6E2]">
-              <Picture
+              <Photo
                 src={alliance.data.image.src}
                 alt={alliance.data.image.alt}
-                formats={['avif', 'webp']}
-                widths={[480, 720, 960]}
                 sizes="(min-width: 48rem) 444px, calc(100vw - 68px)"
+                cadre={2 / 3}
                 loading="eager"
                 class="net h-full w-full object-cover"
                 style={`object-position: ${alliance.data.image.position}`}
@@ -109,11 +109,9 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
           </div>
           <div class="apparait depuis-bas delai-1">
             <Loupe client:visible grande={grande.src} points={lagon.data.pointsLoupe}>
-              <Picture
+              <Photo
                 src={lagon.data.image.src}
                 alt={lagon.data.image.alt}
-                formats={['avif', 'webp']}
-                widths={[640, 960, 1280]}
                 sizes="(min-width: 64rem) 640px, calc(100vw - 32px)"
                 class="block h-full w-full object-cover"
               />
@@ -135,12 +133,11 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
                 <li class:list={['apparait', miseCollection[i].entree, miseCollection[i].decalage]}>
                   <Balise href={id === 'bague-lagon' ? '#loupe' : undefined} class="piece group flex flex-col gap-5">
                     <span class="block aspect-4/5 overflow-hidden bg-[#E8E6E2]">
-                      <Picture
+                      <Photo
                         src={data.image.src}
                         alt={data.image.alt}
-                        formats={['avif', 'webp']}
-                        widths={[360, 540, 720]}
                         sizes="(min-width: 48rem) 30vw, calc(100vw - 32px)"
+                        cadre={4 / 5}
                         class="h-full w-full object-cover transition-transform duration-[1800ms] ease-velin motion-safe:group-hover:scale-[1.04]"
                         style={`object-position: ${data.image.position}`}
                       />
@@ -161,12 +158,11 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
       <section id="porte" data-apparition aria-labelledby="porte-titre" class="bg-ink text-bg">
         <div class="aligne grid items-center gap-x-24 gap-y-14 md:grid-cols-2">
           <div class="apparait depuis-gauche -mx-4 aspect-4/5 max-h-[820px] overflow-hidden bg-[#3A1A10] md:mx-0">
-            <Picture
+            <Photo
               src={photoPorte}
               alt="Colliers en or superposés et puce d'oreille, portés sur une robe rouge"
-              formats={['avif', 'webp']}
-              widths={[480, 720, 960]}
               sizes="(min-width: 48rem) 50vw, 100vw"
+              cadre={4 / 5}
               class="net h-full w-full object-cover"
               style="object-position: center 55%"
             />
