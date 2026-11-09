@@ -25,7 +25,7 @@ export function jsonLd({ url, titre, description, site }: Page) {
         '@id': devbrek,
         name: EDITEUR.nomCommercial,
         url: EDITEUR.site,
-        logo: { '@type': 'ImageObject', url: new URL('/logo/carre-monogramme-jour.svg', site).href, width: 1024, height: 1024 },
+        logo: { '@type': 'ImageObject', url: new URL('/logo/carre-monogramme-jour-1024.png', site).href, width: 1024, height: 1024 },
       },
       {
         '@type': 'WebSite',
