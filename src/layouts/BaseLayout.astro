@@ -39,6 +39,13 @@ const { title, description, identity = 'velin', noindex = false } = Astro.props;
     <ClientRouter />
   </head>
   <body class="min-h-dvh">
+    <!-- Premier arrêt du clavier sur toutes les pages : chaque page a un <main id="contenu"> -->
+    <a
+      href="#contenu"
+      class="sr-only z-50 bg-accent px-5 py-3 text-on-accent focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+    >
+      Aller au contenu
+    </a>
     <slot />
     <script>
       import '../scripts/apparitions';

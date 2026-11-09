@@ -26,13 +26,6 @@ const { title, description, enTeteSurImage = false, noindex = false } = Astro.pr
     <slot name="fonts" />
   </Fragment>
 
-  <a
-    href="#contenu"
-    class="sr-only z-50 bg-accent px-5 py-3 text-on-accent focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
-  >
-    Aller au contenu
-  </a>
-
   <SiteHeader surImage={enTeteSurImage} />
 
   <main id="contenu">

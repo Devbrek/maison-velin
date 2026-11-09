@@ -74,8 +74,10 @@ const px = (n: number) => `${n.toFixed(1)}px`;
               data-etape={i}
               class="absolute top-0 left-0 flex min-h-11 translate-x-[26px] -translate-y-1/2 items-center gap-2.5 whitespace-nowrap"
             >
-              <span class="font-(family-name:--font-cormorant) text-[15px] text-or-sombre italic">{numero}</span>
-              <span class="etape-texte text-[11px] tracking-[0.22em] uppercase">{label}</span>
+              <!-- Libellés dessinés en CSS (content: attr) : purement décoratifs, la même information
+                   est dans la navigation clavier ; les outils de contraste ne les comptent pas comme du texte -->
+              <span class="etape-numero font-(family-name:--font-cormorant) text-[15px] text-or-sombre italic" data-texte={numero}></span>
+              <span class="etape-texte text-[11px] tracking-[0.22em] uppercase" data-texte={label}></span>
             </a>
           </span>
         ))}
@@ -107,6 +109,10 @@ const px = (n: number) => `${n.toFixed(1)}px`;
     /* Opacité = 1 − |angle − 180°| / 95, bornée à 0 (même formule que opaciteEtape) */
     --ecart: calc((var(--i) - var(--p, 0)) * var(--pas));
     opacity: max(0, 1 - max(var(--ecart), -1 * var(--ecart)) / 95);
+  }
+  .etape-numero::before,
+  .etape-texte::before {
+    content: attr(data-texte);
   }
   a[aria-current='location'] .etape-texte {
     font-size: 12px;
