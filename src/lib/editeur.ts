@@ -19,8 +19,12 @@ export const EDITEUR = {
  * Les demandes passent par le formulaire du site Devbrek (Maison Vélin n'a pas de formulaire).
  * `source` permet à Devbrek de savoir que la demande vient de Maison Vélin.
  */
-export const FORMULAIRE_DEVBREK = 'https://devbrek.fr'; // URL exacte du formulaire à confirmer
-export const lienDemandeDevbrek = `${FORMULAIRE_DEVBREK}?source=maison-velin`;
+export const FORMULAIRE_DEVBREK = 'https://devbrek.fr/fr#contact'; // section « Parlons-en » de l'accueil Devbrek
+
+// Le paramètre doit précéder l'ancre : https://devbrek.fr/fr?source=maison-velin#contact
+const url = new URL(FORMULAIRE_DEVBREK);
+url.searchParams.set('source', 'maison-velin');
+export const lienDemandeDevbrek = url.toString();
 
 export const HEBERGEUR = {
   nom: 'Vercel Inc.',
