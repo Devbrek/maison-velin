@@ -1,0 +1,88 @@
+---
+/*
+ * Le fil horaire de la promenade : collé à gauche (position: sticky) pendant les trois chapitres.
+ * Le script calade-fil.ts écrit --remplissage (0 → 1) et data-chapitre (couleurs du chapitre survolé).
+ * C'est un vrai menu : chaque arrêt est un lien vers son chapitre.
+ */
+interface Arret {
+  id: string; // ancre du chapitre
+  heure: string;
+  label: string;
+}
+
+interface Props {
+  arrets: Arret[];
+}
+
+const { arrets } = Astro.props;
+const position = (i: number) => `${(i / (arrets.length - 1)) * 100}%`;
+---
+
+<div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-[clamp(56px,13vw,190px)]">
+  <nav
+    aria-label="Fil de la promenade"
+    data-chapitre="matin"
+    data-fil
+    class="fil pointer-events-auto sticky top-[calc(50svh-260px)] flex h-[520px] flex-col justify-center gap-10 bg-transparent! pl-[clamp(16px,3vw,40px)] text-ink"
+  >
+    <span class="fil-texte text-[10px] font-semibold tracking-[0.3em] text-ink-2">LA PROMENADE</span>
+    <div class="relative h-[420px]">
+      <!-- La piste, la part parcourue, le soleil -->
+      <span aria-hidden="true" class="absolute inset-y-0 left-[7px] w-px bg-line"></span>
+      <span aria-hidden="true" class="fil-rempli absolute top-0 left-[7px] h-full w-px origin-top bg-accent"></span>
+      <span aria-hidden="true" class="fil-soleil absolute left-0 -mt-[7.5px] size-[15px] rounded-full bg-accent"></span>
+
+      <ol>
+        {arrets.map(({ id, heure, label }, i) => (
+          <li class="arret absolute left-0 -translate-y-1/2" style={`top:${position(i)}`} data-arret={i}>
+            <a href={`#${id}`} class="flex min-h-11 items-center gap-3.5">
+              <span aria-hidden="true" class="arret-point size-[15px] flex-none rounded-full border border-ink"></span>
+              <span class="fil-texte flex flex-col gap-0.5 leading-tight">
+                <span class="text-[11px] font-semibold tracking-[0.2em]">{heure}</span>
+                <span class="font-display text-[17px] italic">{label}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+</div>
+
+<style>
+  /* Les couleurs suivent le chapitre survolé, en douceur ; la position suit le défilement, sans retard */
+  .fil,
+  .fil * {
+    transition:
+      color 900ms ease,
+      background-color 900ms ease,
+      border-color 900ms ease,
+      opacity 700ms ease;
+  }
+  .fil-rempli {
+    transform: scaleY(var(--remplissage, 0));
+  }
+  .fil-soleil {
+    top: calc(var(--remplissage, 0) * 100%);
+  }
+  /* Arrêts : à venir (pâle), passés (plein), en cours (net) */
+  .arret {
+    opacity: 0.5;
+  }
+  .arret[data-etat='passe'] {
+    opacity: 0.75;
+  }
+  .arret[data-etat='passe'] .arret-point,
+  .arret[data-etat='courant'] .arret-point {
+    background-color: currentColor;
+  }
+  .arret[data-etat='courant'] {
+    opacity: 1;
+  }
+  /* Téléphone : le fil seul, sans textes */
+  @media (width < 48rem) {
+    .fil-texte {
+      display: none;
+    }
+  }
+</style>

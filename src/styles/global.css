@@ -92,9 +92,9 @@
 [data-identity="calade"] [data-chapitre="matin"] {
   --id-bg: #F3EEE6;
   --id-surface: #E6D8C2;
-  --id-ink: #1E140B;
+  --id-ink: #2A1A0E;
   --id-ink-2: #5E4836;
-  --id-line: #D9CBB6;
+  --id-line: rgb(42 26 14 / 0.25);
   --id-accent: #8A5A0C;
   --id-on-accent: #F3EEE6;
 }
@@ -107,7 +107,7 @@
   --id-surface: #2A1A0E;
   --id-ink: #F4ECE0;
   --id-ink-2: #D9CBB6;
-  --id-line: rgb(244 236 224 / 0.16);
+  --id-line: rgb(244 236 224 / 0.25);
   --id-accent: #F0C46A;
   --id-on-accent: #1E140B;
 }
@@ -116,9 +116,9 @@
   --id-surface: #E1C0B5;
   --id-ink: #3A1410;
   --id-ink-2: #6E3A30;
-  --id-line: rgb(58 20 16 / 0.18);
+  --id-line: rgb(58 20 16 / 0.25);
   --id-accent: #8E2A1C;
-  --id-on-accent: #F4ECE0;
+  --id-on-accent: #E9CFC6;
 }
 
 /* Sertelle / Filigrane */
@@ -351,6 +351,42 @@
     transform: none;
     filter: none;
   }
+
+  /* Arche qui se dévoile de bas en haut (Calade) */
+  .js [data-apparition] .arche-devoile {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1800ms var(--ease-velin-in-out) 150ms;
+  }
+  .js [data-apparition][data-vu="oui"] .arche-devoile {
+    clip-path: inset(0 0 0 0);
+  }
+  /* Image d'arche : floue puis nette, légèrement agrandie pour laisser de la marge au parallaxe */
+  .js [data-apparition] .arche-image {
+    filter: blur(14px);
+    transition: filter 2200ms ease 400ms;
+  }
+  .js [data-apparition][data-vu="oui"] .arche-image {
+    filter: none;
+  }
+}
+
+/* Parallaxe léger des arches, piloté par le navigateur (scroll-driven animations).
+   Sans prise en charge, l'image reste simplement immobile. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-mouvement="reduit"]) .parallaxe {
+      animation: parallaxe linear both;
+      animation-timeline: view();
+    }
+  }
+}
+@keyframes parallaxe {
+  from {
+    transform: translateY(-48px);
+  }
+  to {
+    transform: translateY(48px);
+  }
 }
 
 /* Mouvement réduit (préférence système, ou bouton « Réduire les animations ») :
@@ -366,10 +402,14 @@
     scroll-behavior: auto !important;
   }
   .js [data-apparition] .apparait,
-  .js [data-apparition] .net {
+  .js [data-apparition] .net,
+  .js [data-apparition] .arche-image {
     opacity: 1;
     transform: none;
     filter: none;
+  }
+  .js [data-apparition] .arche-devoile {
+    clip-path: none;
   }
 }
 html[data-mouvement="reduit"] *,
@@ -382,8 +422,12 @@ html[data-mouvement="reduit"] *::after {
   scroll-behavior: auto !important;
 }
 html[data-mouvement="reduit"] [data-apparition] .apparait,
-html[data-mouvement="reduit"] [data-apparition] .net {
+html[data-mouvement="reduit"] [data-apparition] .net,
+html[data-mouvement="reduit"] [data-apparition] .arche-image {
   opacity: 1 !important;
   transform: none !important;
   filter: none !important;
+}
+html[data-mouvement="reduit"] [data-apparition] .arche-devoile {
+  clip-path: none !important;
 }

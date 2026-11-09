@@ -1,0 +1,269 @@
+---
+/*
+ * Démo de la pièce Lavis : Calade, parfums du Sud (marque fictive).
+ * Une promenade en trois chapitres (matin, midi, soir), suivie par un fil horaire collé à gauche.
+ * Aucun îlot React : le fil est piloté par un petit script, les apparitions par le CSS.
+ */
+import { Font } from 'astro:assets';
+import Photo from '../../components/Photo.astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BandeauDemo from '../../components/demo/BandeauDemo.astro';
+import FilPromenade from '../../components/calade/FilPromenade.astro';
+import photoRuelle from '../../assets/calade/calade-ruelle.jpg';
+
+const parfums = (await getCollection('parfumsCalade')).sort((a, b) => a.data.ordre - b.data.ordre);
+
+// Ce qui change d'un chapitre à l'autre, au-delà des couleurs (portées par data-chapitre)
+const mise = {
+  matin: { bouton: 'bg-ink text-bg', fondArche: 'bg-[#1A1A16]' },
+  midi: { bouton: 'bg-accent text-bg', fondArche: 'bg-[#3A2410]' },
+  soir: { bouton: 'bg-ink text-bg', fondArche: 'bg-[#3A1A0E]' },
+};
+const arrets = parfums.map(({ data }) => ({
+  id: `chap-${data.chapitre}`,
+  heure: data.heure,
+  label: data.moment.replace(/^Le /, '').replace(/^./, (c) => c.toUpperCase()),
+}));
+---
+
+<BaseLayout
+  title="Calade — Parfums du Sud (démo Maison Vélin)"
+  description="Calade, maison de parfums fictive : démonstration de la pièce Lavis de Maison Vélin. Une promenade en trois chapitres, du matin au soir."
+  identity="calade"
+>
+  <Fragment slot="fonts">
+    <Font cssVariable="--font-fraunces" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--font-manrope" />
+  </Fragment>
+
+  <BandeauDemo piece="Lavis" retour="/collection/lavis" class="bg-[#1E140B] text-[#D9CBB6]" />
+
+  <main>
+    <!-- Ouverture : la calade -->
+    <section aria-labelledby="hero" class="relative flex min-h-[max(600px,calc(100svh-40px))] flex-col overflow-hidden bg-[#3A2A1A] text-[#F4ECE0]">
+      <Photo
+        src={photoRuelle}
+        alt="Une calade : ruelle pavée qui monte entre deux murs de pierre blonde, au soleil"
+        sizes="100vw"
+        priority
+        class="encre absolute inset-0 h-full w-full object-cover"
+        style="object-position: center 70%"
+      />
+      <div aria-hidden="true" class="voile-ouverture absolute inset-0"></div>
+
+      <header class="relative">
+        <div class="conteneur grid grid-cols-[1fr_auto_1fr] items-center gap-4 py-6 text-xs font-medium tracking-[0.2em] uppercase">
+          <a class="lien-trace hidden justify-self-start md:inline-flex" href="#journee">La promenade</a>
+          <a href="#" aria-label="Calade, haut de page" class="col-start-2 flex flex-col items-center gap-1 leading-none">
+            <span class="pl-[0.42em] font-display text-2xl font-normal tracking-[0.42em] normal-case">CALADE</span>
+            <span class="text-[10px] tracking-[0.4em] text-[#E6D8C2]">Parfums du Sud</span>
+          </a>
+          <a class="lien-trace hidden justify-self-end md:inline-flex" href="#echantillons">Échantillons</a>
+        </div>
+      </header>
+
+      <div class="conteneur relative mt-auto pt-24 pb-20">
+        <div class="flex max-w-[540px] flex-col gap-6">
+          <p class="monte delai-monte-1 font-display text-xl">
+            calade <span class="font-body text-[13px] tracking-[0.08em] text-[#E6D8C2]">[ka.lad] · nom féminin</span>
+          </p>
+          <h1 id="hero" class="monte delai-monte-2 font-display text-[clamp(38px,4.6vw,66px)] leading-[1.08] font-light">
+            Une ruelle pavée <em class="text-[#F0C46A]">qui garde la chaleur du jour.</em>
+          </h1>
+          <p class="monte delai-monte-3 max-w-[420px] text-[17px] leading-[1.8] font-light text-[#EADFCC]">
+            Trois parfums, trois heures d'une même journée. Suivez la promenade, du matin au soir.
+          </p>
+          <a href="#chap-matin" class="pilule monte delai-monte-4 self-start border border-[#F4ECE0] hover:bg-[#F4ECE0] hover:text-[#1E140B]">
+            Commencer la promenade
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- La promenade : trois chapitres, un fil qui suit le défilement -->
+    <div id="journee" class="relative">
+      <FilPromenade arrets={arrets} />
+
+      {parfums.map(({ data }, i) => (
+        <section
+          id={`chap-${data.chapitre}`}
+          data-chapitre={data.chapitre}
+          data-apparition
+          aria-labelledby={`titre-${data.chapitre}`}
+          class="flex min-h-[860px] items-center py-24 pr-4 pl-[clamp(72px,16vw,240px)] md:py-30 md:pr-10"
+        >
+          <div class="mx-auto grid w-full max-w-[1120px] items-center gap-x-24 gap-y-14 lg:grid-cols-2">
+            <div class="flex max-w-[440px] flex-col gap-5.5">
+              <p class="apparait depuis-bas text-xs font-semibold tracking-[0.3em] text-accent uppercase">
+                {data.numero} · {data.heure} · {data.moment}
+              </p>
+              <h2 id={`titre-${data.chapitre}`} class="apparait depuis-bas delai-1 font-display text-[clamp(34px,3.6vw,54px)] leading-[1.1] font-light">
+                {data.nom}
+              </h2>
+              <p class="apparait depuis-bas delai-2 text-lg leading-[1.8] font-light text-ink-2">{data.texte}</p>
+              <p class="apparait depuis-bas delai-3 text-sm tracking-[0.08em] text-ink-2">
+                <span class="sr-only">Notes : </span>{data.notes.join(' · ')}
+              </p>
+              <a href="#echantillons" class:list={['pilule apparait depuis-bas delai-4 self-start', mise[data.chapitre].bouton]}>
+                Découvrir · {data.prix} €
+              </a>
+            </div>
+            <div class="relative w-full max-w-[440px] justify-self-center">
+              <div class:list={['arche arche-devoile relative aspect-4/5 overflow-hidden', mise[data.chapitre].fondArche]}>
+                <div class="parallaxe absolute inset-x-0 -inset-y-12">
+                  <Photo
+                    src={data.image.src}
+                    alt={data.image.alt}
+                    sizes="(min-width: 64rem) 440px, calc(100vw - 104px)"
+                    cadre={440 / 646 /* arche 4:5 + marge de parallaxe */}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    class="arche-image h-full w-full object-cover"
+                    style={`object-position: ${data.image.position}`}
+                  />
+                </div>
+              </div>
+              {/* Petite arche secondaire, posée sur le coin bas gauche : même apparition, un temps après */}
+              {data.imageSecondaire && (
+                <div class="arche arche-devoile arche-secondaire absolute -bottom-8 -left-6 aspect-3/4 w-[42%] overflow-hidden border-6 border-bg bg-[#3A1A0E] md:-bottom-10 md:-left-16">
+                  <Photo
+                    src={data.imageSecondaire.src}
+                    alt={data.imageSecondaire.alt}
+                    sizes="(min-width: 64rem) 185px, 40vw"
+                    cadre={3 / 4}
+                    class="arche-image h-full w-full object-cover"
+                    style={`object-position: ${data.imageSecondaire.position}`}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Échantillons : la nuit tombe (mêmes couleurs que le midi) -->
+    <section id="echantillons" data-chapitre="midi" data-apparition aria-labelledby="ech-titre">
+      <div class="conteneur apparait depuis-bas flex flex-col items-center gap-6 py-28 text-center md:py-[140px]">
+        <p class="text-xs font-semibold tracking-[0.3em] text-accent">FIN DE LA PROMENADE</p>
+        <h2 id="ech-titre" class="font-display text-[clamp(30px,3.2vw,48px)] leading-[1.15] font-light">
+          Toute la journée, <em class="text-accent">dans une enveloppe.</em>
+        </h2>
+        <p class="max-w-[460px] text-[17px] leading-[1.8] font-light text-ink-2">
+          Les trois parfums en échantillons de 2 ml. Leur prix est déduit de votre premier flacon.
+        </p>
+        <button type="button" disabled aria-describedby="ech-demo" class="pilule border border-ink">
+          Commander le coffret · 15 €
+        </button>
+        <p id="ech-demo" class="text-xs text-ink-2">Démonstration : la commande n'est pas active.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-[#160E07] text-[#D9CBB6]">
+    <div class="conteneur flex flex-col gap-10 pt-16 pb-10">
+      <div class="flex flex-wrap items-center justify-between gap-x-16 gap-y-6">
+        <span class="font-display text-[28px] font-light tracking-[0.42em] text-[#F4ECE0]">CALADE</span>
+        <nav aria-label="Liens du pied de page">
+          <ul class="flex flex-wrap gap-x-8 gap-y-1 text-[13px] tracking-[0.12em]">
+            <li><a class="lien-trace" href="/mentions-legales">Mentions légales</a></li>
+            <li><a class="lien-trace" href="/collection/lavis">La pièce Lavis</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-[#F4ECE0]/14 pt-6 text-xs tracking-[0.04em]">
+        <p>
+          Calade est une marque fictive. Démo créée par Maison Vélin by Devbrek. Photos : Pexels,
+          <a class="underline underline-offset-3" href="/mentions-legales#credits">voir les crédits</a>.
+        </p>
+        <button type="button" class="lien-trace" data-reduire-animations aria-pressed="false">Réduire les animations</button>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .voile-ouverture {
+    background:
+      linear-gradient(to top right, rgb(30 20 11 / 0.9) 0%, rgb(30 20 11 / 0.6) 40%, rgb(30 20 11 / 0.1) 70%),
+      linear-gradient(to bottom, rgb(30 20 11 / 0.6) 0%, rgb(30 20 11 / 0) 24%);
+  }
+
+  /* Bouton en pilule (forme Calade) */
+  .pilule {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 26px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition:
+      background-color 700ms ease,
+      color 700ms ease;
+  }
+  .pilule:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* À l'ouverture : la photo passe du flou au net, les textes montent en cascade */
+  .encre {
+    /* backwards : flou avant le départ, mais aucun filtre résiduel une fois l'animation finie */
+    animation: encre 2600ms var(--ease-velin) backwards;
+  }
+  @keyframes encre {
+    from {
+      filter: blur(16px);
+      opacity: 0.4;
+    }
+  }
+  .monte {
+    animation: monte 1400ms var(--ease-velin) backwards;
+  }
+  @keyframes monte {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+  .delai-monte-1 {
+    animation-delay: 600ms;
+  }
+  .delai-monte-2 {
+    animation-delay: 800ms;
+  }
+  .delai-monte-3 {
+    animation-delay: 1000ms;
+  }
+  .delai-monte-4 {
+    animation-delay: 1200ms;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .encre,
+    .monte {
+      animation: none;
+    }
+  }
+  :global(html[data-mouvement='reduit']) .encre,
+  :global(html[data-mouvement='reduit']) .monte {
+    animation: none;
+  }
+
+  /* La petite arche arrive après la grande */
+  .arche-secondaire,
+  .arche-secondaire :global(.arche-image) {
+    transition-delay: 700ms;
+  }
+
+  :global(html[data-identity='calade']) {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script>
+  import '../../scripts/calade-fil';
+  import '../../scripts/reduire-animations';
+</script>

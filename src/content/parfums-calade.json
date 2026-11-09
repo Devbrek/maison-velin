@@ -29,8 +29,8 @@
     "prix": 145,
     "image": {
       "src": "../assets/calade/calade-pierre-d-ete-ambre.jpg",
-      "position": "center 42%",
-      "alt": "Flacon de Pierre d'Été au bord d'une tablette de verre, dans une lumière ambrée"
+      "position": "center 48%",
+      "alt": "Flacon de Pierre d'Été, ambré, posé sur un plateau de verre ; des ombres de feuillage dansent sur le mur"
     }
   },
   {
@@ -48,6 +48,11 @@
       "src": "../assets/calade/calade-le-soir.jpg",
       "position": "28% center",
       "alt": "Une main approche un flacon du cou, dans une lumière orangée du soir"
+    },
+    "imageSecondaire": {
+      "src": "../assets/calade/calade-epices.jpg",
+      "position": "30% center",
+      "alt": "Épices en poudre dans des bols de faïence bleue : paprika rouge, safran et curcuma"
     }
   }
 ]

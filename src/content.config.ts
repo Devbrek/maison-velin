@@ -96,6 +96,8 @@ const parfumsCalade = defineCollection({
       notes: z.array(z.string()).length(3), // tête · cœur · fond
       prix: z.number().positive(),
       image: z.object({ src: image(), position: z.string(), alt: z.string().min(1) }),
+      // Petite image posée à côté de l'arche (facultative)
+      imageSecondaire: z.object({ src: image(), position: z.string(), alt: z.string().min(1) }).optional(),
     }),
 });
 
