@@ -35,7 +35,7 @@ const { id, data } = Astro.props.piece;
         </ol>
       </nav>
       <NomPiece id={id} nom={data.nom} police={data.policeNom} niveau="h1" htmlId="fiche-titre" />
-      <p class="max-w-[480px] text-lg leading-[1.7] font-light text-sur-image-2">{data.intro}</p>
+      <p class="paragraphe max-w-[480px] text-sur-image-2">{data.intro}</p>
       <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
         <a href={data.marqueDemo.href} class="bouton-contour">Voir la démo {data.marqueDemo.nom}</a>
         <a href="#configurer" class="lien-trace text-[12px] tracking-[0.22em] uppercase">Configurer la pièce</a>

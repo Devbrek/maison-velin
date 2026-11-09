@@ -18,7 +18,7 @@ const cartes: Record<string, () => Promise<Buffer>> = {
     cartePhoto({
       photo: 'src/assets/sertelle/sertelle-alliance-riviere.jpg',
       position: 'center 62%',
-      surtitre: 'PIÈCE · JOAILLERIE · HORLOGERIE',
+      surtitre: 'PIÈCE · JOAILLERIE',
       nom: 'Filigrane',
       police: { fontFamily: 'Bodoni Moda', fontWeight: 400 },
       pied: 'Un template Maison Vélin by Devbrek',
@@ -27,7 +27,7 @@ const cartes: Record<string, () => Promise<Buffer>> = {
     cartePhoto({
       photo: 'src/assets/aubrek/aubrek-pluie.jpg',
       position: 'center 45%',
-      surtitre: 'PIÈCE · HORLOGERIE CONNECTÉE · AUTOMOBILE',
+      surtitre: 'PIÈCE · HORLOGERIE CONNECTÉE',
       nom: 'Vecteur',
       police: saira,
       pied: 'Un template Maison Vélin by Devbrek',
@@ -36,7 +36,7 @@ const cartes: Record<string, () => Promise<Buffer>> = {
     cartePhoto({
       photo: 'src/assets/calade/calade-ruelle.jpg',
       position: 'center 70%',
-      surtitre: 'PIÈCE · PARFUM · HÔTELLERIE · SPA',
+      surtitre: 'PIÈCE · PARFUM',
       nom: 'Lavis',
       police: { fontFamily: 'Fraunces', fontWeight: 300, fontStyle: 'italic' },
       pied: 'Un template Maison Vélin by Devbrek',

@@ -5,36 +5,35 @@
     "nom": "Filigrane",
     "policeNom": "--font-bodoni",
     "univers": [
-      "Joaillerie",
-      "Horlogerie"
+      "Joaillerie"
     ],
-    "intro": "Une pièce pour l'horlogerie et la joaillerie. La délicatesse d'un motif vu en transparence : fond clair, macros sur la matière, beaucoup d'espace autour de l'objet.",
+    "intro": "Une pièce pour la joaillerie : fond clair, macros, beaucoup d'espace.",
     "marqueDemo": { "nom": "Sertelle", "href": "/demos/sertelle" },
     "couverture": { "src": "../assets/sertelle/sertelle-alliance-riviere.jpg", "position": "center 62%" },
     "accueil": {
-      "accroche": "La délicatesse d'un motif vu en transparence. Fond clair, macros sur la matière, détails fins.",
+      "accroche": "Fond clair et macros : la matière vue de très près.",
       "image": "../assets/sertelle/sertelle-alliance-riviere.jpg",
       "position": "center 62%",
       "mise": "bas-gauche"
     },
     "pourQui": {
       "surtitre": "Pour quelles maisons",
-      "titre": "Pour les maisons dont l'objet est petit, précieux, et se regarde de très près.",
-      "texte": "Horlogers, joailliers, maroquiniers, orfèvres. La mise en page laisse toute la place à la matière, et le texte n'arrive qu'ensuite."
+      "titre": "Pour l'objet qui se regarde de près.",
+      "texte": "Joailliers et orfèvres. La matière d'abord, le texte ensuite."
     },
     "contenu": [
-      { "nom": "Accueil", "detail": "vidéo plein écran" },
-      { "nom": "Collection", "detail": "modèles filtrables" },
-      { "nom": "Fiche d'un modèle", "detail": "macros, caractéristiques" },
-      { "nom": "La Maison", "detail": "histoire et savoir-faire" },
-      { "nom": "Rendez-vous en boutique", "detail": "formulaire sobre" },
-      { "nom": "Mentions légales", "detail": "générées depuis le contenu" }
+      { "nom": "Ouverture", "detail": "photo plein écran" },
+      { "nom": "À la loupe", "detail": "zoom sur une bague" },
+      { "nom": "La collection", "detail": "trois bijoux" },
+      { "nom": "Porté", "detail": "le bijou à la main" },
+      { "nom": "L'atelier", "detail": "le savoir-faire" },
+      { "nom": "Salon privé", "detail": "appel au rendez-vous" }
     ],
     "matieres": [
-      { "titre": "Astro", "texte": "Un site statique : rapide, sans serveur à entretenir." },
-      { "titre": "Tailwind CSS", "texte": "Couleurs et polices réunies dans quelques variables." },
+      { "titre": "Astro", "texte": "Site statique, sans serveur à entretenir." },
+      { "titre": "Tailwind CSS", "texte": "Couleurs et polices en quelques variables." },
       { "titre": "Animations CSS", "texte": "Liées au défilement, sans bibliothèque lourde." },
-      { "titre": "Un fichier de contenu", "texte": "Textes et modèles modifiables sans toucher au code." }
+      { "titre": "Un fichier de contenu", "texte": "Textes modifiables sans toucher au code." }
     ],
     "configurateur": {
       "accents": [
@@ -75,12 +74,12 @@
       ]
     },
     "preuves": {
-      "mention": "Scores Lighthouse sur mobile, mesurés sur la démo en ligne : [À MESURER].",
+      "mention": "Scores Lighthouse mobile : [À MESURER].",
       "engagements": [
-        "Texte lisible partout, contraste d'au moins 4,5 pour 1.",
-        "Navigation complète au clavier, focus toujours visible.",
-        "Animations coupées pour qui préfère les réduire.",
-        "Zoom autorisé sur téléphone, contrairement à beaucoup de sites de luxe."
+        "Contraste d'au moins 4,5 pour 1.",
+        "Tout au clavier, focus visible.",
+        "Animations coupées sur demande.",
+        "Zoom autorisé sur téléphone."
       ]
     },
     "suivante": "vecteur"
@@ -91,37 +90,35 @@
     "nom": "Vecteur",
     "policeNom": "--font-saira",
     "univers": [
-      "Horlogerie connectée",
-      "Automobile",
-      "Haute technologie"
+      "Horlogerie connectée"
     ],
-    "intro": "Une pièce pour l'horlogerie connectée, l'automobile et la haute technologie. La précision d'une machine, l'allure d'une sculpture.",
+    "intro": "Une pièce pour l'horlogerie connectée : la précision d'une machine, l'allure d'une sculpture.",
     "marqueDemo": { "nom": "Aubrek", "href": "/demos/aubrek" },
     "couverture": { "src": "../assets/aubrek/aubrek-pluie.jpg", "position": "center 45%" },
     "accueil": {
-      "accroche": "La précision d'une machine, l'allure d'une sculpture. Fond noir, angles coupés, chiffres techniques et un configurateur au centre.",
+      "accroche": "Fond noir, angles coupés : la technique mise en scène.",
       "image": "../assets/aubrek/aubrek-orage-neon.jpg",
       "position": "center 50%",
       "mise": "droite"
     },
     "pourQui": {
       "surtitre": "Pour quelles marques",
-      "titre": "Pour les marques qui vendent autant la performance que le style.",
-      "texte": "Montres connectées, voitures, objets techniques. Les caractéristiques deviennent un spectacle, et chaque modèle se compose en direct."
+      "titre": "Pour la performance qui a du style.",
+      "texte": "Montres connectées. Les caractéristiques deviennent un spectacle."
     },
     "contenu": [
-      { "nom": "Accueil", "detail": "image plein écran, barre de caractéristiques" },
+      { "nom": "Ouverture", "detail": "image plein écran" },
       { "nom": "La gamme", "detail": "sélecteur de modèles" },
-      { "nom": "Fiche technique", "detail": "tableau des caractéristiques" },
       { "nom": "Ingénierie", "detail": "texte posé sur image" },
-      { "nom": "Coloris", "detail": "l'ambiance change avec le choix" },
-      { "nom": "Points de vente", "detail": "essai privé, partenaires" }
+      { "nom": "Coloris", "detail": "l'ambiance suit le choix" },
+      { "nom": "Fiche modèle", "detail": "configurateur, fiche technique" },
+      { "nom": "Points de vente", "detail": "essai privé" }
     ],
     "matieres": [
-      { "titre": "Astro", "texte": "Un site statique, rapide, sans serveur à entretenir." },
-      { "titre": "Îles React", "texte": "Le sélecteur de modèles et le configurateur, seuls à charger du JavaScript." },
-      { "titre": "Variables de thème", "texte": "Une ambiance se change en une ligne : fond, encre, accent." },
-      { "titre": "Un fichier de contenu", "texte": "Modèles, caractéristiques et coloris modifiables sans toucher au code." }
+      { "titre": "Astro", "texte": "Site statique, sans serveur à entretenir." },
+      { "titre": "Îlots React", "texte": "Seuls le sélecteur et le configurateur chargent du JavaScript." },
+      { "titre": "Variables de thème", "texte": "Une ambiance se change en une ligne." },
+      { "titre": "Un fichier de contenu", "texte": "Textes modifiables sans toucher au code." }
     ],
     "configurateur": {
       "accents": [
@@ -130,7 +127,7 @@
         { "id": "neutre", "label": "Neutre", "clair": "#0A0A0B", "sombre": "#F2F2F0" }
       ],
       "polices": [
-        { "id": "saira", "label": "Saira", "police": "--font-saira", "note": "Sobre, automobile" },
+        { "id": "saira", "label": "Saira", "police": "--font-saira", "note": "Sobre, technique" },
         { "id": "exo", "label": "Exo 2", "police": "--font-exo2", "note": "Futuriste, anguleuse" },
         { "id": "titillium", "label": "Titillium Web", "police": "--font-titillium", "note": "Technique, discrète" }
       ],
@@ -162,12 +159,12 @@
       ]
     },
     "preuves": {
-      "mention": "Scores Lighthouse sur mobile, mesurés sur la démo Aubrek en ligne : [À MESURER].",
+      "mention": "Scores Lighthouse mobile : [À MESURER].",
       "engagements": [
-        "Texte lisible sur chaque photo, grâce à un voile réglé image par image.",
-        "Sélecteurs utilisables au clavier, état annoncé aux lecteurs d'écran.",
-        "Taille du texte réglable et animations coupées sur demande.",
-        "Photos compressées et chargées à la demande, sans vidéo imposée."
+        "Un voile réglé sous chaque photo.",
+        "Sélecteurs au clavier, état annoncé.",
+        "Zoom autorisé, animations coupées sur demande.",
+        "Photos légères, aucune vidéo imposée."
       ]
     },
     "suivante": "lavis"
@@ -178,37 +175,34 @@
     "nom": "Lavis",
     "policeNom": "--font-fraunces",
     "univers": [
-      "Parfum",
-      "Hôtellerie",
-      "Spa"
+      "Parfum"
     ],
-    "intro": "Une pièce pour le parfum, l'hôtellerie et le spa. L'atmosphère d'une encre diluée : un récit qui se lit en défilant, des images qui passent du flou au net.",
+    "intro": "Une pièce pour le parfum : un récit qui passe du flou au net.",
     "marqueDemo": { "nom": "Calade", "href": "/demos/calade" },
     "couverture": { "src": "../assets/calade/calade-ruelle.jpg", "position": "center 70%" },
     "accueil": {
-      "accroche": "L'atmosphère d'une encre diluée. Un récit qui se lit en défilant, des images qui passent du flou au net.",
+      "accroche": "Un récit qui se lit en défilant, du flou au net.",
       "image": "../assets/calade/calade-pierre-d-ete-ambre.jpg",
       "position": "center 55%",
       "mise": "haut-gauche"
     },
     "pourQui": {
       "surtitre": "Pour quelles marques",
-      "titre": "Pour les marques qui vendent une sensation plutôt qu'un objet.",
-      "texte": "Parfumeurs, hôtels, spas, maisons de thé. La page se lit comme un récit : le visiteur avance au rythme de l'histoire, et un fil lui montre où il en est."
+      "titre": "Pour une sensation plutôt qu'un objet.",
+      "texte": "Parfumeurs. La page se lit comme un récit, un fil montre où l'on en est."
     },
     "contenu": [
-      { "nom": "Ouverture", "detail": "image plein écran, du flou au net" },
-      { "nom": "Le récit en chapitres", "detail": "un fond par chapitre, apparitions au défilement" },
-      { "nom": "Le fil de lecture", "detail": "progression qui suit le défilement" },
-      { "nom": "Fiche produit", "detail": "notes de tête, de cœur et de fond" },
-      { "nom": "Coffret d'échantillons", "detail": "premier achat en douceur" },
-      { "nom": "Mentions légales", "detail": "générées depuis le contenu" }
+      { "nom": "Ouverture", "detail": "du flou au net" },
+      { "nom": "Le récit en chapitres", "detail": "un fond par heure du jour" },
+      { "nom": "Le fil de promenade", "detail": "suit le défilement" },
+      { "nom": "Les parfums", "detail": "notes et prix" },
+      { "nom": "Coffret d'échantillons", "detail": "premier achat en douceur" }
     ],
     "matieres": [
-      { "titre": "Astro", "texte": "Un site statique, rapide, sans serveur à entretenir." },
-      { "titre": "Défilement en CSS", "texte": "Le fil et les apparitions sont pilotés par le navigateur, sans bibliothèque." },
-      { "titre": "Images optimisées", "texte": "Formats modernes, tailles adaptées à chaque écran, chargement à la demande." },
-      { "titre": "Un fichier de contenu", "texte": "Chapitres, produits et notes modifiables sans toucher au code." }
+      { "titre": "Astro", "texte": "Site statique, sans serveur à entretenir." },
+      { "titre": "Défilement en CSS", "texte": "Fil et apparitions pilotés par le navigateur." },
+      { "titre": "Images optimisées", "texte": "Formats modernes, chargés à la demande." },
+      { "titre": "Un fichier de contenu", "texte": "Textes modifiables sans toucher au code." }
     ],
     "configurateur": {
       "accents": [
@@ -247,12 +241,12 @@
       ]
     },
     "preuves": {
-      "mention": "Scores Lighthouse sur mobile, mesurés sur la démo Calade en ligne : [À MESURER].",
+      "mention": "Scores Lighthouse mobile : [À MESURER].",
       "engagements": [
-        "Chaque chapitre a son fond, chaque photo contraste avec lui.",
-        "Le fil de lecture est un vrai menu : chaque étape est un lien utilisable au clavier.",
-        "Les apparitions se coupent pour qui préfère réduire les animations.",
-        "Le texte reste lisible même si une animation ne se joue pas."
+        "Chaque photo contraste avec son fond.",
+        "Le fil de lecture est un vrai menu au clavier.",
+        "Apparitions coupées sur demande.",
+        "Texte lisible même sans animation."
       ]
     },
     "suivante": "filigrane"

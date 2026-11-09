@@ -12,42 +12,39 @@ const etapes = [
   {
     numero: 'I',
     titre: 'Écouter la maison',
-    texte: "Un premier rendez-vous pour comprendre votre maison : ses objets, son public, ce qu'elle refuse d'être.",
+    texte: "Comprendre vos objets, votre public, ce que vous refusez d'être.",
   },
   {
     numero: 'II',
     titre: 'Choisir la pièce',
-    texte:
-      "Filigrane, Vecteur ou Lavis : la pièce la plus proche de votre univers sert de point de départ. Ou l'on part d'une page blanche.",
+    texte: "Partir de la pièce la plus proche, ou d'une page blanche.",
   },
   {
     numero: 'III',
     titre: "Ajuster à l'atelier",
-    texte:
-      'Couleurs, typographies, photographies et textes se règlent dans quelques variables et un fichier de contenu. Le code reste propre et documenté.',
+    texte: 'Couleurs, polices et textes se règlent sans toucher au code.',
   },
   {
     numero: 'IV',
     titre: 'Livrer et mesurer',
-    texte:
-      'Le site est mis en ligne, puis mesuré sur téléphone : performance, accessibilité, référencement. Les résultats vous sont remis tels quels.',
+    texte: 'Mise en ligne, puis mesure sur téléphone. Résultats remis tels quels.',
   },
 ];
 
 const matieres = [
-  { titre: 'Astro', texte: 'Des pages statiques : rapides, sûres, sans serveur à entretenir.' },
-  { titre: 'Îlots React', texte: 'Seuls les éléments interactifs chargent du JavaScript, au moment où on les voit.' },
-  { titre: 'Variables de thème', texte: 'Une identité tient en quelques variables : fond, encre, accent, typographies.' },
-  { titre: 'Défilement en CSS', texte: "Les animations sont confiées au navigateur, et s'effacent pour qui préfère les réduire." },
+  { titre: 'Astro', texte: 'Pages statiques, sans serveur à entretenir.' },
+  { titre: 'Îlots React', texte: "Du JavaScript seulement là où l'on interagit." },
+  { titre: 'Variables de thème', texte: 'Une identité tient en quelques variables.' },
+  { titre: 'Défilement en CSS', texte: 'Animations confiées au navigateur, sans bibliothèque.' },
 ];
 
 const engagements = [
-  "Texte lisible partout, contraste d'au moins 4,5 pour 1.",
-  'Navigation complète au clavier, focus toujours visible.',
-  'Animations coupées pour qui préfère les réduire.',
+  "Contraste d'au moins 4,5 pour 1.",
+  'Tout au clavier, focus visible.',
+  'Animations coupées sur demande.',
   'Zoom autorisé sur téléphone.',
-  'Photos aux formats modernes, chargées à la demande.',
-  'Scores Lighthouse publiés après la mise en ligne : [À MESURER].',
+  'Photos légères, chargées à la demande.',
+  'Scores Lighthouse : [À MESURER].',
 ];
 ---
 
@@ -60,7 +57,7 @@ const engagements = [
   <OuvertureSobre
     surtitre="Maison Vélin"
     titre="Le savoir-faire"
-    intro="Trois principes, une méthode en quatre temps, et des matières choisies pour durer. Ce qui fait qu'une page se tient comme une pièce rare."
+    intro="Trois principes, quatre étapes, des matières qui durent."
   />
 
   <SavoirFaire titre="Trois<br />principes" />
@@ -71,10 +68,10 @@ const engagements = [
       <ol class="border-b border-ink/12">
         {etapes.map(({ numero, titre, texte }) => (
           <li class="grid gap-x-8 gap-y-2 border-t border-ink/12 py-7 sm:grid-cols-[56px_1fr]">
-            <span class="font-display text-xl text-accent italic" aria-hidden="true">{numero}</span>
+            <span class="font-display text-xl text-accent" aria-hidden="true">{numero}</span>
             <div class="flex flex-col gap-2">
               <h3 class="text-[17px] font-medium">{titre}</h3>
-              <p class="leading-[1.7] font-light text-ink-2">{texte}</p>
+              <p class="paragraphe text-ink-2">{texte}</p>
             </div>
           </li>
         ))}
@@ -88,7 +85,7 @@ const engagements = [
       {matieres.map(({ titre, texte }) => (
         <div class="flex flex-col gap-3">
           <h3 class="surtitre">{titre}</h3>
-          <p class="leading-[1.7] font-light text-ink-2">{texte}</p>
+          <p class="paragraphe text-ink-2">{texte}</p>
         </div>
       ))}
     </div>
@@ -99,7 +96,7 @@ const engagements = [
       <h2 id="engagements" class="font-display text-[clamp(30px,3.2vw,48px)] leading-[1.2]">Nos engagements</h2>
       <ul class="border-b border-ink/12">
         {engagements.map((texte) => (
-          <li class="border-t border-ink/12 py-5 text-[17px] leading-[1.6] font-light">{texte}</li>
+          <li class="paragraphe border-t border-ink/12 py-5">{texte}</li>
         ))}
       </ul>
     </div>

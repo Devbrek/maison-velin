@@ -47,7 +47,7 @@ const alignement = {
     <div class="flex max-w-[460px] flex-col gap-5">
       <p class="apparait depuis-bas surtitre text-sur-image-3">{data.univers.join(' · ')}</p>
       <NomPiece id={id} nom={data.nom} police={data.policeNom} niveau="h3" htmlId={`piece-${id}`} class="apparait depuis-bas delai-1" />
-      <p class="apparait depuis-bas delai-2 text-[17px] leading-[1.7] font-light text-sur-image-2">{data.accueil.accroche}</p>
+      <p class="apparait depuis-bas delai-2 paragraphe text-sur-image-2">{data.accueil.accroche}</p>
       <div class="apparait depuis-bas delai-3 flex">
         <LienPiece href={`/collection/${id}`} nom={data.nom} police={data.policeNom} />
       </div>
