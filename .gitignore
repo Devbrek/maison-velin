@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Brief de travail personnel (gardé en local, jamais publié)
+PROMPT-CLAUDE-CODE.md
