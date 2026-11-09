@@ -127,4 +127,18 @@ const bijouxSertelle = defineCollection({
     }),
 });
 
-export const collections = { pieces, modelesAubrek, parfumsCalade, bijouxSertelle };
+/* ───────────── Crédits photos (Pexels) ───────────── */
+
+const creditsPhotos = defineCollection({
+  loader: file('src/content/credits-photos.json'),
+  schema: z.object({
+    // id = nom de la photo dans src/assets, sans extension (ex. aubrek-pluie)
+    fichierPexels: z.string().regex(/^pexels-.+-\d+\.jpg$/),
+    auteur: z.string().min(1), // identifiant Pexels ; nom complet à compléter en phase 8
+    nomAuteur: z.string().optional(),
+    pexelsId: z.string().regex(/^\d+$/),
+    url: z.url(),
+  }),
+});
+
+export const collections = { pieces, modelesAubrek, parfumsCalade, bijouxSertelle, creditsPhotos };
