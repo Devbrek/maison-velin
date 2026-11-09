@@ -40,6 +40,9 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
     <Font cssVariable="--font-hanken" />
   </Fragment>
 
+  <!-- L'écrin vient en premier dans le code : au clavier, sa navigation sert de raccourci vers les sections -->
+  <Ecrin />
+
   <div class="overflow-x-clip pb-14 lg:pr-[340px] lg:pb-0">
     <BandeauDemo piece="Filigrane" retour="/collection/filigrane" class="bg-ink text-sertelle-pale" />
 
@@ -236,7 +239,6 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
     </footer>
   </div>
 
-  <Ecrin />
   <BarreVisite />
 </BaseLayout>
 

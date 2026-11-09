@@ -27,8 +27,28 @@ const px = (n: number) => `${n.toFixed(1)}px`;
     VOTRE VISITE
   </p>
 
-  <nav
-    aria-label="Sections de la page"
+  <!--
+    Navigation pour le clavier et les lecteurs d'écran : invisible tant qu'on ne l'atteint pas,
+    elle s'ouvre par-dessus l'anneau dès qu'un de ses liens reçoit le focus (comme « Aller au contenu »).
+  -->
+  <nav aria-label="Sections de la page" class="nav-clavier absolute inset-x-0 top-20 z-10 px-8">
+    <ol class="border-b border-ecrin-texte/12 bg-ecrin">
+      {ETAPES.map(({ id, numero, label }, i) => (
+        <li class="border-t border-ecrin-texte/12">
+          <a href={`#${id}`} data-etape={i} class="flex min-h-11 items-center gap-4 text-[12px] tracking-[0.22em] uppercase">
+            <span class="w-6 font-(family-name:--font-cormorant) text-[15px] tracking-normal text-or-sombre normal-case italic">
+              {numero}
+            </span>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+
+  <!-- L'anneau est décoratif : ses étapes restent cliquables à la souris, hors du parcours clavier -->
+  <div
+    aria-hidden="true"
     class="absolute top-1/2 right-0 h-[600px] w-[300px] -translate-y-1/2 overflow-hidden"
     style={`--pas:${PAS_ETAPE}`}
   >
@@ -50,6 +70,7 @@ const px = (n: number) => `${n.toFixed(1)}px`;
           <span class="etape absolute size-0" style={`left:${px(left)};top:${px(top)};--i:${i}`}>
             <a
               href={`#${id}`}
+              tabindex="-1"
               data-etape={i}
               class="absolute top-0 left-0 flex min-h-11 translate-x-[26px] -translate-y-1/2 items-center gap-2.5 whitespace-nowrap"
             >
@@ -64,7 +85,7 @@ const px = (n: number) => `${n.toFixed(1)}px`;
            (filet compris) égale l'épaisseur de l'anneau : 22 px, sans déborder à gauche. -->
       <span aria-hidden="true" class="pierre absolute top-[300px] left-[11px] border-2 border-ecrin bg-or-sombre"></span>
     </div>
-  </nav>
+  </div>
 </aside>
 
 <style>
@@ -87,11 +108,25 @@ const px = (n: number) => `${n.toFixed(1)}px`;
     --ecart: calc((var(--i) - var(--p, 0)) * var(--pas));
     opacity: max(0, 1 - max(var(--ecart), -1 * var(--ecart)) / 95);
   }
-  .etape:focus-within {
-    opacity: 1;
-  }
   a[aria-current='location'] .etape-texte {
     font-size: 12px;
     font-weight: 600;
+  }
+
+  /* Navigation clavier : masquée visuellement (mais lue), révélée au focus */
+  .nav-clavier:not(:focus-within) {
+    clip-path: inset(50%);
+    opacity: 0;
+  }
+  .nav-clavier {
+    transition: opacity 400ms var(--ease-velin);
+  }
+  .nav-clavier a[aria-current='location'] {
+    font-weight: 600;
+  }
+  /* Sur le velours sombre, le focus prend l'or clair (contraste suffisant, contrairement à l'or du site) */
+  .nav-clavier a:focus-visible {
+    outline-color: var(--color-or-sombre);
+    outline-offset: -2px;
   }
 </style>
