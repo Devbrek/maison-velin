@@ -1,30 +1,41 @@
 ---
 /*
- * Logo horizontal Maison Vélin (arche + « MAISON Vélin BY DEVBREK », texte vectorisé : aucune police requise).
+ * Logo Maison Vélin (texte vectorisé : aucune police requise).
+ * `navbar` : version simplifiée pour l'en-tête (traits épaissis, sans « BY DEVBREK »), nette dès 40 px.
+ * `horizontal` : arche + « MAISON Vélin BY DEVBREK », lisible à partir de 72 px (pied de page).
  * `clair` : version pour fond sombre (photo, mode nuit). Sinon, la version suit le thème :
  * encre sur vélin, et version claire sous [data-theme="nuit"].
- * Décoratif ici (alt vide) : le lien qui l'entoure porte le nom accessible.
+ * Décoratif ici (alt vide) : le lien ou le texte voisin porte le nom accessible.
  */
-import logoEncre from '../../assets/logo/horizontal.svg';
-import logoClair from '../../assets/logo/horizontal-clair.svg';
+import navbarEncre from '../../assets/logo/navbar.svg';
+import navbarClair from '../../assets/logo/navbar-clair.svg';
+import horizontalEncre from '../../assets/logo/horizontal.svg';
+import horizontalClair from '../../assets/logo/horizontal-clair.svg';
 
 interface Props {
+  variante?: 'navbar' | 'horizontal';
   clair?: boolean;
   class?: string;
 }
 
-const { clair = false, class: classe } = Astro.props;
-// Hauteur affichée : 44 px sur téléphone, 52 px en grand écran (le texte « BY DEVBREK » reste lisible)
-const taille = 'h-11 w-auto md:h-[52px]';
+const { variante = 'navbar', clair = false, class: classe } = Astro.props;
+
+const VERSIONS = {
+  // 44 px sur téléphone, 56 px en grand écran
+  navbar: { encre: navbarEncre, clair: navbarClair, taille: 'h-11 w-auto lg:h-14' },
+  // 72 px minimum (sous cette taille, « BY DEVBREK » devient illisible)
+  horizontal: { encre: horizontalEncre, clair: horizontalClair, taille: 'h-18 w-auto lg:h-24' },
+};
+const { encre, clair: versionClaire, taille } = VERSIONS[variante];
 ---
 
 {
   clair ? (
-    <img src={logoClair.src} width={logoClair.width} height={logoClair.height} alt="" class:list={[taille, classe]} />
+    <img src={versionClaire.src} width={versionClaire.width} height={versionClaire.height} alt="" class:list={[taille, classe]} />
   ) : (
     <>
-      <img src={logoEncre.src} width={logoEncre.width} height={logoEncre.height} alt="" class:list={['logo-jour', taille, classe]} />
-      <img src={logoClair.src} width={logoClair.width} height={logoClair.height} alt="" class:list={['logo-nuit hidden', taille, classe]} />
+      <img src={encre.src} width={encre.width} height={encre.height} alt="" class:list={['logo-jour', taille, classe]} />
+      <img src={versionClaire.src} width={versionClaire.width} height={versionClaire.height} alt="" class:list={['logo-nuit hidden', taille, classe]} />
     </>
   )
 }

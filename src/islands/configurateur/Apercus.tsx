@@ -11,11 +11,11 @@ export function ApercuSertelle(props: ApercuProps) {
     <>
       <div className="flex items-center justify-between gap-4 border-b border-(--p-ligne) px-8 py-5">
         <span className="font-(family-name:--p-police) text-xl tracking-[0.4em]">SERTELLE</span>
-        <span className="hidden text-[11px] tracking-[0.24em] text-(--p-secondaire) sm:inline">
+        <span className="hidden text-[11px] tracking-[0.24em] text-(--p-secondaire) @lg:inline">
           COLLECTION · À LA LOUPE · RENDEZ-VOUS
         </span>
       </div>
-      <div className="grid items-center gap-8 px-8 py-14 sm:grid-cols-2">
+      <div className="grid items-center gap-8 px-8 py-14 @lg:grid-cols-2">
         <div className="flex flex-col gap-5">
           <p className="text-[11px] tracking-[0.3em] text-(--p-secondaire)">COLLECTION RIVIÈRE</p>
           <p className="font-(family-name:--p-police) text-[clamp(36px,3.6vw,52px)] leading-none">
@@ -52,7 +52,7 @@ export function ApercuAubrek(props: ApercuProps) {
         </span>
       </div>
       {/* Texte et photo côte à côte : le texte ne passe jamais sur l'image */}
-      <div className="grid items-center gap-x-8 gap-y-6 px-7 py-10 sm:grid-cols-2">
+      <div className="grid items-center gap-x-8 gap-y-6 px-7 py-10 @lg:grid-cols-2">
         <div className="flex flex-col gap-5">
           <p className="text-[11px] font-semibold tracking-[0.3em] text-(--p-accent)">HORLOGERIE CONNECTÉE</p>
           <p className="text-[clamp(28px,2.6vw,38px)] leading-[1.05] font-semibold uppercase">
@@ -88,7 +88,7 @@ export function ApercuCalade(props: ApercuProps) {
       <div className="flex justify-center border-b border-(--p-ligne) px-7 py-[22px]">
         <span className="pl-[0.42em] font-(family-name:--p-police) text-xl tracking-[0.42em]">CALADE</span>
       </div>
-      <div className="grid grid-cols-[40px_1fr] items-center gap-x-8 gap-y-6 px-7 py-11 sm:grid-cols-[40px_1fr_1fr]">
+      <div className="grid grid-cols-[40px_1fr] items-center gap-x-8 gap-y-6 px-7 py-11 @lg:grid-cols-[40px_1fr_1fr]">
         <div aria-hidden="true" className="relative min-h-[220px] self-stretch">
           <span className="absolute inset-y-0 left-1.5 w-px bg-(--p-ligne)" />
           <span className="absolute top-0 left-1.5 h-1/2 w-px bg-(--p-accent)" />
@@ -108,7 +108,7 @@ export function ApercuCalade(props: ApercuProps) {
             DÉCOUVRIR · 145 €
           </span>
         </div>
-        <div className="arche relative col-span-2 aspect-4/5 overflow-hidden bg-[#2A1A0E] sm:col-span-1">
+        <div className="arche relative col-span-2 aspect-4/5 overflow-hidden bg-[#2A1A0E] @lg:col-span-1">
           <ImagesEmpilees {...props} flou />
         </div>
       </div>

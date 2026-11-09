@@ -236,6 +236,27 @@
       border-color 900ms var(--ease-velin);
   }
 
+  /* Configurateur : intro → aperçu → réglages sur téléphone ; aperçu à droite en grand écran */
+  .configurateur {
+    grid-template-areas: "intro" "apercu" "reglages";
+  }
+  @media (min-width: 64rem) {
+    .configurateur {
+      grid-template-areas: "intro apercu" "reglages apercu";
+    }
+  }
+  /* Posé par ApercuColle (téléphone, écran assez haut) : l'aperçu reste en haut,
+     les réglages défilent dessous ; il se libère à la fin du configurateur (fin de la grille) */
+  .apercu-colle[data-colle] {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-inline: -16px;
+    padding: 0.75rem 16px;
+    background-color: var(--id-bg);
+    border-bottom: 1px solid color-mix(in oklab, var(--id-ink) 16%, transparent);
+  }
+
   /* Texte posé sur une photo : ombre douce et diffuse (jamais nette ni décalée), héritée par tous les textes.
      Un bouton qui se remplit au survol la perd, sinon elle salirait le texte sombre sur fond clair. */
   .texte-sur-image {

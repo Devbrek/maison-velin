@@ -1,4 +1,5 @@
 import { useState, type CSSProperties, type ReactNode } from 'react';
+import ApercuColle from './ApercuColle';
 import GroupeOptions from './GroupeOptions';
 import { ApercuAubrek, ApercuCalade, ApercuSertelle } from './Apercus';
 import { resumeReglage, variablesApercu } from './couleurs';
@@ -17,6 +18,7 @@ const APERCUS = { filigrane: ApercuSertelle, vecteur: ApercuAubrek, lavis: Aperc
 /**
  * Configurateur d'une fiche pièce : accent, police de titre, ambiance.
  * L'aperçu se règle en direct en changeant des variables CSS sur son conteneur.
+ * Grille : sur téléphone, intro → aperçu (collé en haut) → réglages ; en grand écran, aperçu à droite.
  */
 export default function Configurateur({ pieceId, accents, polices, ambiances, children }: Props) {
   const [accentId, setAccentId] = useState(accents[0].id);
@@ -29,10 +31,20 @@ export default function Configurateur({ pieceId, accents, polices, ambiances, ch
   const Apercu = APERCUS[pieceId];
 
   return (
-    <div className="flex flex-wrap items-start gap-x-20 gap-y-16">
-      <div className="flex max-w-[400px] min-w-0 flex-[1_1_280px] flex-col gap-12">
-        {children}
+    <div className="configurateur grid grid-cols-1 items-start gap-x-20 gap-y-12 lg:grid-cols-[minmax(280px,400px)_minmax(0,1fr)]">
+      <div className="max-w-[400px] min-w-0 [grid-area:intro]">{children}</div>
 
+      {/* Enfant direct de la grille : collé, il ne se libère qu'à la fin du configurateur */}
+      <ApercuColle libelle={<>Aperçu : {resumeReglage(accent, police, ambiance)}</>}>
+        <div
+          className="apercu @container border border-ink/16 bg-(--p-fond) text-(--p-encre)"
+          style={variablesApercu(accent, police, ambiance) as CSSProperties}
+        >
+          <Apercu ambiances={ambiances} ambianceId={ambianceId} />
+        </div>
+      </ApercuColle>
+
+      <div className="flex max-w-[400px] min-w-0 flex-col gap-12 [grid-area:reglages]">
         <GroupeOptions
           legende="Accent"
           nom={`${pieceId}-accent`}
@@ -78,18 +90,6 @@ export default function Configurateur({ pieceId, accents, polices, ambiances, ch
           disposition="egale"
           rendu={(a) => <span>{a.label}</span>}
         />
-      </div>
-
-      <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-4">
-        <p aria-live="polite" className="text-xs tracking-[0.22em] text-ink-2 uppercase">
-          Aperçu : {resumeReglage(accent, police, ambiance)}
-        </p>
-        <div
-          className="apercu border border-ink/16 bg-(--p-fond) text-(--p-encre)"
-          style={variablesApercu(accent, police, ambiance) as CSSProperties}
-        >
-          <Apercu ambiances={ambiances} ambianceId={ambianceId} />
-        </div>
       </div>
     </div>
   );
