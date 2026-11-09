@@ -1,30 +1,17 @@
 ---
 /*
- * Sur mesure : demande de rendez-vous, sans serveur.
- * Le formulaire prépare un e-mail (mailto:) dans la messagerie du visiteur.
- * L'envoi passe par envoyerDemande() : en phase 9, passer MODE_ENVOI à 'api' suffira.
- * L'adresse complète n'est jamais écrite dans le HTML (data-utilisateur + data-domaine).
+ * Sur mesure : Maison Vélin est une vitrine, sans formulaire.
+ * Les demandes se font sur le site de Devbrek (lien avec ?source=maison-velin).
  */
 import VelinLayout from '../layouts/VelinLayout.astro';
 import OuvertureSobre from '../components/velin/OuvertureSobre.astro';
-import { CONTACT, emailAffiche } from '../lib/contact';
-
-const pieces = [
-  { valeur: 'Filigrane', label: 'Filigrane — joaillerie, horlogerie' },
-  { valeur: 'Vecteur', label: 'Vecteur — horlogerie connectée, automobile' },
-  { valeur: 'Lavis', label: 'Lavis — parfum, hôtellerie, spa' },
-  { valeur: 'Création entière', label: 'Une création entière, sur mesure' },
-];
+import { EDITEUR, lienDemandeDevbrek } from '../lib/editeur';
 
 const deroule = [
-  { numero: 'I', texte: 'Votre messagerie s’ouvre avec votre demande déjà rédigée. Vous la relisez, puis vous l’envoyez.' },
+  { numero: 'I', texte: 'Vous décrivez votre maison et votre projet sur le formulaire de Devbrek.' },
   { numero: 'II', texte: 'Devbrek vous répond pour fixer un premier échange, en visio ou par téléphone.' },
   { numero: 'III', texte: 'Vous recevez une proposition : la pièce, les ajustements, le calendrier.' },
 ];
-
-// Classe commune des champs : filet en bas, hauteur tactile confortable
-const champ =
-  'min-h-12 w-full border-0 border-b border-ink/30 bg-transparent px-0 py-2 text-[17px] font-light transition-colors duration-500 placeholder:text-ink-2/60 hover:border-ink focus:border-ink';
 ---
 
 <VelinLayout
@@ -37,130 +24,38 @@ const champ =
     intro="Chaque template peut être ajusté à votre identité, ou dessiné entièrement pour vous par Devbrek. Dites-nous en quelques lignes ce que vous préparez."
   />
 
-  <section aria-labelledby="demande" class="border-t border-line">
-    <div class="conteneur grid items-start gap-x-30 gap-y-16 py-20 md:py-28 lg:grid-cols-[3fr_2fr]">
-      <form
-        id="formulaire-demande"
-        class="flex flex-col gap-8"
-        data-utilisateur={CONTACT.utilisateur}
-        data-domaine={CONTACT.domaine}
-      >
-        <h2 id="demande" class="font-display text-[clamp(28px,2.8vw,40px)]">Votre demande</h2>
-        <noscript>
-          <p class="text-sm leading-[1.7] text-ink-2">
-            Ce formulaire a besoin de JavaScript. Vous pouvez aussi écrire directement à {emailAffiche}.
-          </p>
-        </noscript>
-
-        <div class="grid gap-8 sm:grid-cols-2">
-          <div class="flex flex-col gap-2">
-            <label for="nom" class="surtitre">Votre nom</label>
-            <input id="nom" name="nom" type="text" autocomplete="name" required class={champ} />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="maison" class="surtitre">Maison ou marque</label>
-            <input id="maison" name="maison" type="text" autocomplete="organization" class={champ} />
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="email" class="surtitre">E-mail</label>
-          <input id="email" name="email" type="email" autocomplete="email" required class={champ} />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="piece" class="surtitre">La pièce qui vous intéresse</label>
-          <select id="piece" name="piece" class={`${champ} cursor-pointer`}>
-            {pieces.map(({ valeur, label }) => <option value={valeur}>{label}</option>)}
-          </select>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="message" class="surtitre">Votre projet</label>
-          <textarea id="message" name="message" rows="6" required class={`${champ} resize-y`}></textarea>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
-          <button
-            type="submit"
-            class="inline-flex min-h-11 items-center bg-accent px-7 text-[12px] tracking-[0.22em] text-on-accent uppercase transition-colors duration-[600ms] ease-velin hover:bg-ink"
-          >
-            Préparer l'e-mail
-          </button>
-          <p class="text-sm text-ink-2">Les champs nom, e-mail et projet sont nécessaires.</p>
-        </div>
-        <p role="status" aria-live="polite" class="text-sm leading-[1.7] text-ink-2" data-statut></p>
-        <p class="border-t border-line pt-6 text-sm leading-[1.7] text-ink-2">
-          Maison Vélin est la vitrine des templates de
-          <a href="https://devbrek.fr" class="text-ink underline underline-offset-3 hover:text-accent">Devbrek</a>.
-          Votre demande est adressée à Devbrek.
-        </p>
-      </form>
-
-      <aside aria-labelledby="deroule" class="flex flex-col gap-8 lg:pt-3">
-        <h2 id="deroule" class="surtitre text-ink-2">Comment ça se passe</h2>
+  <section aria-labelledby="deroule" class="border-t border-line">
+    <div class="conteneur grid items-start gap-x-30 gap-y-12 py-20 md:py-28 lg:grid-cols-[1fr_2fr]">
+      <h2 id="deroule" class="font-display text-[clamp(28px,2.8vw,40px)] leading-[1.2]">Comment ça se passe</h2>
+      <div class="flex max-w-[680px] flex-col gap-10">
         <ol class="border-b border-ink/12">
           {deroule.map(({ numero, texte }) => (
-            <li class="grid grid-cols-[40px_1fr] gap-4 border-t border-ink/12 py-5">
-              <span aria-hidden="true" class="font-display text-lg text-accent italic">{numero}</span>
-              <p class="leading-[1.7] font-light">{texte}</p>
+            <li class="grid grid-cols-[48px_1fr] gap-4 border-t border-ink/12 py-6">
+              <span aria-hidden="true" class="font-display text-xl text-accent italic">{numero}</span>
+              <p class="text-[17px] leading-[1.7] font-light">{texte}</p>
             </li>
           ))}
         </ol>
-        <p class="leading-[1.7] font-light text-ink-2">
-          Vous préférez écrire directement ?<br />
-          <span class="text-ink">{emailAffiche}</span>
+
+        <a
+          href={lienDemandeDevbrek}
+          class="group inline-flex min-h-11 items-center gap-3 self-start border border-current px-7 text-[12px] tracking-[0.22em] uppercase transition-colors duration-[900ms] ease-velin hover:bg-ink hover:text-bg focus-visible:bg-ink focus-visible:text-bg"
+        >
+          Faire une demande sur Devbrek
+          <span
+            aria-hidden="true"
+            class="inline-block transition-[translate] duration-[900ms] ease-velin motion-safe:group-hover:translate-x-1.5 motion-safe:group-focus-visible:translate-x-1.5"
+          >
+            →
+          </span>
+        </a>
+
+        <p class="border-t border-line pt-6 text-sm leading-[1.7] text-ink-2">
+          Maison Vélin est la vitrine des templates de{' '}
+          <a href={EDITEUR.site} class="text-ink underline underline-offset-3 hover:text-accent">Devbrek</a>.
+          Votre demande est adressée à Devbrek.
         </p>
-        <p class="text-sm leading-[1.7] text-ink-2">
-          Aucune donnée n'est enregistrée par ce site : le message part de votre propre messagerie.
-        </p>
-      </aside>
+      </div>
     </div>
   </section>
 </VelinLayout>
-
-<script>
-  import { emailComplet, envoyerDemande } from '../lib/contact';
-
-  document.addEventListener('astro:page-load', () => {
-    const formulaire = document.querySelector<HTMLFormElement>('#formulaire-demande');
-    if (!formulaire) return;
-    const statut = formulaire.querySelector('[data-statut]');
-    // L'adresse n'est reconstituée qu'ici, jamais écrite dans la page
-    const { utilisateur = '', domaine = '' } = formulaire.dataset;
-    const destinataire = emailComplet(utilisateur, domaine);
-    const ecrire = (texte: string) => {
-      if (statut) statut.textContent = texte;
-    };
-
-    // Pièce présélectionnée depuis une fiche : /sur-mesure?piece=Vecteur
-    const piece = new URLSearchParams(location.search).get('piece');
-    const choix = formulaire.querySelector<HTMLSelectElement>('#piece');
-    if (piece && choix && [...choix.options].some((o) => o.value === piece)) choix.value = piece;
-
-    formulaire.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const donnees = new FormData(formulaire);
-      const valeur = (cle: string) => String(donnees.get(cle) ?? '').trim();
-      try {
-        const resultat = await envoyerDemande(destinataire, {
-          nom: valeur('nom'),
-          maison: valeur('maison'),
-          email: valeur('email'),
-          piece: valeur('piece'),
-          message: valeur('message'),
-        });
-        if (resultat.mode === 'mailto') {
-          ecrire(`Votre messagerie devrait s'ouvrir avec la demande prête à envoyer. Si rien ne se passe, écrivez à ${destinataire}.`);
-        } else if (resultat.ok) {
-          ecrire('Merci, votre demande est envoyée. Devbrek vous répond rapidement.');
-          formulaire.reset();
-        } else {
-          throw new Error('Envoi refusé');
-        }
-      } catch {
-        ecrire(`L'envoi n'a pas abouti. Vous pouvez écrire directement à ${destinataire}.`);
-      }
-    });
-  });
-</script>

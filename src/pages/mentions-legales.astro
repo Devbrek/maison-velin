@@ -7,7 +7,6 @@ import { getCollection } from 'astro:content';
 import VelinLayout from '../layouts/VelinLayout.astro';
 import OuvertureSobre from '../components/velin/OuvertureSobre.astro';
 import { EDITEUR, HEBERGEUR, ouACompleter } from '../lib/editeur';
-import { emailAffiche } from '../lib/contact';
 
 // Seules les photos affichées sur le site sont créditées (les photos de réserve n'ont pas d'utilisation)
 const credits = (await getCollection('creditsPhotos'))
@@ -20,7 +19,7 @@ const editeur = [
   ['Statut', ouACompleter(EDITEUR.statut, 'STATUT À COMPLÉTER')],
   ['SIRET', ouACompleter(EDITEUR.siret, 'SIRET À COMPLÉTER')],
   ['Adresse', ouACompleter(EDITEUR.adresse, 'ADRESSE À COMPLÉTER')],
-  ['E-mail', emailAffiche],
+  ['E-mail', EDITEUR.email],
   ['Téléphone', ouACompleter(EDITEUR.telephone, 'TÉLÉPHONE À COMPLÉTER')],
   ['Directeur de la publication', ouACompleter(EDITEUR.directeurPublication || EDITEUR.nom, 'NOM À COMPLÉTER')],
 ];
@@ -96,10 +95,6 @@ const texte = 'flex max-w-[680px] flex-col gap-4 leading-[1.8] font-light text-i
         Il ne collecte ni ne conserve aucune donnée personnelle.
       </p>
       <p>
-        Le formulaire « Sur mesure » ne transmet rien au site : il prépare un e-mail dans votre propre messagerie, que vous
-        choisissez d'envoyer ou non. Les informations que vous y écrivez servent uniquement à répondre à votre demande.
-      </p>
-      <p>
         Si vous choisissez de réduire les animations, ce réglage est gardé dans votre navigateur (stockage local), sur votre
         appareil uniquement. Les polices sont servies par ce site, sans appel à un service tiers.
       </p>
@@ -108,7 +103,7 @@ const texte = 'flex max-w-[680px] flex-col gap-4 leading-[1.8] font-light text-i
         et la sécurité du service.
       </p>
       <p>
-        Pour toute question, ou pour exercer vos droits d'accès, de rectification et d'effacement : {emailAffiche}.
+        Pour toute question, ou pour exercer vos droits d'accès, de rectification et d'effacement : {EDITEUR.email}.
       </p>
     </div>
   </section>

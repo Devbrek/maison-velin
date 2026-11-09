@@ -10,8 +10,17 @@ export const EDITEUR = {
   adresse: '781 avenue de Monsieur Teste, 34070 Montpellier, France',
   telephone: '+33 6 29 84 28 84',
   directeurPublication: 'Benjamin Sanna',
+  // Écrit sans arobase : les robots collecteurs d'adresses ne la reconnaissent pas
+  email: 'contact [at] devbrek.fr',
   site: 'https://devbrek.fr',
 };
+
+/*
+ * Les demandes passent par le formulaire du site Devbrek (Maison Vélin n'a pas de formulaire).
+ * `source` permet à Devbrek de savoir que la demande vient de Maison Vélin.
+ */
+export const FORMULAIRE_DEVBREK = 'https://devbrek.fr'; // URL exacte du formulaire à confirmer
+export const lienDemandeDevbrek = `${FORMULAIRE_DEVBREK}?source=maison-velin`;
 
 export const HEBERGEUR = {
   nom: 'Vercel Inc.',
