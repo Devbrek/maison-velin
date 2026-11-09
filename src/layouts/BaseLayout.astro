@@ -13,9 +13,10 @@ interface Props {
   title: string;
   description: string;
   identity?: Identity;
+  noindex?: boolean; // page à exclure des moteurs de recherche (ex. 404)
 }
 
-const { title, description, identity = 'velin' } = Astro.props;
+const { title, description, identity = 'velin', noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,6 +27,7 @@ const { title, description, identity = 'velin' } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <slot name="fonts" />
     <!-- Avant l'affichage : signale que JS est actif (apparitions) et applique le choix « Réduire les animations » -->
     <script is:inline data-astro-rerun>

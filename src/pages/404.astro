@@ -1,0 +1,36 @@
+---
+// Page introuvable : sobre, dans l'identité Vélin, avec trois chemins pour repartir
+import VelinLayout from '../layouts/VelinLayout.astro';
+import OuvertureSobre from '../components/velin/OuvertureSobre.astro';
+
+const chemins = [
+  { href: '/', label: "Retour à l'accueil" },
+  { href: '/#collection', label: 'Voir la collection' },
+  { href: '/sur-mesure', label: 'Demander une pièce sur mesure' },
+];
+---
+
+<VelinLayout
+  title="Page introuvable — Maison Vélin"
+  description="Cette page n'existe pas ou a été déplacée."
+  noindex
+>
+  <OuvertureSobre
+    surtitre="Erreur 404"
+    titre="Cette page s'est égarée."
+    intro="Le lien est peut-être ancien, ou l'adresse mal recopiée. Voici de quoi reprendre la visite."
+  />
+
+  <nav aria-label="Pour repartir" class="conteneur pb-24 md:pb-[140px]">
+    <ul class="max-w-[560px] border-b border-ink/12">
+      {chemins.map(({ href, label }) => (
+        <li class="border-t border-ink/12">
+          <a href={href} class="group flex min-h-14 items-center justify-between gap-6 py-3 text-[17px] font-light hover:text-accent">
+            {label}
+            <span aria-hidden="true" class="transition-transform duration-[600ms] ease-velin motion-safe:group-hover:translate-x-1">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</VelinLayout>

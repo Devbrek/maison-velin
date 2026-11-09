@@ -13,12 +13,13 @@ interface Props {
   title: string;
   description: string;
   enTeteSurImage?: boolean;
+  noindex?: boolean;
 }
 
-const { title, description, enTeteSurImage = false } = Astro.props;
+const { title, description, enTeteSurImage = false, noindex = false } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} identity="velin">
+<BaseLayout title={title} description={description} identity="velin" noindex={noindex}>
   <Fragment slot="fonts">
     <Font cssVariable="--font-bodoni" preload={[{ style: 'normal' }]} />
     <Font cssVariable="--font-jost" />
