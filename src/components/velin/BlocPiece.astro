@@ -3,10 +3,13 @@
  * Bloc d'une pièce sur l'accueil : photo plein cadre, voile en dégradé, texte posé dessus.
  * Le nom de la pièce est écrit dans la police de sa propre identité.
  * Sur téléphone, le texte est toujours en bas ; sur grand écran, il suit la « mise » de la maquette.
+ * Tout le bloc mène à la fiche (lien étiré « Découvrir la pièce »). À l'arrivée : photo floue → nette,
+ * texte en cascade ; au survol : photo agrandie, voile plus sombre, flèche qui glisse.
  */
 import type { CollectionEntry } from 'astro:content';
 import Photo from '../Photo.astro';
 import NomPiece from '../fiche/NomPiece.astro';
+import LienPiece from './LienPiece.astro';
 
 interface Props {
   piece: CollectionEntry<'pieces'>;
@@ -24,25 +27,30 @@ const alignement = {
 
 <article
   aria-labelledby={`piece-${id}`}
-  class:list={['bloc relative flex min-h-[640px] overflow-hidden bg-[#2B2723] text-sur-image md:min-h-[820px]', `bloc--${data.accueil.mise}`]}
+  data-apparition
+  class:list={['bloc bloc-piece group relative isolate flex min-h-[640px] overflow-hidden bg-[#2B2723] text-sur-image md:min-h-[820px]', `bloc--${data.accueil.mise}`]}
 >
-  <Photo
-    src={data.accueil.image}
-    alt=""
-    sizes="100vw"
-    class="absolute inset-0 h-full w-full object-cover"
-    style={`object-position: ${data.accueil.position}`}
-  />
-  <div aria-hidden="true" class="voile absolute inset-0"></div>
+  <!-- Deux couches : l'enveloppe passe du flou au net à l'arrivée, l'image s'agrandit au survol -->
+  <div class="net absolute inset-0 -z-10">
+    <Photo
+      src={data.accueil.image}
+      alt=""
+      sizes="100vw"
+      class="bloc-image absolute inset-0 h-full w-full object-cover"
+      style={`object-position: ${data.accueil.position}`}
+    />
+  </div>
+  <div aria-hidden="true" class="voile absolute inset-0 -z-10"></div>
+  <div aria-hidden="true" class="bloc-assombri absolute inset-0 -z-10 bg-[rgb(15_14_12/0.22)]"></div>
 
-  <div class:list={['conteneur relative flex items-end py-18', alignement]}>
+  <div class:list={['conteneur flex items-end py-18', alignement]}>
     <div class="flex max-w-[460px] flex-col gap-5">
-      <p class="surtitre text-sur-image-3">{data.univers.join(' · ')}</p>
-      <NomPiece id={id} nom={data.nom} police={data.policeNom} niveau="h3" htmlId={`piece-${id}`} />
-      <p class="text-[17px] leading-[1.7] font-light text-sur-image-2">{data.accueil.accroche}</p>
-      <a href={`/collection/${id}`} class="lien-trace self-start text-[12px] tracking-[0.22em] uppercase">
-        Découvrir la pièce<span class="sr-only"> {data.nom}</span>
-      </a>
+      <p class="apparait depuis-bas surtitre text-sur-image-3">{data.univers.join(' · ')}</p>
+      <NomPiece id={id} nom={data.nom} police={data.policeNom} niveau="h3" htmlId={`piece-${id}`} class="apparait depuis-bas delai-1" />
+      <p class="apparait depuis-bas delai-2 text-[17px] leading-[1.7] font-light text-sur-image-2">{data.accueil.accroche}</p>
+      <div class="apparait depuis-bas delai-3 flex">
+        <LienPiece href={`/collection/${id}`} nom={data.nom} police={data.policeNom} />
+      </div>
     </div>
   </div>
 </article>

@@ -1,8 +1,13 @@
 ---
-// Carte « pièce suivante » : la collection tourne en boucle (Filigrane → Vecteur → Lavis → Filigrane)
+/*
+ * Carte « pièce suivante » : la collection tourne en boucle (Filigrane → Vecteur → Lavis → Filigrane).
+ * Même comportement que les blocs de l'accueil : toute la carte mène à la fiche (lien étiré),
+ * photo floue → nette et texte en cascade à l'arrivée, photo agrandie et voile plus sombre au survol.
+ */
 import type { CollectionEntry } from 'astro:content';
 import Photo from '../Photo.astro';
 import NomPiece from './NomPiece.astro';
+import LienPiece from '../velin/LienPiece.astro';
 
 interface Props {
   piece: CollectionEntry<'pieces'>;
@@ -11,24 +16,33 @@ interface Props {
 const { id, data } = Astro.props.piece;
 ---
 
-<a
-  href={`/collection/${id}`}
-  class="suivante group relative flex min-h-[420px] overflow-hidden bg-[#161513] text-sur-image md:min-h-[520px]"
+<section
+  aria-labelledby="piece-suivante"
+  data-apparition
+  class="suivante bloc-piece group relative isolate flex min-h-[420px] overflow-hidden bg-[#161513] text-sur-image md:min-h-[520px]"
 >
-  <Photo
-    src={data.accueil.image}
-    alt=""
-    sizes="(min-width: 48rem) 60vw, 100vw"
-    class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-velin motion-safe:group-hover:scale-[1.03] md:left-auto md:w-3/5"
-    style={`object-position: ${data.accueil.position}`}
-  />
-  <span aria-hidden="true" class="voile absolute inset-0"></span>
-  <span class="conteneur relative flex flex-col justify-end gap-4 py-18">
-    <span class="surtitre text-sur-image-3">Pièce suivante</span>
-    <NomPiece id={id} nom={data.nom} police={data.policeNom} />
-    <span class="text-[12px] tracking-[0.22em] text-brume uppercase">{data.univers.join(' · ')}</span>
-  </span>
-</a>
+  <div class="net absolute inset-0 -z-10 overflow-hidden md:left-auto md:w-3/5">
+    <Photo
+      src={data.accueil.image}
+      alt=""
+      sizes="(min-width: 48rem) 60vw, 100vw"
+      class="bloc-image absolute inset-0 h-full w-full object-cover"
+      style={`object-position: ${data.accueil.position}`}
+    />
+  </div>
+  <div aria-hidden="true" class="voile absolute inset-0 -z-10"></div>
+  <div aria-hidden="true" class="bloc-assombri absolute inset-0 -z-10 bg-[rgb(22_21_19/0.22)]"></div>
+  <div class="conteneur flex flex-col justify-end gap-4 py-18">
+    <p class="apparait depuis-bas surtitre text-sur-image-3">Pièce suivante</p>
+    <h2 id="piece-suivante" class="apparait depuis-bas delai-1">
+      <NomPiece id={id} nom={data.nom} police={data.policeNom} />
+    </h2>
+    <p class="apparait depuis-bas delai-2 text-[12px] tracking-[0.22em] text-brume uppercase">{data.univers.join(' · ')}</p>
+    <div class="apparait depuis-bas delai-3 flex pt-2">
+      <LienPiece href={`/collection/${id}`} nom={data.nom} police={data.policeNom} />
+    </div>
+  </div>
+</section>
 
 <style>
   .voile {

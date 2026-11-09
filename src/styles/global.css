@@ -236,6 +236,39 @@
       border-color 900ms var(--ease-velin);
   }
 
+  /* Lien étiré : tout le bloc parent (position: relative) devient cliquable.
+     Le focus clavier dessine un cadre autour du bloc entier. */
+  .lien-etire::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .lien-etire:focus-visible {
+    outline: none;
+  }
+  .lien-etire:focus-visible::after {
+    outline: 2px solid var(--color-sur-image);
+    outline-offset: -8px;
+  }
+
+  /* Bloc pièce au survol / focus : image légèrement agrandie, voile un peu plus sombre */
+  .bloc-piece .bloc-image {
+    transition: transform 1200ms var(--ease-velin);
+  }
+  .bloc-piece .bloc-assombri {
+    opacity: 0;
+    transition: opacity 1000ms var(--ease-velin);
+  }
+  .bloc-piece:is(:hover, :has(a:focus-visible)) .bloc-assombri {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-mouvement="reduit"]) .bloc-piece:is(:hover, :has(a:focus-visible)) .bloc-image {
+      transform: scale(1.04);
+    }
+  }
+
   /* Aubrek : bouton à coins coupés (forme donnée par .cut) */
   .bouton-aubrek {
     display: inline-flex;

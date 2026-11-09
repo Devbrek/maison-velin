@@ -1,0 +1,28 @@
+---
+/*
+ * « Découvrir la pièce » : bouton contour + flèche, dans la police de la pièce.
+ * Lien étiré : son ::after couvre tout le bloc parent (qui doit être `relative group`),
+ * donc tout le bloc est cliquable, mais un seul lien est annoncé aux lecteurs d'écran.
+ */
+interface Props {
+  href: string;
+  nom: string; // nom de la pièce, lu par les lecteurs d'écran
+  police: string; // variable CSS de la police de la pièce
+}
+
+const { href, nom, police } = Astro.props;
+---
+
+<a
+  href={href}
+  class="lien-etire inline-flex min-h-11 items-center gap-3 self-start border border-current px-6 text-[12px] tracking-[0.22em] uppercase transition-colors duration-[900ms] ease-velin group-hover:bg-sur-image group-hover:text-[#141311] group-has-[a:focus-visible]:bg-sur-image group-has-[a:focus-visible]:text-[#141311]"
+  style={`font-family: var(${police})`}
+>
+  Découvrir la pièce<span class="sr-only"> {nom}</span>
+  <span
+    aria-hidden="true"
+    class="inline-block transition-[translate] duration-[900ms] ease-velin motion-safe:group-hover:translate-x-1.5 motion-safe:group-has-[a:focus-visible]:translate-x-1.5"
+  >
+    →
+  </span>
+</a>
