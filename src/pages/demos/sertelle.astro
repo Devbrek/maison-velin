@@ -68,9 +68,10 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
 
     <main id="contenu">
       <!-- I. Ouverture -->
-      <section id="ouverture" data-apparition aria-labelledby="hero">
+      <!-- Visible dès le premier rendu (photo et titre = élément principal de la page) : seul un zoom lent anime la photo -->
+      <section id="ouverture" aria-labelledby="hero">
         <div class="aligne grid items-center gap-x-24 gap-y-16 pt-16 pb-24 md:grid-cols-2 md:pt-24 md:pb-[140px]">
-          <div class="apparait depuis-gauche flex max-w-[460px] flex-col gap-7">
+          <div class="flex max-w-[460px] flex-col gap-7">
             <p class="surtitre font-medium text-accent">Collection Rivière</p>
             <h1 id="hero" class="font-display text-[clamp(40px,4.6vw,68px)] leading-[1.04] font-light">
               L'éclat <em>se regarde de près.</em>
@@ -83,15 +84,15 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
               <a href="#collection" class="lien-trace text-[12px] font-medium tracking-[0.22em] uppercase">La collection</a>
             </div>
           </div>
-          <div class="apparait depuis-droite delai-1 w-full max-w-[480px] border border-accent/45 p-[18px]">
+          <div class="w-full max-w-[480px] border border-accent/45 p-[18px]">
             <div class="aspect-2/3 overflow-hidden bg-[#E8E6E2]">
               <Photo
                 src={alliance.data.image.src}
                 alt={alliance.data.image.alt}
                 sizes="(min-width: 48rem) 444px, calc(100vw - 68px)"
                 cadre={2 / 3}
-                loading="eager"
-                class="net h-full w-full object-cover"
+                priority
+                class="zoom-ouverture h-full w-full object-cover"
                 style={`object-position: ${alliance.data.image.position}`}
               />
             </div>
@@ -246,6 +247,24 @@ const prix = (euros: number) => `${euros.toLocaleString('fr-FR')} €`;
 </BaseLayout>
 
 <style>
+  /* Ouverture : la photo, nette et opaque dès le départ, se resserre lentement (transform seul) */
+  .zoom-ouverture {
+    animation: zoom-ouverture 2400ms var(--ease-velin) backwards;
+  }
+  @keyframes zoom-ouverture {
+    from {
+      transform: scale(1.08);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .zoom-ouverture {
+      animation: none;
+    }
+  }
+  :global(html[data-mouvement='reduit']) .zoom-ouverture {
+    animation: none;
+  }
+
   /* Contenu aligné à gauche : l'écrin garde le bord droit */
   .aligne {
     max-width: 1120px;
