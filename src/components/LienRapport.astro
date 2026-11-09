@@ -1,0 +1,21 @@
+---
+/*
+ * Lien vers un rapport PageSpeed Insights, ouvert dans un nouvel onglet
+ * (annoncé aux lecteurs d'écran ; rel="noopener" : la page ouverte ne peut pas agir sur celle-ci).
+ */
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: classe } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener"
+  class:list={['underline decoration-current/40 underline-offset-3 hover:text-accent hover:decoration-current', classe]}
+>
+  <slot>voir le rapport</slot><span aria-hidden="true">&nbsp;↗</span><span class="sr-only"> (nouvel onglet)</span>
+</a>

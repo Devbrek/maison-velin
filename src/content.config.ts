@@ -53,7 +53,6 @@ const pieces = defineCollection({
           .length(2),
       }),
       preuves: z.object({
-        mention: z.string(),
         engagements: z.array(z.string()).min(1),
       }),
       suivante: reference('pieces'),

@@ -7,6 +7,10 @@ import VelinLayout from '../layouts/VelinLayout.astro';
 import OuvertureSobre from '../components/velin/OuvertureSobre.astro';
 import SavoirFaire from '../components/velin/SavoirFaire.astro';
 import BandeauSurMesure from '../components/velin/BandeauSurMesure.astro';
+import LienRapport from '../components/LienRapport.astro';
+import { dateMesure, mesureDe, scoresEnLigne } from '../lib/mesures';
+
+const accueil = mesureDe('/');
 
 const etapes = [
   {
@@ -44,7 +48,6 @@ const engagements = [
   'Animations coupées sur demande.',
   'Zoom autorisé sur téléphone.',
   'Photos légères, chargées à la demande.',
-  'Scores Lighthouse : [À MESURER].',
 ];
 ---
 
@@ -98,6 +101,10 @@ const engagements = [
         {engagements.map((texte) => (
           <li class="paragraphe border-t border-ink/12 py-5">{texte}</li>
         ))}
+        <li class="paragraphe border-t border-ink/12 py-5">
+          Scores Lighthouse de l'accueil : {scoresEnLigne(accueil)}, mesurés le {dateMesure()} sur mobile.{' '}
+          <LienRapport href={accueil.rapport}>Voir le rapport</LienRapport>
+        </li>
       </ul>
     </div>
   </section>

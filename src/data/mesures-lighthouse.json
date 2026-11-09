@@ -1,0 +1,31 @@
+{
+  "outil": "PageSpeed Insights",
+  "strategie": "mobile",
+  "date": "2026-11-09",
+  "pages": [
+    {
+      "chemin": "/",
+      "nom": "Accueil Maison Vélin",
+      "scores": { "performance": 100, "accessibilite": 100, "bonnesPratiques": 100, "seo": 100 },
+      "rapport": "https://pagespeed.web.dev/analysis/https-maison-velin-vercel-app/v4xqkql77c?form_factor=mobile"
+    },
+    {
+      "chemin": "/demos/sertelle",
+      "nom": "Démo Sertelle",
+      "scores": { "performance": 100, "accessibilite": 100, "bonnesPratiques": 100, "seo": 100 },
+      "rapport": "https://pagespeed.web.dev/analysis/https-maison-velin-vercel-app-demos-sertelle/joz4aqkvud?form_factor=mobile"
+    },
+    {
+      "chemin": "/demos/aubrek",
+      "nom": "Démo Aubrek",
+      "scores": { "performance": 100, "accessibilite": 100, "bonnesPratiques": 100, "seo": 100 },
+      "rapport": "https://pagespeed.web.dev/analysis/https-maison-velin-vercel-app-demos-aubrek/87vt4xh7wm?form_factor=mobile"
+    },
+    {
+      "chemin": "/demos/calade",
+      "nom": "Démo Calade",
+      "scores": { "performance": 97, "accessibilite": 100, "bonnesPratiques": 100, "seo": 100 },
+      "rapport": "https://pagespeed.web.dev/analysis/https-maison-velin-vercel-app-demos-calade/e0bd1iv6qm?form_factor=mobile"
+    }
+  ]
+}

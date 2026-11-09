@@ -1,25 +1,38 @@
 ---
-// Les trois principes de la maison (accueil et /savoir-faire)
+// Les trois principes de la maison (accueil et /savoir-faire). « Exigence » cite les scores mesurés de l'accueil.
+import LienRapport from '../LienRapport.astro';
+import { dateMesure, mesureDe } from '../../lib/mesures';
 interface Props {
   titre?: string; // titre de la section (HTML autorisé pour le retour à la ligne)
 }
 
 const { titre = 'Le<br />Savoir-faire' } = Astro.props;
+const accueil = mesureDe('/');
+const tousA100 = Object.values(accueil.scores).every((s) => s === 100);
 
 const principes = [
   { titre: 'Retenue', texte: 'Une idée par écran, un seul accent de couleur.' },
   { titre: 'Lenteur', texte: 'Des gestes lents, coupés si vous réduisez les animations.' },
-  { titre: 'Exigence', texte: 'Accessible et rapide au téléphone. Scores : [À MESURER].' },
+  {
+    titre: 'Exigence',
+    texte: tousA100
+      ? 'Accessible et rapide au téléphone : 100 sur 100 aux quatre scores Lighthouse'
+      : `Accessible et rapide au téléphone. Scores Lighthouse : ${Object.values(accueil.scores).join(' / ')}`,
+    rapport: true,
+  },
 ];
 ---
 
 <section id="savoir-faire" aria-labelledby="sf-titre">
   <div class="conteneur grid items-start gap-x-20 gap-y-16 py-24 md:grid-cols-2 md:py-[140px] lg:grid-cols-4">
     <h2 id="sf-titre" class="font-display text-[clamp(36px,4vw,60px)] leading-none" set:html={titre} />
-    {principes.map(({ titre, texte }) => (
+    {principes.map(({ titre, texte, rapport }) => (
       <div class="flex flex-col gap-4 pt-3">
         <h3 class="surtitre">{titre}</h3>
-        <p class="paragraphe text-ink-2">{texte}</p>
+        {/* Pas de saut de ligne entre {texte} et la suite : il ajouterait une espace avant la virgule */}
+        <p class="paragraphe text-ink-2">
+          {texte}{rapport && <>, mesurés le {dateMesure()} sur mobile. <LienRapport href={accueil.rapport}>Voir le rapport</LienRapport></>}
+        </p>
       </div>
     ))}
   </div>
