@@ -1,0 +1,107 @@
+---
+/*
+ * Le savoir-faire : pas de maquette, page construite avec les blocs existants
+ * (principes de l'accueil, listes à filets et matières des fiches, bandeau sur mesure).
+ */
+import VelinLayout from '../layouts/VelinLayout.astro';
+import OuvertureSobre from '../components/velin/OuvertureSobre.astro';
+import SavoirFaire from '../components/velin/SavoirFaire.astro';
+import BandeauSurMesure from '../components/velin/BandeauSurMesure.astro';
+
+const etapes = [
+  {
+    numero: 'I',
+    titre: 'Écouter la maison',
+    texte: "Un premier rendez-vous pour comprendre votre maison : ses objets, son public, ce qu'elle refuse d'être.",
+  },
+  {
+    numero: 'II',
+    titre: 'Choisir la pièce',
+    texte:
+      "Filigrane, Vecteur ou Lavis : la pièce la plus proche de votre univers sert de point de départ. Ou l'on part d'une page blanche.",
+  },
+  {
+    numero: 'III',
+    titre: "Ajuster à l'atelier",
+    texte:
+      'Couleurs, typographies, photographies et textes se règlent dans quelques variables et un fichier de contenu. Le code reste propre et documenté.',
+  },
+  {
+    numero: 'IV',
+    titre: 'Livrer et mesurer',
+    texte:
+      'Le site est mis en ligne, puis mesuré sur téléphone : performance, accessibilité, référencement. Les résultats vous sont remis tels quels.',
+  },
+];
+
+const matieres = [
+  { titre: 'Astro', texte: 'Des pages statiques : rapides, sûres, sans serveur à entretenir.' },
+  { titre: 'Îlots React', texte: 'Seuls les éléments interactifs chargent du JavaScript, au moment où on les voit.' },
+  { titre: 'Variables de thème', texte: 'Une identité tient en quelques variables : fond, encre, accent, typographies.' },
+  { titre: 'Défilement en CSS', texte: "Les animations sont confiées au navigateur, et s'effacent pour qui préfère les réduire." },
+];
+
+const engagements = [
+  "Texte lisible partout, contraste d'au moins 4,5 pour 1.",
+  'Navigation complète au clavier, focus toujours visible.',
+  'Animations coupées pour qui préfère les réduire.',
+  'Zoom autorisé sur téléphone.',
+  'Photos aux formats modernes, chargées à la demande.',
+  'Scores Lighthouse publiés après la mise en ligne : [À MESURER].',
+];
+---
+
+<VelinLayout
+  title="Le savoir-faire — Maison Vélin"
+  description="Comment Maison Vélin conçoit ses templates de sites pour maisons de luxe : retenue, lenteur, exigence, et une méthode en quatre temps."
+>
+  <OuvertureSobre
+    surtitre="Maison Vélin"
+    titre="Le savoir-faire"
+    intro="Trois principes, une méthode en quatre temps, et des matières choisies pour durer. Ce qui fait qu'une page se tient comme une pièce rare."
+  />
+
+  <SavoirFaire titre="Trois<br />principes" />
+
+  <section aria-labelledby="methode" class="border-t border-line">
+    <div class="conteneur grid items-start gap-x-30 gap-y-12 py-24 md:py-[140px] lg:grid-cols-[1fr_2fr]">
+      <h2 id="methode" class="font-display text-[clamp(30px,3.2vw,48px)] leading-[1.2]">Comment naît une pièce</h2>
+      <ol class="border-b border-ink/12">
+        {etapes.map(({ numero, titre, texte }) => (
+          <li class="grid gap-x-8 gap-y-2 border-t border-ink/12 py-7 sm:grid-cols-[56px_1fr]">
+            <span class="font-display text-xl text-accent italic" aria-hidden="true">{numero}</span>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-[17px] font-medium">{titre}</h3>
+              <p class="leading-[1.7] font-light text-ink-2">{texte}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="matieres" class="conteneur pb-24 md:pb-[140px]">
+    <h2 id="matieres" class="mb-12 font-display text-[clamp(30px,3.2vw,48px)]">Les matières</h2>
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      {matieres.map(({ titre, texte }) => (
+        <div class="flex flex-col gap-3">
+          <h3 class="surtitre">{titre}</h3>
+          <p class="leading-[1.7] font-light text-ink-2">{texte}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="engagements" class="border-t border-line">
+    <div class="conteneur grid items-start gap-x-30 gap-y-12 py-24 md:py-[140px] lg:grid-cols-[1fr_2fr]">
+      <h2 id="engagements" class="font-display text-[clamp(30px,3.2vw,48px)] leading-[1.2]">Nos engagements</h2>
+      <ul class="border-b border-ink/12">
+        {engagements.map((texte) => (
+          <li class="border-t border-ink/12 py-5 text-[17px] leading-[1.6] font-light">{texte}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <BandeauSurMesure />
+</VelinLayout>

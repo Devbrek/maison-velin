@@ -1,0 +1,18 @@
+---
+// Ouverture des pages intérieures Maison Vélin : sans photo, titre et introduction
+interface Props {
+  surtitre: string;
+  titre: string;
+  intro: string;
+}
+
+const { surtitre, titre, intro } = Astro.props;
+---
+
+<section aria-labelledby="page-titre" class="conteneur flex flex-col gap-7 pt-20 pb-16 md:pt-28 md:pb-24">
+  <p class="surtitre text-ink-2">{surtitre}</p>
+  <h1 id="page-titre" class="max-w-[900px] font-display text-[clamp(40px,5vw,76px)] leading-[1.02] tracking-[-0.02em]">
+    <slot>{titre}</slot>
+  </h1>
+  <p class="max-w-[560px] text-lg leading-[1.7] font-light text-ink-2">{intro}</p>
+</section>
