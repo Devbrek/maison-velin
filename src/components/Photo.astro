@@ -1,6 +1,7 @@
 ---
 /*
- * Toutes les photos du site passent par ce composant : mêmes formats, même qualité,
+ * Toutes les photos du site passent par ce composant : mêmes formats, même qualité
+ * (réglée par format dans astro.config.mjs : AVIF 55, WebP 75, JPEG 80),
  * mêmes largeurs, et des `sizes` qui tiennent compte du recadrage.
  *
  * Piège corrigé : avec object-fit: cover, une photo plus large que sa boîte est agrandie
@@ -17,9 +18,10 @@ interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'alt' | 'width' | 'h
   sizes: string; // largeur de la boîte à l'écran
   cadre?: number; // rapport largeur / hauteur de la boîte, si la photo est recadrée (object-fit: cover)
   priority?: boolean;
+  qualite?: number; // exception ponctuelle (photo très texturée), appliquée à tous les formats
 }
 
-const { src, alt, sizes, cadre, priority = false, ...attributs } = Astro.props;
+const { src, alt, sizes, cadre, priority = false, qualite, ...attributs } = Astro.props;
 const facteur = cadre ? facteurCouverture(src.width / src.height, cadre) : 1;
 ---
 
@@ -27,7 +29,7 @@ const facteur = cadre ? facteurCouverture(src.width / src.height, cadre) : 1;
   src={src}
   alt={alt}
   formats={['avif', 'webp']}
-  quality={80}
+  quality={qualite}
   widths={largeursPhoto(src.width)}
   sizes={sizesAgrandis(sizes, facteur)}
   priority={priority}

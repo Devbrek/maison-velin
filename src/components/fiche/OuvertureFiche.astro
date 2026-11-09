@@ -20,6 +20,7 @@ const { id, data } = Astro.props.piece;
     alt=""
     sizes="100vw"
     priority
+    qualite={data.couverture.qualite}
     class="absolute inset-0 h-full w-full object-cover"
     style={`object-position: ${data.couverture.position}`}
   />

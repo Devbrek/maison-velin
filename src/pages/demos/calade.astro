@@ -49,6 +49,7 @@ const arrets = parfums.map(({ data }) => ({
         alt="Une calade : ruelle pavée qui monte entre deux murs de pierre blonde, au soleil"
         sizes="100vw"
         priority
+        qualite={45}
         class="encre absolute inset-0 h-full w-full object-cover"
         style="object-position: center 70%"
       />
@@ -70,7 +71,7 @@ const arrets = parfums.map(({ data }) => ({
           <p class="monte delai-monte-1 font-display text-xl">
             calade <span class="font-body text-[13px] tracking-[0.08em] text-[#E6D8C2]">[ka.lad] · nom féminin</span>
           </p>
-          <h1 id="hero" class="monte delai-monte-2 font-display text-[clamp(38px,4.6vw,66px)] leading-[1.08] font-light">
+          <h1 id="hero" class="font-display text-[clamp(38px,4.6vw,66px)] leading-[1.08] font-light">
             Une ruelle pavée <em class="text-[#F0C46A]">qui garde la chaleur du jour.</em>
           </h1>
           <p class="monte delai-monte-3 max-w-[420px] text-[17px] leading-[1.8] font-light text-[#EADFCC]">
@@ -219,14 +220,14 @@ const arrets = parfums.map(({ data }) => ({
   }
 
   /* À l'ouverture : la photo passe du flou au net, les textes montent en cascade */
+  /* La photo est l'élément principal de la page (LCP) : nette et opaque dès le premier rendu.
+     Seul un léger recul de cadrage l'anime ; le passage du flou au net reste sur les arches des chapitres. */
   .encre {
-    /* backwards : flou avant le départ, mais aucun filtre résiduel une fois l'animation finie */
     animation: encre 2600ms var(--ease-velin) backwards;
   }
   @keyframes encre {
     from {
-      filter: blur(16px);
-      opacity: 0.4;
+      transform: scale(1.04);
     }
   }
   .monte {
@@ -240,9 +241,6 @@ const arrets = parfums.map(({ data }) => ({
   }
   .delai-monte-1 {
     animation-delay: 600ms;
-  }
-  .delai-monte-2 {
-    animation-delay: 800ms;
   }
   .delai-monte-3 {
     animation-delay: 1000ms;

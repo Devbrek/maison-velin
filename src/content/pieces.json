@@ -179,7 +179,7 @@
     ],
     "intro": "Une pièce pour le parfum : un récit qui passe du flou au net.",
     "marqueDemo": { "nom": "Calade", "href": "/demos/calade" },
-    "couverture": { "src": "../assets/calade/calade-ruelle.jpg", "position": "center 70%" },
+    "couverture": { "src": "../assets/calade/calade-ruelle.jpg", "position": "center 70%", "qualite": 45 },
     "accueil": {
       "accroche": "Un récit qui se lit en défilant, du flou au net.",
       "image": "../assets/calade/calade-pierre-d-ete-ambre.jpg",

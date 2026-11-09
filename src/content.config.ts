@@ -21,7 +21,8 @@ const pieces = defineCollection({
       univers: z.array(z.string()).min(1),
       intro: z.string(),
       marqueDemo: z.object({ nom: z.string(), href: z.string() }),
-      couverture: z.object({ src: image(), position: z.string() }),
+      // qualite : exception pour une photo très texturée (sinon AVIF 55 par défaut)
+      couverture: z.object({ src: image(), position: z.string(), qualite: z.number().int().min(30).max(90).optional() }),
       // Bloc de la pièce sur l'accueil Maison Vélin
       accueil: z.object({
         accroche: z.string(),
