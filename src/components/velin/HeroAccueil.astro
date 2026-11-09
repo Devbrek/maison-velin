@@ -9,7 +9,7 @@ import photo from '../../assets/aubrek/aubrek-pluie.jpg';
 
 <section
   aria-labelledby="hero-titre"
-  class="relative flex min-h-[max(560px,100svh)] flex-col bg-[#2B2723] text-sur-image"
+  class="texte-sur-image relative flex min-h-[max(560px,100svh)] flex-col bg-[#2B2723] text-sur-image"
 >
   <Photo
     src={photo}
@@ -39,12 +39,16 @@ import photo from '../../assets/aubrek/aubrek-pluie.jpg';
 </section>
 
 <style>
+  /* Téléphone : texte en bas, voile fort du bas vers le haut */
   .voile {
-    background: linear-gradient(
-      to top,
-      rgb(15 14 12 / 0.82) 0%,
-      rgb(15 14 12 / 0.35) 45%,
-      rgb(15 14 12 / 0.55) 100%
-    );
+    background: linear-gradient(to top, rgb(15 14 12 / 0.94) 0%, rgb(15 14 12 / 0.86) 50%, rgb(15 14 12 / 0.6) 100%);
+  }
+  /* Grand écran : texte à gauche, voile fort à gauche ; bande sombre en haut pour l'en-tête */
+  @media (width >= 48rem) {
+    .voile {
+      background:
+        linear-gradient(to bottom, rgb(15 14 12 / 0.6) 0%, rgb(15 14 12 / 0) 18%),
+        linear-gradient(to right, rgb(15 14 12 / 0.9) 0%, rgb(15 14 12 / 0.74) 40%, rgb(15 14 12 / 0.15) 66%);
+    }
   }
 </style>

@@ -19,7 +19,7 @@ const { id, data } = Astro.props.piece;
 <section
   aria-labelledby="piece-suivante"
   data-apparition
-  class="suivante bloc-piece group relative isolate flex min-h-[420px] overflow-hidden bg-[#161513] text-sur-image md:min-h-[520px]"
+  class="texte-sur-image suivante bloc-piece group relative isolate flex min-h-[420px] overflow-hidden bg-[#161513] text-sur-image md:min-h-[520px]"
 >
   <div class="net absolute inset-0 -z-10 overflow-hidden md:left-auto md:w-3/5">
     <Photo
@@ -46,7 +46,7 @@ const { id, data } = Astro.props.piece;
 
 <style>
   .voile {
-    background: linear-gradient(to top, #161513 0%, rgb(22 21 19 / 0.75) 45%, rgb(22 21 19 / 0.2) 100%);
+    background: linear-gradient(to top, #161513 0%, rgb(22 21 19 / 0.88) 50%, rgb(22 21 19 / 0.62) 100%);
   }
   @media (width >= 48rem) {
     .suivante {

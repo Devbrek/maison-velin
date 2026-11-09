@@ -236,6 +236,16 @@
       border-color 900ms var(--ease-velin);
   }
 
+  /* Texte posé sur une photo : ombre douce et diffuse (jamais nette ni décalée), héritée par tous les textes.
+     Un bouton qui se remplit au survol la perd, sinon elle salirait le texte sombre sur fond clair. */
+  .texte-sur-image {
+    text-shadow: 0 1px 24px rgb(0 0 0 / 0.45);
+  }
+  .texte-sur-image :is(a, button):is(:hover, :focus-visible),
+  .bloc-piece:is(:hover, :has(a:focus-visible)) .lien-etire {
+    text-shadow: none;
+  }
+
   /* Lien étiré : tout le bloc parent (position: relative) devient cliquable.
      Le focus clavier dessine un cadre autour du bloc entier. */
   .lien-etire::after {

@@ -41,7 +41,7 @@ const arrets = parfums.map(({ data }) => ({
 
   <main>
     <!-- Ouverture : la calade -->
-    <section aria-labelledby="hero" class="relative flex min-h-[max(600px,calc(100svh-40px))] flex-col overflow-hidden bg-[#3A2A1A] text-[#F4ECE0]">
+    <section aria-labelledby="hero" class="texte-sur-image relative flex min-h-[max(600px,calc(100svh-40px))] flex-col overflow-hidden bg-[#3A2A1A] text-[#F4ECE0]">
       <Photo
         src={photoRuelle}
         alt="Une calade : ruelle pavée qui monte entre deux murs de pierre blonde, au soleil"
@@ -183,10 +183,17 @@ const arrets = parfums.map(({ data }) => ({
 </BaseLayout>
 
 <style>
+  /* Téléphone : texte en bas, voile fort du bas vers le haut */
   .voile-ouverture {
-    background:
-      linear-gradient(to top right, rgb(30 20 11 / 0.9) 0%, rgb(30 20 11 / 0.6) 40%, rgb(30 20 11 / 0.1) 70%),
-      linear-gradient(to bottom, rgb(30 20 11 / 0.6) 0%, rgb(30 20 11 / 0) 24%);
+    background: linear-gradient(to top, rgb(30 20 11 / 0.95) 0%, rgb(30 20 11 / 0.86) 55%, rgb(30 20 11 / 0.62) 100%);
+  }
+  /* Grand écran : voile fort à gauche (texte) et bande sombre en haut (en-tête) */
+  @media (width >= 48rem) {
+    .voile-ouverture {
+      background:
+        linear-gradient(to bottom, rgb(30 20 11 / 0.72) 0%, rgb(30 20 11 / 0) 22%),
+        linear-gradient(to right, rgb(30 20 11 / 0.9) 0%, rgb(30 20 11 / 0.7) 38%, rgb(30 20 11 / 0.1) 64%);
+    }
   }
 
   /* Bouton en pilule (forme Calade) */
